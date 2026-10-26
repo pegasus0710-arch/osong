@@ -20,49 +20,546 @@
     "showDiscount": true,
     "pwHash": "de64b116d208c12f41504cf04f5ef7352c2d4b1f7895fa8b0f9e62a2b2aeab9c"
   },
-  "categories": ["시스템에어컨", "TV", "냉장고", "김치냉장고", "의류케어", "전기레인지", "식기세척기", "무선청소기", "로봇청소기", "조리기기"],
+  "categories": [
+    "시스템에어컨",
+    "TV",
+    "냉장고",
+    "김치냉장고",
+    "의류케어",
+    "전기레인지",
+    "식기세척기",
+    "무선청소기",
+    "로봇청소기",
+    "조리기기"
+  ],
   "products": [
-    {"id":"dvm2","cat":"시스템에어컨","name":"무풍 시스템에어컨 DVM HOME 2실","model":"DVM HOME 2실 패키지","specs":["실외기 1대 + 실내기 2대 (거실·안방)","무풍 1Way 천장형 카세트","SmartThings 앱 원격 제어"],"img":"","list":null,"price":null,"badge":"입주 필수","hidden":false},
-    {"id":"dvm3","cat":"시스템에어컨","name":"무풍 시스템에어컨 DVM HOME 3실","model":"DVM HOME 3실 패키지","specs":["실외기 1대 + 실내기 3대 (거실·안방·침실)","무풍 1Way 천장형 카세트","SmartThings 앱 원격 제어"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"dvm4","cat":"시스템에어컨","name":"무풍 시스템에어컨 DVM HOME 4실","model":"DVM HOME 4실 패키지","specs":["실외기 1대 + 실내기 4대 (거실·안방·침실 2)","무풍 1Way 천장형 카세트","SmartThings 앱 원격 제어"],"img":"","list":null,"price":null,"badge":"추천","hidden":false},
-    {"id":"dvm5","cat":"시스템에어컨","name":"무풍 시스템에어컨 DVM HOME 5실","model":"DVM HOME 5실 패키지","specs":["실외기 1대 + 실내기 5대 (거실·안방·침실 3)","무풍 1Way 천장형 카세트","SmartThings 앱 원격 제어"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-
-    {"id":"tv1","cat":"TV","name":"Neo QLED 4K TV 189cm (75형)","model":"KQ75QNH70AFXKR","specs":["Quantum Mini LED · 4K UHD","HDR10+ · 게이밍 최대 120Hz(DLG)","에너지효율 1등급 · 2026년형"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"tv2","cat":"TV","name":"Neo QLED 4K TV 163cm (65형)","model":"KQ65QNH70AFXKR","specs":["Quantum Mini LED · 4K UHD","HDR10+ · 게이밍 최대 120Hz(DLG)","2026년형"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"tv3","cat":"TV","name":"Mini LED 4K TV 138cm (55형)","model":"KU55MH80AFXKR","specs":["Mini LED 백라이트 · 4K UHD","AI 화질·음성 기능","2026년형"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-
-    {"id":"rf1","cat":"냉장고","name":"BESPOKE AI 하이브리드 냉장고 4도어","model":"RM80F91K1A","specs":["AI 하이브리드 쿨링","대용량 4도어 (880L대)","AI 절약 모드 · SmartThings 연동"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"rf2","cat":"냉장고","name":"BESPOKE AI 하이브리드 냉장고 4도어 (UV탈취)","model":"RM70H91RMA","specs":["AI 하이브리드 쿨링","UV 탈취·제균","대용량 4도어 · 2026년형"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"rf3","cat":"냉장고","name":"BESPOKE AI 냉장고 4도어","model":"RM80F64L2A","specs":["대용량 4도어","AI 절약 모드","SmartThings 연동"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"rf4","cat":"냉장고","name":"BESPOKE 1도어 냉동고","model":"RZ34C785501","specs":["1도어 단독형 냉동고","냉장고·김치냉장고와 조합 설치","패널 컬러 선택"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"rf5","cat":"냉장고","name":"BESPOKE 1도어 냉장고","model":"RR40C798501","specs":["1도어 단독형 냉장고","냉동고·김치냉장고와 조합 설치","패널 컬러 선택"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-
-    {"id":"kc1","cat":"김치냉장고","name":"BESPOKE AI 김치플러스 4도어","model":"RK80F49C1W","specs":["칸별 독립 정온 보관","김치·식재료 맞춤 보관 모드","AI 절약 모드"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"kc2","cat":"김치냉장고","name":"BESPOKE AI 김치플러스 4도어","model":"RK70F49F1DD","specs":["칸별 독립 정온 보관","김치·식재료 맞춤 보관 모드","AI 절약 모드"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"kc3","cat":"김치냉장고","name":"BESPOKE 김치플러스 3도어","model":"RQ33DG71G1S9","specs":["스탠드형 3도어","칸별 맞춤 보관","패널 컬러 선택"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"kc4","cat":"김치냉장고","name":"BESPOKE 김치플러스 3도어","model":"RQ33DB744101","specs":["스탠드형 3도어","칸별 맞춤 보관","패널 컬러 선택"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"kc5","cat":"김치냉장고","name":"BESPOKE 김치플러스 1도어","model":"RQ34C793501","specs":["1도어 단독형","냉장고·냉동고와 조합 설치","패널 컬러 선택"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-
-    {"id":"lc1","cat":"의류케어","name":"BESPOKE AI 콤보 (세탁 25kg + 건조 18kg)","model":"WD90H25AHS","specs":["세탁부터 건조까지 한 번에","AI 맞춤 세탁·건조","2026년형"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"lc2","cat":"의류케어","name":"BESPOKE AI 콤보 (세탁 25kg + 건조 18kg)","model":"WD90H25BHW","specs":["세탁부터 건조까지 한 번에","AI 맞춤 세탁·건조","2026년형"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"lc3","cat":"의류케어","name":"BESPOKE AI 원바디 (세탁 25kg + 건조 22kg)","model":"WH90F2522AAHS","specs":["세탁기·건조기 일체형","7형(177.8mm) LCD 컨트롤","AI 맞춤 코스"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"lc4","cat":"의류케어","name":"BESPOKE AI 세탁기 25kg","model":"WF90F25ADS","specs":["드럼 세탁기 25kg","AI 맞춤 세탁","SmartThings 연동"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"lc5","cat":"의류케어","name":"BESPOKE AI 건조기 22kg","model":"DV90F22CDS","specs":["히트펌프 건조기 22kg","AI 맞춤 건조","SmartThings 연동"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"lc6","cat":"의류케어","name":"BESPOKE AI 에어드레서","model":"DF90H24R5C","specs":["에어·스팀 의류 케어","냄새·미세먼지 케어","2026년형"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"lc7","cat":"의류케어","name":"BESPOKE AI 에어드레서","model":"DF90H24R4D","specs":["에어·스팀 의류 케어","냄새·미세먼지 케어","2026년형"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-
-    {"id":"ck1","cat":"전기레인지","name":"BESPOKE AI 인덕션 전기레인지","model":"CC99F63U1DS","specs":["고화력 인덕션 조리","안전 잠금·잔열 표시","SmartThings 연동"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"ck2","cat":"전기레인지","name":"BESPOKE AI 인덕션 전기레인지","model":"CC80H63U1HS","specs":["고화력 인덕션 조리","안전 잠금·잔열 표시","2026년형"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-
-    {"id":"dw1","cat":"식기세척기","name":"BESPOKE AI 식기세척기","model":"DW90F79F1USWT","specs":["고온 세척·건조","AI 오토 코스","SmartThings 연동"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"dw2","cat":"식기세척기","name":"BESPOKE AI 식기세척기","model":"DW90F79F1USBT","specs":["고온 세척·건조","AI 오토 코스","SmartThings 연동"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-
-    {"id":"vc1","cat":"무선청소기","name":"BESPOKE AI 제트 무선청소기","model":"VS70H18GVG","specs":["강력한 흡입력","AI 청소 모드","2026년형"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-
-    {"id":"rb1","cat":"로봇청소기","name":"BESPOKE AI 스팀 로봇청소기","model":"VR90F01AAH","specs":["흡입 + 물걸레 스팀 살균","올인원 청정스테이션","AI 사물 인식 주행"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"rb2","cat":"로봇청소기","name":"BESPOKE AI 스팀 로봇청소기","model":"VR90F01AAG","specs":["흡입 + 물걸레 스팀 살균","올인원 청정스테이션","AI 사물 인식 주행"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-
-    {"id":"ov1","cat":"조리기기","name":"BESPOKE 광파오븐 50L","model":"NQ50T8539BK","specs":["오븐·그릴·전자레인지 겸용","대용량 50L","블랙"],"img":"","list":null,"price":null,"badge":"","hidden":false},
-    {"id":"ov2","cat":"조리기기","name":"BESPOKE 광파오븐 50L","model":"NQ50T8539BW","specs":["오븐·그릴·전자레인지 겸용","대용량 50L","화이트"],"img":"","list":null,"price":null,"badge":"","hidden":false}
+    {
+      "id": "dvm2",
+      "cat": "시스템에어컨",
+      "name": "무풍 시스템에어컨 DVM HOME 2실",
+      "model": "DVM HOME 2실 패키지",
+      "specs": [
+        "실외기 1대 + 실내기 2대 (거실·안방)",
+        "무풍 1Way 천장형 카세트",
+        "SmartThings 앱 원격 제어"
+      ],
+      "img": "",
+      "list": null,
+      "price": null,
+      "badge": "입주 필수",
+      "hidden": false
+    },
+    {
+      "id": "dvm3",
+      "cat": "시스템에어컨",
+      "name": "무풍 시스템에어컨 DVM HOME 3실",
+      "model": "DVM HOME 3실 패키지",
+      "specs": [
+        "실외기 1대 + 실내기 3대 (거실·안방·침실)",
+        "무풍 1Way 천장형 카세트",
+        "SmartThings 앱 원격 제어"
+      ],
+      "img": "",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "dvm4",
+      "cat": "시스템에어컨",
+      "name": "무풍 시스템에어컨 DVM HOME 4실",
+      "model": "DVM HOME 4실 패키지",
+      "specs": [
+        "실외기 1대 + 실내기 4대 (거실·안방·침실 2)",
+        "무풍 1Way 천장형 카세트",
+        "SmartThings 앱 원격 제어"
+      ],
+      "img": "",
+      "list": null,
+      "price": null,
+      "badge": "추천",
+      "hidden": false
+    },
+    {
+      "id": "dvm5",
+      "cat": "시스템에어컨",
+      "name": "무풍 시스템에어컨 DVM HOME 5실",
+      "model": "DVM HOME 5실 패키지",
+      "specs": [
+        "실외기 1대 + 실내기 5대 (거실·안방·침실 3)",
+        "무풍 1Way 천장형 카세트",
+        "SmartThings 앱 원격 제어"
+      ],
+      "img": "",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "tv1",
+      "cat": "TV",
+      "name": "2026 Neo QLED QNH70 189cm (75형)",
+      "model": "KQ75QNH70AFXKR",
+      "specs": [
+        "Supreme Mini LED Dimming · 4K UHD",
+        "HDR10+ (Adaptive)",
+        "2026년형"
+      ],
+      "img": "images/KQ75QNH70AFXKR.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "tv2",
+      "cat": "TV",
+      "name": "2026 Neo QLED QNH70 163cm (65형)",
+      "model": "KQ65QNH70AFXKR",
+      "specs": [
+        "Supreme Mini LED Dimming · 4K UHD",
+        "HDR10+ (Adaptive)",
+        "2026년형"
+      ],
+      "img": "images/KQ65QNH70AFXKR.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "tv3",
+      "cat": "TV",
+      "name": "2026 Mini LED MH80 138cm (55형)",
+      "model": "KU55MH80AFXKR",
+      "specs": [
+        "Mini LED · 4K UHD",
+        "최대 144Hz (VRR 지원)",
+        "HDR10+ · Auto HDR 리마스터링"
+      ],
+      "img": "images/KU55MH80AFXKR.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "rf1",
+      "cat": "냉장고",
+      "name": "Bespoke AI 하이브리드 4도어 889L (오토오픈도어)",
+      "model": "RM80F91K1A",
+      "specs": [
+        "냉장 523L + 냉동 366L",
+        "하이브리드 쿨링 (컴프레서+펠티어)",
+        "에너지효율 1등급 · 투명 쇼케이스"
+      ],
+      "img": "images/RM80F91K1A.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "rf2",
+      "cat": "냉장고",
+      "name": "Bespoke AI 하이브리드 4도어 901L (UV탈취)",
+      "model": "RM70H91RMA",
+      "specs": [
+        "냉장 535L + 냉동 366L",
+        "AI 하이브리드 쿨링 · UV 탈취",
+        "에너지효율 1등급"
+      ],
+      "img": "images/RM70H91RMA.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "rf3",
+      "cat": "냉장고",
+      "name": "Bespoke AI 하이브리드 4도어 키친핏 Max 611L",
+      "model": "RM80F64L2A",
+      "specs": [
+        "냉장 376L + 냉동 235L",
+        "키친핏 Max 설치 · 푸드 쇼케이스",
+        "에너지효율 2등급"
+      ],
+      "img": "images/RM80F64L2A.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "rf4",
+      "cat": "냉장고",
+      "name": "Bespoke 1도어 키친핏 냉동고",
+      "model": "RZ34C785501",
+      "specs": [
+        "1도어 단독형 냉동고",
+        "냉장고·김치냉장고와 조합 설치",
+        "키친핏 설치"
+      ],
+      "img": "",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "rf5",
+      "cat": "냉장고",
+      "name": "Bespoke 1도어 키친핏 냉장고",
+      "model": "RR40C798501",
+      "specs": [
+        "1도어 단독형 냉장고",
+        "냉동고·김치냉장고와 조합 설치",
+        "키친핏 설치"
+      ],
+      "img": "",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "kc1",
+      "cat": "김치냉장고",
+      "name": "Bespoke AI 김치플러스 4도어 487L (맞춤숙성실)",
+      "model": "RK80F49C1W",
+      "specs": [
+        "독립냉각 · 김치통 114.9L",
+        "오토 오픈 도어",
+        "에너지효율 1등급"
+      ],
+      "img": "images/RK80F49C1W.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "kc2",
+      "cat": "김치냉장고",
+      "name": "Bespoke AI 김치플러스 4도어 490L (냄새케어 김치통)",
+      "model": "RK70F49F1DD",
+      "specs": [
+        "독립냉각 · 김치통 114.9L",
+        "냄새케어 김치통",
+        "에너지효율 1등급"
+      ],
+      "img": "images/RK70F49F1DD.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "kc3",
+      "cat": "김치냉장고",
+      "name": "김치플러스 3도어 328L",
+      "model": "RQ33DG71G1S9",
+      "specs": [
+        "독립냉각 · 김치통 124.8L",
+        "도어 디스플레이",
+        "에너지효율 1등급"
+      ],
+      "img": "images/RQ33DG71G1S9.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "kc4",
+      "cat": "김치냉장고",
+      "name": "Bespoke 김치플러스 3도어 키친핏",
+      "model": "RQ33DB744101",
+      "specs": [
+        "스탠드형 3도어",
+        "키친핏 설치",
+        "칸별 독립 보관"
+      ],
+      "img": "",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "kc5",
+      "cat": "김치냉장고",
+      "name": "Bespoke 김치플러스 1도어 키친핏 348L",
+      "model": "RQ34C793501",
+      "specs": [
+        "1도어 단독형",
+        "냉장고·냉동고와 조합 설치",
+        "키친핏 설치"
+      ],
+      "img": "",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "lc1",
+      "cat": "의류케어",
+      "name": "Bespoke AI 콤보 25/20kg (다크스틸)",
+      "model": "WD90H25AHS",
+      "specs": [
+        "세탁 25kg + 건조 20kg 일체형",
+        "7형(177.8mm) LCD · 오토 오픈 도어",
+        "2026년형"
+      ],
+      "img": "images/WD90H25AHS.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "lc2",
+      "cat": "의류케어",
+      "name": "Bespoke AI 콤보 25/20kg (화이트)",
+      "model": "WD90H25BHW",
+      "specs": [
+        "세탁 25kg + 건조 20kg 일체형",
+        "7형(177.8mm) LCD",
+        "2026년형"
+      ],
+      "img": "images/WD90H25BHW.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "lc3",
+      "cat": "의류케어",
+      "name": "Bespoke AI 원바디 25/22kg",
+      "model": "WH90F2522AAHS",
+      "specs": [
+        "세탁 25kg + 건조 22kg 원바디",
+        "인버터 히트펌프 + 히터 건조",
+        "7형(177.8mm) LCD"
+      ],
+      "img": "images/WH90F2522AAHS.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "lc4",
+      "cat": "의류케어",
+      "name": "Bespoke AI 세탁기 25kg",
+      "model": "WF90F25ADS",
+      "specs": [
+        "드럼 세탁기 25kg",
+        "7형(177.8mm) LCD · 오토 오픈 도어",
+        "다크스틸"
+      ],
+      "img": "images/WF90F25ADS.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "lc5",
+      "cat": "의류케어",
+      "name": "Bespoke AI 건조기 22kg",
+      "model": "DV90F22CDS",
+      "specs": [
+        "인버터 히트펌프 + 히터",
+        "7형(177.8mm) LCD · 오토 오픈 도어",
+        "다크스틸"
+      ],
+      "img": "images/DV90F22CDS.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "lc6",
+      "cat": "의류케어",
+      "name": "Bespoke AI 에어드레서 대용량 (크리스탈 미러)",
+      "model": "DF90H24R5C",
+      "specs": [
+        "상의 5~9벌 + 하의 3벌",
+        "크리스탈 미러",
+        "2026년형"
+      ],
+      "img": "images/DF90H24R5C.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "lc7",
+      "cat": "의류케어",
+      "name": "Bespoke AI 에어드레서 대용량 (클린화이트)",
+      "model": "DF90H24R4D",
+      "specs": [
+        "상의 5~9벌 + 하의 2벌",
+        "클린화이트",
+        "2026년형"
+      ],
+      "img": "images/DF90H24R4D.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "ck1",
+      "cat": "전기레인지",
+      "name": "Infinite AI 인덕션 3구",
+      "model": "CC99F63U1DS",
+      "specs": [
+        "3구 · 최대 3.4kW",
+        "에너지효율 1등급 · SmartThings",
+        "새틴 블랙"
+      ],
+      "img": "images/CC99F63U1DS.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "ck2",
+      "cat": "전기레인지",
+      "name": "Bespoke AI 인덕션 3구",
+      "model": "CC80H63U1HS",
+      "specs": [
+        "3구 · 최대 3.4kW",
+        "에너지효율 1등급 · SmartThings",
+        "화이트 · 2026년형"
+      ],
+      "img": "images/CC80H63U1HS.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "dw1",
+      "cat": "식기세척기",
+      "name": "Bespoke AI 식기세척기 빌트인 14인용",
+      "model": "DW90F79F1USWT",
+      "specs": [
+        "14인용 빌트인",
+        "열풍건조",
+        "SmartThings 연동"
+      ],
+      "img": "images/DW90F79F1USWT.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "dw2",
+      "cat": "식기세척기",
+      "name": "Bespoke AI 식기세척기 빌트인 14인용",
+      "model": "DW90F79F1USBT",
+      "specs": [
+        "14인용 빌트인",
+        "열풍건조",
+        "SmartThings 연동"
+      ],
+      "img": "images/DW90F79F1USBT.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "vc1",
+      "cat": "무선청소기",
+      "name": "Bespoke AI 제트 핏 (물걸레 브러시 패키지)",
+      "model": "VS70H18GVG",
+      "specs": [
+        "흡입력 180W",
+        "물걸레 브러시 포함",
+        "새틴 그레이지 · 2026년형"
+      ],
+      "img": "images/VS70H18GVG.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "rb1",
+      "cat": "로봇청소기",
+      "name": "Bespoke AI 스팀 울트라 로봇청소기 (새틴 차콜)",
+      "model": "VR90F01AAH",
+      "specs": [
+        "흡입 + 물걸레 스팀 살균",
+        "청정스테이션 (정수 4L / 오수 3.6L)",
+        "새틴 차콜"
+      ],
+      "img": "images/VR90F01AAH.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "rb2",
+      "cat": "로봇청소기",
+      "name": "Bespoke AI 스팀 울트라 로봇청소기 (새틴 그레이지)",
+      "model": "VR90F01AAG",
+      "specs": [
+        "흡입 + 물걸레 스팀 살균",
+        "청정스테이션 (정수 4L / 오수 3.6L)",
+        "새틴 그레이지"
+      ],
+      "img": "images/VR90F01AAG.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "ov1",
+      "cat": "조리기기",
+      "name": "Bespoke 콤팩트 오븐 50L (블랙)",
+      "model": "NQ50T8539BK",
+      "specs": [
+        "빌트인 50L",
+        "터치 + 다이얼 조작",
+        "스팀청소"
+      ],
+      "img": "images/NQ50T8539BK.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    },
+    {
+      "id": "ov2",
+      "cat": "조리기기",
+      "name": "Bespoke 콤팩트 오븐 50L (글램 화이트)",
+      "model": "NQ50T8539BW",
+      "specs": [
+        "빌트인 50L",
+        "터치 + 다이얼 조작",
+        "스팀청소"
+      ],
+      "img": "images/NQ50T8539BW.png",
+      "list": null,
+      "price": null,
+      "badge": "",
+      "hidden": false
+    }
   ]
 }
