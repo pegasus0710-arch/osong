@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>힐스테이트 오송역 퍼스트 · 입주민 공동구매</title>
+<meta name="description" content="힐스테이트 오송역 퍼스트 입주민 대상 삼성스토어 공동구매 제안">
+<meta property="og:title" content="힐스테이트 오송역 퍼스트 입주민 공동구매">
+<meta property="og:description" content="삼성스토어와 함께하는 입주민 공동구매 특별 제안">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --ink:#0d1b2e; --ink2:#43526a; --mute:#8592a6; --line:#e4e8ef;
+  --bg:#f4f6f9; --card:#fff; --blue:#1428a0; --blue2:#2d4bd6; --sky:#e9eefc;
+  --accent:#c7a76c; --red:#e2463a; --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;word-break:keep-all}
+img{max-width:100%;display:block}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(150deg,#0a1530 0%,#13286e 55%,#1d3fae 100%)}
+.hero:before{content:"";position:absolute;inset:0;background:
+  radial-gradient(600px 300px at 85% 10%,rgba(199,167,108,.28),transparent 70%),
+  radial-gradient(500px 400px at 0% 100%,rgba(255,255,255,.08),transparent 70%)}
+.hero .wrap{position:relative;padding-top:28px;padding-bottom:44px}
+.brandrow{display:flex;align-items:center;gap:10px;font-size:13px;letter-spacing:.08em;opacity:.9}
+.brandrow b{font-weight:800;letter-spacing:.14em}
+.brandrow i{width:4px;height:4px;border-radius:50%;background:var(--accent)}
+.hero .apt{margin-top:34px;font-size:15px;color:var(--accent);font-weight:700;letter-spacing:.02em}
+.hero h1{margin-top:6px;font-size:clamp(28px,7vw,48px);font-weight:800;line-height:1.22;letter-spacing:-.02em}
+.hero p.sub{margin-top:12px;font-size:clamp(14px,3.6vw,17px);opacity:.82}
+.period{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);font-size:13.5px}
+.benefits{margin-top:26px;display:grid;gap:10px;grid-template-columns:1fr}
+.benefit{display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);font-size:14.5px}
+.benefit span{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#1b1408;font-weight:800;font-size:13px}
+
+/* TABS */
+.tabs{position:sticky;top:0;z-index:20;background:rgba(244,246,249,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.tabs .wrap{display:flex;gap:8px;overflow-x:auto;padding-top:12px;padding-bottom:12px;scrollbar-width:none}
+.tabs .wrap::-webkit-scrollbar{display:none}
+.tab{flex:none;padding:8px 15px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:14px;font-weight:600;color:var(--ink2);white-space:nowrap;transition:.15s}
+.tab.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* SECTIONS */
+main{padding:8px 0 40px}
+.sec{padding-top:34px;scroll-margin-top:64px}
+.sec-h{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.sec-h h2{font-size:21px;font-weight:800;letter-spacing:-.01em}
+.sec-h small{color:var(--mute);font-size:13px}
+.sec.feature .sec-h h2:before{content:"PREMIUM";display:inline-block;margin-right:8px;padding:3px 8px;border-radius:6px;background:var(--accent);color:#1b1408;font-size:11px;letter-spacing:.1em;vertical-align:4px}
+.grid{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+
+/* CARD */
+.card{position:relative;display:flex;flex-direction:column;background:var(--card);border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-2px);box-shadow:0 12px 30px -14px rgba(13,27,46,.25)}
+.thumb{position:relative;aspect-ratio:1/1;background:linear-gradient(160deg,#fafbfd,#eef1f6);display:grid;place-items:center}
+.thumb img{width:100%;height:100%;object-fit:contain;padding:10%}
+.thumb svg{width:44%;height:44%;color:#b5bfcf}
+.badge{position:absolute;top:10px;left:10px;padding:4px 9px;border-radius:7px;background:var(--blue);color:#fff;font-size:11.5px;font-weight:700}
+.body{display:flex;flex-direction:column;flex:1;padding:13px 13px 15px}
+.model{font-size:11.5px;color:var(--mute);font-weight:600;letter-spacing:.02em;word-break:break-all}
+.name{margin-top:3px;font-size:15px;font-weight:700;line-height:1.35}
+.specs{margin-top:8px;list-style:none;display:grid;gap:3px}
+.specs li{position:relative;padding-left:10px;font-size:12.5px;color:var(--ink2);line-height:1.4}
+.specs li:before{content:"";position:absolute;left:0;top:.62em;width:4px;height:4px;border-radius:50%;background:#b9c3d4}
+.prices{margin-top:auto;padding-top:12px}
+.prices .row{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.prices .lbl{font-size:12px;color:var(--mute)}
+.list-v{font-size:13px;color:var(--mute)}
+.list-v.num{text-decoration:line-through}
+.gb{margin-top:4px;padding-top:8px;border-top:1px dashed var(--line);flex-direction:column;align-items:flex-start!important;gap:2px!important}
+.gb-v,.gb .ph{align-self:flex-end}
+.gb .lbl{color:var(--blue);font-weight:700}
+.gb-v{font-size:17px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.gb-v .pct{color:var(--red);margin-right:5px;font-size:15px}
+.ph{color:var(--blue2);font-weight:700;font-size:15px;background:var(--sky);padding:1px 8px;border-radius:6px}
+.list-v.ph-l{font-size:13px;color:var(--mute);text-decoration:none}
+.feature .grid{grid-template-columns:1fr 1fr}
+.feature .card{border-color:#e0d3b8}
+.feature .thumb{background:linear-gradient(160deg,#fffdf8,#f4eee2)}
+.feature .thumb svg{color:#cdb98f}
+
+/* CONTACT / NOTICE */
+.contact{margin-top:44px;border-radius:22px;background:var(--ink);color:#fff;padding:26px 20px;display:grid;gap:14px}
+.contact h3{font-size:20px;font-weight:800}
+.contact p{opacity:.75;font-size:14px}
+.cbtn{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:14px;background:#fff;color:var(--ink);font-weight:800;font-size:16px;text-decoration:none}
+.notice{margin-top:26px;padding:0 4px}
+.notice h4{font-size:14px;margin-bottom:8px}
+.notice li{font-size:12.5px;color:var(--mute);margin-left:16px;margin-bottom:4px}
+footer{padding:26px 0 calc(30px + env(safe-area-inset-bottom));text-align:center;color:var(--mute);font-size:12px;user-select:none;-webkit-user-select:none}
+
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:30;display:none;align-items:center;gap:6px;height:48px;padding:0 18px;border-radius:999px;background:var(--blue);color:#fff;font-weight:700;box-shadow:0 10px 24px -8px rgba(20,40,160,.6);text-decoration:none}
+.fab.show{display:flex}
+
+@media (min-width:640px){
+  .benefits{grid-template-columns:repeat(3,1fr)}
+  .grid{grid-template-columns:repeat(3,1fr);gap:16px}
+  .contact{grid-template-columns:1fr auto;align-items:center;padding:30px 32px}
+  .gb{flex-direction:row;align-items:baseline!important;justify-content:space-between}
+  .cbtn{padding:0 28px}
+}
+@media (min-width:980px){
+  .hero .wrap{padding-top:36px;padding-bottom:64px}
+  .grid{grid-template-columns:repeat(4,1fr);gap:18px}
+  .feature .grid{grid-template-columns:repeat(4,1fr)}
+  .body{padding:16px 16px 18px}
+  .name{font-size:16px}
+  .fab{display:none!important}
+}
+
+/* ===== ADMIN ===== */
+#admin{position:fixed;inset:0;z-index:100;background:#f6f7fa;display:none;flex-direction:column}
+#admin.open{display:flex}
+.ad-top{display:flex;align-items:center;gap:8px;padding:12px 16px;background:#111827;color:#fff}
+.ad-top b{flex:1;font-size:15px}
+.ad-top button{padding:8px 12px;border-radius:9px;background:rgba(255,255,255,.12);font-size:13px;font-weight:600}
+.ad-top .pri{background:#3b82f6}
+.ad-tabs{display:flex;gap:6px;padding:10px 16px;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto}
+.ad-tabs button{flex:none;padding:7px 13px;border-radius:8px;font-size:13.5px;font-weight:600;color:var(--ink2)}
+.ad-tabs button.on{background:var(--sky);color:var(--blue)}
+.ad-body{flex:1;overflow:auto;padding:16px;padding-bottom:80px}
+.ad-body .inner{max-width:860px;margin:0 auto}
+.fld{display:block;margin-bottom:12px}
+.fld span{display:block;font-size:12.5px;font-weight:700;color:var(--ink2);margin-bottom:5px}
+.fld input,.fld textarea,.fld select{width:100%;padding:10px 12px;border:1px solid #d5dbe5;border-radius:10px;font:inherit;font-size:14.5px;background:#fff;color:var(--ink)}
+.fld textarea{min-height:80px;resize:vertical}
+.fld em{display:block;font-style:normal;font-size:11.5px;color:var(--mute);margin-top:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.box h3{font-size:15px;margin-bottom:12px}
+.pitem{background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;overflow:hidden}
+.pitem.hid{opacity:.55}
+.phead{display:flex;align-items:center;gap:8px;padding:10px 12px;cursor:pointer}
+.phead .t{flex:1;min-width:0}
+.phead .t b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.phead .t small{color:var(--mute);font-size:12px}
+.phead .st{font-size:11px;padding:2px 7px;border-radius:6px;background:#fef3c7;color:#92400e;flex:none}
+.phead .st.ok{background:#dcfce7;color:#166534}
+.mini{width:30px;height:30px;border-radius:8px;background:#f1f3f7;font-size:14px;flex:none}
+.pbody{display:none;padding:4px 12px 14px;border-top:1px solid var(--line)}
+.pitem.open .pbody{display:block}
+.row-btn{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.btn{padding:9px 14px;border-radius:10px;background:#eef1f6;font-size:13.5px;font-weight:600}
+.btn.blue{background:var(--blue);color:#fff}
+.btn.red{background:#fee2e2;color:#b91c1c}
+.calc{display:flex;gap:6px;align-items:center;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:10px;padding:8px 10px;margin-bottom:12px;font-size:12.5px;color:var(--ink2);flex-wrap:wrap}
+.calc input{width:70px;padding:6px 8px;border:1px solid #d5dbe5;border-radius:8px;font:inherit}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);opacity:0;z-index:200;background:#111827;color:#fff;padding:11px 18px;border-radius:12px;font-size:14px;transition:.25s;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.lock{position:fixed;inset:0;z-index:150;background:rgba(10,15,30,.6);display:none;place-items:center;padding:20px}
+.lock.open{display:grid}
+.lock .pane{width:100%;max-width:340px;background:#fff;border-radius:18px;padding:22px}
+.lock h3{font-size:17px;margin-bottom:12px}
+.chk{display:flex;align-items:center;gap:8px;font-size:14px;margin-bottom:12px}
+.imgprev{width:72px;height:72px;border-radius:10px;border:1px solid var(--line);object-fit:contain;background:#f6f7fa}
+.draftbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fef3c7;color:#78350f;font-size:13px;text-align:center;padding:9px 12px calc(9px + env(safe-area-inset-bottom))}
+.draftbar.show{display:block}
+.draftbar button{text-decoration:underline;font-weight:700;margin-left:6px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="brandrow"><b id="h-store">SAMSUNG STORE</b><i></i><span>입주민 공동구매</span></div>
+    <div class="apt" id="h-apt"></div>
+    <h1 id="h-title"></h1>
+    <p class="sub" id="h-sub"></p>
+    <div class="period" id="h-period"></div>
+    <div class="benefits" id="h-benefits"></div>
+  </div>
+</header>
+
+<nav class="tabs"><div class="wrap" id="tabs"></div></nav>
+
+<main><div class="wrap" id="sections"></div>
+  <div class="wrap">
+    <section class="contact" id="contact">
+      <div><h3>공동구매 상담 문의</h3><p id="c-desc"></p></div>
+      <a class="cbtn" id="c-btn" href="#">📞 전화 상담</a>
+    </section>
+    <div class="notice"><h4>유의사항</h4><ul id="notice"></ul></div>
+  </div>
+</main>
+<footer><span id="ft">©</span> <span id="ft-txt"></span></footer>
+<a class="fab" id="fab" href="#">📞 상담</a>
+<div class="draftbar" id="draftbar">이 기기에 저장 전 수정본을 미리보는 중입니다.<button id="draft-clear">원본 보기</button></div>
+
+<!-- ADMIN (hidden) -->
+<div class="lock" id="lock"><div class="pane">
+  <h3>관리자 확인</h3>
+  <label class="fld"><span>비밀번호</span><input type="password" id="pw" autocomplete="current-password"></label>
+  <div class="row-btn"><button class="btn blue" id="pw-ok">확인</button><button class="btn" id="pw-cancel">닫기</button></div>
+</div></div>
+
+<div id="admin">
+  <div class="ad-top"><b>관리자 모드</b><button id="ad-preview">미리보기</button><button class="pri" id="ad-save">저장·배포</button><button id="ad-close">✕</button></div>
+  <div class="ad-tabs" id="ad-tabs">
+    <button data-t="products" class="on">제품·가격</button>
+    <button data-t="site">페이지 문구</button>
+    <button data-t="deploy">저장 설정</button>
+  </div>
+  <div class="ad-body"><div class="inner" id="ad-view"></div></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* 기본 데이터 (data.json 을 못 불러올 때 사용) */
+const FALLBACK = {"site": {"apartment": "힐스테이트 오송역 퍼스트", "title": "입주민 공동구매 특별 제안", "store": "삼성스토어", "subtitle": "조합원 및 입주 예정 세대를 위한 삼성전자 가전 공동구매", "period": "공동구매 기간 : 추후 안내", "phone": "", "contactName": "삼성스토어 담당자", "benefits": ["입주 일정에 맞춘 일괄 배송·설치", "공동구매 전용 특별가 적용", "시스템에어컨 세대별 맞춤 설계 상담"], "notice": ["본 페이지는 1차 제안 시안이며, 가격 및 혜택은 확정 후 안내됩니다.", "제품 사양 및 디자인은 제조사 사정에 따라 변경될 수 있습니다.", "시스템에어컨은 세대 구조에 따라 설치 사양이 달라질 수 있습니다."], "showDiscount": true, "pwHash": "de64b116d208c12f41504cf04f5ef7352c2d4b1f7895fa8b0f9e62a2b2aeab9c"}, "categories": ["시스템에어컨", "TV", "냉장고", "김치냉장고", "의류케어", "전기레인지", "식기세척기", "무선청소기", "로봇청소기", "조리기기"], "products": [{"id": "dvm2", "cat": "시스템에어컨", "name": "무풍 시스템에어컨 DVM HOME 2실", "model": "DVM HOME 2실 패키지", "specs": ["실외기 1대 + 실내기 2대 (거실·안방)", "무풍 1Way 천장형 카세트", "SmartThings 앱 원격 제어"], "img": "", "list": null, "price": null, "badge": "입주 필수", "hidden": false}, {"id": "dvm3", "cat": "시스템에어컨", "name": "무풍 시스템에어컨 DVM HOME 3실", "model": "DVM HOME 3실 패키지", "specs": ["실외기 1대 + 실내기 3대 (거실·안방·침실)", "무풍 1Way 천장형 카세트", "SmartThings 앱 원격 제어"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "dvm4", "cat": "시스템에어컨", "name": "무풍 시스템에어컨 DVM HOME 4실", "model": "DVM HOME 4실 패키지", "specs": ["실외기 1대 + 실내기 4대 (거실·안방·침실 2)", "무풍 1Way 천장형 카세트", "SmartThings 앱 원격 제어"], "img": "", "list": null, "price": null, "badge": "추천", "hidden": false}, {"id": "dvm5", "cat": "시스템에어컨", "name": "무풍 시스템에어컨 DVM HOME 5실", "model": "DVM HOME 5실 패키지", "specs": ["실외기 1대 + 실내기 5대 (거실·안방·침실 3)", "무풍 1Way 천장형 카세트", "SmartThings 앱 원격 제어"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "tv1", "cat": "TV", "name": "Neo QLED 4K TV 189cm (75형)", "model": "KQ75QNH70AFXKR", "specs": ["Quantum Mini LED · 4K UHD", "HDR10+ · 게이밍 최대 120Hz(DLG)", "에너지효율 1등급 · 2026년형"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "tv2", "cat": "TV", "name": "Neo QLED 4K TV 163cm (65형)", "model": "KQ65QNH70AFXKR", "specs": ["Quantum Mini LED · 4K UHD", "HDR10+ · 게이밍 최대 120Hz(DLG)", "2026년형"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "tv3", "cat": "TV", "name": "Mini LED 4K TV 138cm (55형)", "model": "KU55MH80AFXKR", "specs": ["Mini LED 백라이트 · 4K UHD", "AI 화질·음성 기능", "2026년형"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "rf1", "cat": "냉장고", "name": "BESPOKE AI 하이브리드 냉장고 4도어", "model": "RM80F91K1A", "specs": ["AI 하이브리드 쿨링", "대용량 4도어 (880L대)", "AI 절약 모드 · SmartThings 연동"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "rf2", "cat": "냉장고", "name": "BESPOKE AI 하이브리드 냉장고 4도어 (UV탈취)", "model": "RM70H91RMA", "specs": ["AI 하이브리드 쿨링", "UV 탈취·제균", "대용량 4도어 · 2026년형"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "rf3", "cat": "냉장고", "name": "BESPOKE AI 냉장고 4도어", "model": "RM80F64L2A", "specs": ["대용량 4도어", "AI 절약 모드", "SmartThings 연동"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "rf4", "cat": "냉장고", "name": "BESPOKE 1도어 냉동고", "model": "RZ34C785501", "specs": ["1도어 단독형 냉동고", "냉장고·김치냉장고와 조합 설치", "패널 컬러 선택"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "rf5", "cat": "냉장고", "name": "BESPOKE 1도어 냉장고", "model": "RR40C798501", "specs": ["1도어 단독형 냉장고", "냉동고·김치냉장고와 조합 설치", "패널 컬러 선택"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "kc1", "cat": "김치냉장고", "name": "BESPOKE AI 김치플러스 4도어", "model": "RK80F49C1W", "specs": ["칸별 독립 정온 보관", "김치·식재료 맞춤 보관 모드", "AI 절약 모드"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "kc2", "cat": "김치냉장고", "name": "BESPOKE AI 김치플러스 4도어", "model": "RK70F49F1DD", "specs": ["칸별 독립 정온 보관", "김치·식재료 맞춤 보관 모드", "AI 절약 모드"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "kc3", "cat": "김치냉장고", "name": "BESPOKE 김치플러스 3도어", "model": "RQ33DG71G1S9", "specs": ["스탠드형 3도어", "칸별 맞춤 보관", "패널 컬러 선택"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "kc4", "cat": "김치냉장고", "name": "BESPOKE 김치플러스 3도어", "model": "RQ33DB744101", "specs": ["스탠드형 3도어", "칸별 맞춤 보관", "패널 컬러 선택"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "kc5", "cat": "김치냉장고", "name": "BESPOKE 김치플러스 1도어", "model": "RQ34C793501", "specs": ["1도어 단독형", "냉장고·냉동고와 조합 설치", "패널 컬러 선택"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc1", "cat": "의류케어", "name": "BESPOKE AI 콤보 (세탁 25kg + 건조 18kg)", "model": "WD90H25AHS", "specs": ["세탁부터 건조까지 한 번에", "AI 맞춤 세탁·건조", "2026년형"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc2", "cat": "의류케어", "name": "BESPOKE AI 콤보 (세탁 25kg + 건조 18kg)", "model": "WD90H25BHW", "specs": ["세탁부터 건조까지 한 번에", "AI 맞춤 세탁·건조", "2026년형"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc3", "cat": "의류케어", "name": "BESPOKE AI 원바디 (세탁 25kg + 건조 22kg)", "model": "WH90F2522AAHS", "specs": ["세탁기·건조기 일체형", "7형(177.8mm) LCD 컨트롤", "AI 맞춤 코스"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc4", "cat": "의류케어", "name": "BESPOKE AI 세탁기 25kg", "model": "WF90F25ADS", "specs": ["드럼 세탁기 25kg", "AI 맞춤 세탁", "SmartThings 연동"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc5", "cat": "의류케어", "name": "BESPOKE AI 건조기 22kg", "model": "DV90F22CDS", "specs": ["히트펌프 건조기 22kg", "AI 맞춤 건조", "SmartThings 연동"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc6", "cat": "의류케어", "name": "BESPOKE AI 에어드레서", "model": "DF90H24R5C", "specs": ["에어·스팀 의류 케어", "냄새·미세먼지 케어", "2026년형"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc7", "cat": "의류케어", "name": "BESPOKE AI 에어드레서", "model": "DF90H24R4D", "specs": ["에어·스팀 의류 케어", "냄새·미세먼지 케어", "2026년형"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "ck1", "cat": "전기레인지", "name": "BESPOKE AI 인덕션 전기레인지", "model": "CC99F63U1DS", "specs": ["고화력 인덕션 조리", "안전 잠금·잔열 표시", "SmartThings 연동"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "ck2", "cat": "전기레인지", "name": "BESPOKE AI 인덕션 전기레인지", "model": "CC80H63U1HS", "specs": ["고화력 인덕션 조리", "안전 잠금·잔열 표시", "2026년형"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "dw1", "cat": "식기세척기", "name": "BESPOKE AI 식기세척기", "model": "DW90F79F1USWT", "specs": ["고온 세척·건조", "AI 오토 코스", "SmartThings 연동"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "dw2", "cat": "식기세척기", "name": "BESPOKE AI 식기세척기", "model": "DW90F79F1USBT", "specs": ["고온 세척·건조", "AI 오토 코스", "SmartThings 연동"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "vc1", "cat": "무선청소기", "name": "BESPOKE AI 제트 무선청소기", "model": "VS70H18GVG", "specs": ["강력한 흡입력", "AI 청소 모드", "2026년형"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "rb1", "cat": "로봇청소기", "name": "BESPOKE AI 스팀 로봇청소기", "model": "VR90F01AAH", "specs": ["흡입 + 물걸레 스팀 살균", "올인원 청정스테이션", "AI 사물 인식 주행"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "rb2", "cat": "로봇청소기", "name": "BESPOKE AI 스팀 로봇청소기", "model": "VR90F01AAG", "specs": ["흡입 + 물걸레 스팀 살균", "올인원 청정스테이션", "AI 사물 인식 주행"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "ov1", "cat": "조리기기", "name": "BESPOKE 광파오븐 50L", "model": "NQ50T8539BK", "specs": ["오븐·그릴·전자레인지 겸용", "대용량 50L", "블랙"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "ov2", "cat": "조리기기", "name": "BESPOKE 광파오븐 50L", "model": "NQ50T8539BW", "specs": ["오븐·그릴·전자레인지 겸용", "대용량 50L", "화이트"], "img": "", "list": null, "price": null, "badge": "", "hidden": false}]};
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const won = n => Number(n).toLocaleString("ko-KR") + "원";
+const isNum = v => v !== null && v !== "" && !isNaN(Number(v)) && Number(v) > 0;
+const LS = {
+  get(k){ try{ return localStorage.getItem(k) }catch(e){ return null } },
+  set(k,v){ try{ localStorage.setItem(k,v) }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k) }catch(e){} }
+};
+function toast(msg, ms=2400){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"), ms); }
+
+/* 카테고리 아이콘 (이미지 없을 때) */
+const ICON = {
+  "시스템에어컨":'<path d="M3 6h18v6H3z"/><path d="M6 12v1M12 12v1M18 12v1M7 16c1 1.5 1 3 0 4.5M12 16c1 1.5 1 3 0 4.5M17 16c1 1.5 1 3 0 4.5"/>',
+  "TV":'<rect x="2.5" y="4" width="19" height="12.5" rx="1.5"/><path d="M8 20.5h8M12 16.5v4"/>',
+  "냉장고":'<rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M5 10h14M12 2.5v19M9.5 6v2M14.5 6v2M9.5 13v3M14.5 13v3"/>',
+  "김치냉장고":'<rect x="5" y="2.5" width="14" height="19" rx="2"/><path d="M5 8.5h14M5 15h14M9 5.5h6M9 11.5h6M9 18h6"/>',
+  "의류케어":'<rect x="4" y="2.5" width="16" height="19" rx="2"/><circle cx="12" cy="13" r="5"/><path d="M7 6h3"/>',
+  "전기레인지":'<rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="8" cy="12" r="2.6"/><circle cx="16" cy="12" r="2.6"/>',
+  "식기세척기":'<rect x="4" y="2.5" width="16" height="19" rx="2"/><path d="M4 7h16M8 4.8h2M9 11v7M12 11v7M15 11v7"/>',
+  "무선청소기":'<path d="M15 3l-6 14"/><path d="M5 18h7l1 3H4z"/><rect x="13" y="2" width="5" height="6" rx="1.5"/>',
+  "로봇청소기":'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M8 5.5h8"/>',
+  "조리기기":'<rect x="2.5" y="5" width="19" height="14" rx="2"/><rect x="5" y="8" width="10" height="8" rx="1"/><path d="M18 9v.5M18 12v.5"/>'
+};
+const iconSvg = c => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${ICON[c]||ICON["TV"]}</svg>`;
+
+let DATA = null, ORIGINAL = null;
+
+async function load(){
+  let d = null;
+  try{
+    const r = await fetch("data.json?v=" + Date.now(), {cache:"no-store"});
+    if(r.ok) d = await r.json();
+  }catch(e){}
+  if(!d) d = FALLBACK;
+  ORIGINAL = JSON.parse(JSON.stringify(d));
+  const draft = LS.get("gb_draft");
+  if(draft){ try{ DATA = JSON.parse(draft); $("#draftbar").classList.add("show"); }catch(e){ DATA = d; } }
+  else DATA = d;
+  render();
+  if(location.hash === "#admin" || new URLSearchParams(location.search).has("admin")) openLock();
+}
+
+/* ===== 고객 화면 렌더링 ===== */
+function priceBlock(p){
+  const s = DATA.site;
+  const hasL = isNum(p.list), hasP = isNum(p.price);
+  const pct = (hasL && hasP && s.showDiscount && Number(p.price) < Number(p.list)) ? Math.round((1 - p.price / p.list) * 100) : 0;
+  return `<div class="prices">
+    <div class="row"><span class="lbl">출고가</span>${hasL ? `<span class="list-v num">${won(p.list)}</span>` : `<span class="list-v ph-l">출고가</span>`}</div>
+    <div class="row gb"><span class="lbl">공동구매가</span>${hasP ? `<span class="gb-v">${pct?`<span class="pct">${pct}%</span>`:""}${won(p.price)}</span>` : `<span class="ph">공동구매가</span>`}</div>
+  </div>`;
+}
+function card(p){
+  const img = p.img ? `<img src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy" onerror="this.replaceWith(document.createRange().createContextualFragment(iconSvg('${esc(p.cat)}')))">` : iconSvg(p.cat);
+  return `<article class="card">
+    <div class="thumb">${img}${p.badge?`<span class="badge">${esc(p.badge)}</span>`:""}</div>
+    <div class="body">
+      <div class="model">${esc(p.model)}</div>
+      <div class="name">${esc(p.name)}</div>
+      <ul class="specs">${(p.specs||[]).filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+      ${priceBlock(p)}
+    </div></article>`;
+}
+function render(){
+  const s = DATA.site;
+  $("#h-store").textContent = (s.store || "삼성스토어").toUpperCase() === "삼성스토어" ? "SAMSUNG STORE" : s.store;
+  $("#h-apt").textContent = s.apartment;
+  $("#h-title").textContent = s.title;
+  $("#h-sub").textContent = s.subtitle;
+  $("#h-period").textContent = "🗓 " + s.period;
+  $("#h-benefits").innerHTML = (s.benefits||[]).filter(Boolean).map((b,i)=>`<div class="benefit"><span>${i+1}</span>${esc(b)}</div>`).join("");
+  document.title = `${s.apartment} · 입주민 공동구매`;
+
+  const visible = DATA.products.filter(p=>!p.hidden);
+  const cats = DATA.categories.filter(c=>visible.some(p=>p.cat===c));
+  visible.forEach(p=>{ if(!cats.includes(p.cat)) cats.push(p.cat) });
+
+  $("#tabs").innerHTML = `<button class="tab on" data-c="">전체</button>` + cats.map(c=>`<button class="tab" data-c="${esc(c)}">${esc(c)}</button>`).join("");
+  $("#sections").innerHTML = cats.map((c,i)=>{
+    const list = visible.filter(p=>p.cat===c);
+    return `<section class="sec ${c==="시스템에어컨"?"feature":""}" id="sec-${i}" data-c="${esc(c)}">
+      <div class="sec-h"><h2>${esc(c)}</h2><small>${list.length}개 모델</small></div>
+      <div class="grid">${list.map(card).join("")}</div></section>`;
+  }).join("");
+
+  $("#tabs").querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+    $("#tabs").querySelectorAll(".tab").forEach(x=>x.classList.toggle("on", x===t));
+    const c = t.dataset.c;
+    document.querySelectorAll(".sec").forEach(sec=>sec.style.display = (!c || sec.dataset.c===c) ? "" : "none");
+    window.scrollTo({top: $(".tabs").offsetTop, behavior:"smooth"});
+    t.scrollIntoView({inline:"center", block:"nearest", behavior:"smooth"});
+  });
+
+  const tel = (s.phone||"").replace(/[^0-9+]/g,"");
+  $("#c-desc").textContent = tel ? `${s.contactName||""} · ${s.phone}` : `${s.contactName||"담당자"} 연락처는 추후 안내됩니다.`;
+  ["#c-btn","#fab"].forEach(id=>{ const a=$(id); a.href = tel ? "tel:"+tel : "#contact"; });
+  $("#fab").classList.toggle("show", !!tel);
+  $("#notice").innerHTML = (s.notice||[]).filter(Boolean).map(n=>`<li>${esc(n)}</li>`).join("");
+  $("#ft-txt").textContent = `${s.store} · ${s.apartment} 입주민 공동구매`;
+}
+
+/* ===== 숨은 관리자 진입: URL #admin 또는 하단 © 7번 탭 ===== */
+let tapN = 0, tapT = 0;
+$("#ft").addEventListener("click", ()=>{
+  const now = Date.now(); tapN = (now - tapT < 600) ? tapN + 1 : 1; tapT = now;
+  if(tapN >= 7){ tapN = 0; openLock(); }
+});
+window.addEventListener("hashchange", ()=>{ if(location.hash === "#admin") openLock(); });
+
+async function sha256(t){
+  const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t));
+  return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");
+}
+function openLock(){
+  if(sessionStorage.getItem("gb_auth") === "1") return openAdmin();
+  $("#lock").classList.add("open"); setTimeout(()=>$("#pw").focus(), 50);
+}
+$("#pw-cancel").onclick = ()=>{ $("#lock").classList.remove("open"); history.replaceState(null,"",location.pathname); };
+$("#pw").addEventListener("keydown", e=>{ if(e.key==="Enter") $("#pw-ok").click(); });
+$("#pw-ok").onclick = async ()=>{
+  const h = await sha256($("#pw").value);
+  if(h === (ORIGINAL.site.pwHash || DATA.site.pwHash)){
+    sessionStorage.setItem("gb_auth","1"); $("#pw").value=""; $("#lock").classList.remove("open"); openAdmin();
+  } else toast("비밀번호가 올바르지 않습니다.");
+};
+
+/* ===== 관리자 화면 ===== */
+let adTab = "products", openId = null;
+function openAdmin(){ $("#admin").classList.add("open"); document.body.style.overflow="hidden"; drawAdmin(); }
+function closeAdmin(){ $("#admin").classList.remove("open"); document.body.style.overflow=""; history.replaceState(null,"",location.pathname); }
+$("#ad-close").onclick = closeAdmin;
+$("#ad-preview").onclick = ()=>{ keepDraft(); render(); closeAdmin(); toast("미리보기 — 이 기기에서만 보입니다."); };
+$("#ad-tabs").onclick = e=>{ const b=e.target.closest("button"); if(!b) return; adTab=b.dataset.t; $("#ad-tabs").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b)); drawAdmin(); };
+function keepDraft(){ LS.set("gb_draft", JSON.stringify(DATA)); $("#draftbar").classList.add("show"); }
+$("#draft-clear").onclick = ()=>{ LS.del("gb_draft"); DATA = JSON.parse(JSON.stringify(ORIGINAL)); $("#draftbar").classList.remove("show"); render(); };
+
+const lines = a => (a||[]).join("\n");
+const unlines = t => t.split("\n").map(x=>x.trim()).filter(Boolean);
+const numOrNull = v => { const n = Number(String(v).replace(/[^0-9]/g,"")); return n>0 ? n : null; };
+
+function drawAdmin(){
+  const v = $("#ad-view");
+  if(adTab === "products") v.innerHTML = adProducts();
+  if(adTab === "site") v.innerHTML = adSite();
+  if(adTab === "deploy") v.innerHTML = adDeploy();
+  bindAdmin();
+}
+function adProducts(){
+  const done = DATA.products.filter(p=>isNum(p.list)&&isNum(p.price)).length;
+  return `<div class="box"><h3>가격 입력 현황 ${done} / ${DATA.products.length}</h3>
+    <div class="chk"><input type="checkbox" id="s-disc" ${DATA.site.showDiscount?"checked":""}><label for="s-disc">공동구매가 앞에 할인율(%) 자동 표시</label></div>
+    <div style="font-size:12.5px;color:var(--mute)">가격을 비워두면 고객 화면에 ‘출고가 / 공동구매가’ 글자로 표시됩니다. 내부 정책 DC율은 저장하지 마세요 — data.json 은 공개 파일입니다.</div>
+    <div class="row-btn" style="margin-top:10px"><button class="btn" id="p-add">+ 제품 추가</button></div></div>
+  ${DATA.products.map((p,i)=>{
+    const ok = isNum(p.list)&&isNum(p.price);
+    return `<div class="pitem ${p.hidden?"hid":""} ${openId===p.id?"open":""}" data-i="${i}">
+      <div class="phead" data-act="toggle"><div class="t"><b>${esc(p.name)}</b><small>${esc(p.cat)} · ${esc(p.model)}</small></div>
+        <span class="st ${ok?"ok":""}">${ok?"가격완료":"가격미정"}</span>
+        <button class="mini" data-act="up">↑</button><button class="mini" data-act="down">↓</button></div>
+      <div class="pbody">
+        <div class="two">
+          <label class="fld"><span>출고가 (원)</span><input inputmode="numeric" data-k="list" value="${isNum(p.list)?Number(p.list).toLocaleString():""}" placeholder="비우면 '출고가' 표시"></label>
+          <label class="fld"><span>공동구매가 (원)</span><input inputmode="numeric" data-k="price" value="${isNum(p.price)?Number(p.price).toLocaleString():""}" placeholder="비우면 '공동구매가' 표시"></label>
+        </div>
+        <div class="calc">계산기: 출고가에서 <input inputmode="decimal" class="c-pct" placeholder="%"> % 할인 → <button class="btn c-go" style="padding:6px 10px">공동구매가에 적용</button><em style="font-style:normal;color:var(--mute)">(%는 저장되지 않음)</em></div>
+        <label class="fld"><span>제품명</span><input data-k="name" value="${esc(p.name)}"></label>
+        <div class="two">
+          <label class="fld"><span>모델명</span><input data-k="model" value="${esc(p.model)}"></label>
+          <label class="fld"><span>품목</span><input data-k="cat" value="${esc(p.cat)}" list="catlist"></label>
+        </div>
+        <label class="fld"><span>사양 소개 (한 줄에 하나)</span><textarea data-k="specs">${esc(lines(p.specs))}</textarea></label>
+        <div class="two">
+          <label class="fld"><span>배지 (선택)</span><input data-k="badge" value="${esc(p.badge)}" placeholder="예: 추천, 한정"></label>
+          <label class="fld"><span>이미지 주소</span><input data-k="img" value="${esc(p.img)}" placeholder="images/모델명.jpg 또는 URL"></label>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px">
+          ${p.img?`<img class="imgprev" src="${esc(p.img)}" alt="">`:""}
+          <label class="btn" style="display:inline-block">이미지 업로드<input type="file" accept="image/*" class="p-file" hidden></label>
+          <em style="font-style:normal;font-size:11.5px;color:var(--mute)">저장 설정에 깃허브 토큰이 있으면 images/ 폴더로 바로 올라갑니다.</em>
+        </div>
+        <div class="chk"><input type="checkbox" data-k="hidden" id="h${i}" ${p.hidden?"checked":""}><label for="h${i}">고객 화면에서 숨기기</label></div>
+        <div class="row-btn"><button class="btn" data-act="dup">복제</button><button class="btn red" data-act="del">삭제</button></div>
+      </div></div>`;
+  }).join("")}
+  <datalist id="catlist">${DATA.categories.map(c=>`<option value="${esc(c)}">`).join("")}</datalist>`;
+}
+function adSite(){
+  const s = DATA.site;
+  return `<div class="box"><h3>상단 문구</h3>
+    <label class="fld"><span>단지명</span><input data-s="apartment" value="${esc(s.apartment)}"></label>
+    <label class="fld"><span>제목</span><input data-s="title" value="${esc(s.title)}"></label>
+    <label class="fld"><span>부제</span><input data-s="subtitle" value="${esc(s.subtitle)}"></label>
+    <label class="fld"><span>판매처</span><input data-s="store" value="${esc(s.store)}"></label>
+    <label class="fld"><span>기간 문구</span><input data-s="period" value="${esc(s.period)}"></label>
+    <label class="fld"><span>혜택 (한 줄에 하나)</span><textarea data-sl="benefits">${esc(lines(s.benefits))}</textarea></label></div>
+  <div class="box"><h3>상담 연락처</h3>
+    <div class="two"><label class="fld"><span>담당자 표시명</span><input data-s="contactName" value="${esc(s.contactName)}"></label>
+    <label class="fld"><span>전화번호</span><input data-s="phone" value="${esc(s.phone)}" inputmode="tel" placeholder="비우면 '추후 안내'"></label></div></div>
+  <div class="box"><h3>유의사항</h3>
+    <label class="fld"><span>한 줄에 하나</span><textarea data-sl="notice">${esc(lines(s.notice))}</textarea></label></div>
+  <div class="box"><h3>품목 순서</h3>
+    <label class="fld"><span>한 줄에 하나 (위에서부터 표시)</span><textarea data-cats>${esc(lines(DATA.categories))}</textarea></label></div>
+  <div class="box"><h3>관리자 비밀번호 변경</h3>
+    <label class="fld"><span>새 비밀번호</span><input type="password" id="newpw" autocomplete="new-password"><em>저장·배포 후 적용됩니다.</em></label>
+    <button class="btn" id="pw-set">변경 예약</button></div>`;
+}
+function adDeploy(){
+  const g = JSON.parse(LS.get("gb_gh")||"{}");
+  return `<div class="box"><h3>깃허브 자동 저장 (권장)</h3>
+    <div style="font-size:13px;color:var(--ink2);margin-bottom:12px">입력값은 <b>이 기기 브라우저에만</b> 보관되고 저장소에는 올라가지 않습니다. 토큰은 해당 저장소의 Contents 읽기/쓰기 권한만 준 Fine-grained 토큰을 쓰세요.</div>
+    <div class="two"><label class="fld"><span>계정(owner)</span><input id="g-owner" value="${esc(g.owner||"")}"></label>
+    <label class="fld"><span>저장소(repo)</span><input id="g-repo" value="${esc(g.repo||"")}"></label></div>
+    <div class="two"><label class="fld"><span>브랜치</span><input id="g-branch" value="${esc(g.branch||"main")}"></label>
+    <label class="fld"><span>토큰</span><input id="g-token" type="password" value="${esc(g.token||"")}"></label></div>
+    <div class="row-btn"><button class="btn blue" id="g-save">설정 저장</button><button class="btn" id="g-test">연결 확인</button><button class="btn red" id="g-clear">토큰 삭제</button></div></div>
+  <div class="box"><h3>수동 방식</h3>
+    <div style="font-size:13px;color:var(--ink2);margin-bottom:10px">토큰 없이 쓰려면 data.json 을 내려받아 깃허브에서 파일을 교체하세요.</div>
+    <div class="row-btn"><button class="btn" id="dl">data.json 다운로드</button><button class="btn" id="rv">수정 내용 되돌리기</button></div></div>`;
+}
+
+function bindAdmin(){
+  const v = $("#ad-view");
+  v.oninput = e=>{
+    const el = e.target, it = el.closest(".pitem");
+    if(it && el.dataset.k){
+      const p = DATA.products[+it.dataset.i], k = el.dataset.k;
+      if(k==="specs") p.specs = unlines(el.value);
+      else if(k==="list"||k==="price"){ p[k] = numOrNull(el.value); }
+      else if(k==="hidden") p.hidden = el.checked;
+      else p[k] = el.value.trim();
+      if(k==="name") it.querySelector(".t b").textContent = p.name;
+    }
+    if(el.dataset.s) DATA.site[el.dataset.s] = el.value.trim();
+    if(el.dataset.sl) DATA.site[el.dataset.sl] = unlines(el.value);
+    if(el.dataset.cats !== undefined) DATA.categories = unlines(el.value);
+    if(el.id==="s-disc") DATA.site.showDiscount = el.checked;
+  };
+  v.onchange = async e=>{
+    const el = e.target;
+    if(el.dataset.k==="list"||el.dataset.k==="price"){ const n=numOrNull(el.value); el.value = n? n.toLocaleString():""; drawStatus(el); }
+    if(el.dataset.k==="hidden") el.closest(".pitem").classList.toggle("hid", el.checked);
+    if(el.classList.contains("p-file") && el.files[0]) await uploadImage(DATA.products[+el.closest(".pitem").dataset.i], el.files[0]);
+  };
+  v.onclick = e=>{
+    const b = e.target.closest("[data-act],.c-go,#p-add,#g-save,#g-test,#g-clear,#dl,#rv,#pw-set");
+    if(!b) return;
+    const it = b.closest(".pitem"), i = it ? +it.dataset.i : -1, P = DATA.products;
+    const act = b.dataset.act;
+    if(act==="toggle"){ if(e.target.closest(".mini")) return; const p=P[i]; openId = openId===p.id?null:p.id; it.classList.toggle("open"); return; }
+    if(act==="up"&&i>0){ e.stopPropagation(); [P[i-1],P[i]]=[P[i],P[i-1]]; drawAdmin(); return; }
+    if(act==="down"&&i<P.length-1){ e.stopPropagation(); [P[i+1],P[i]]=[P[i],P[i+1]]; drawAdmin(); return; }
+    if(act==="dup"){ const c=JSON.parse(JSON.stringify(P[i])); c.id="p"+Date.now(); P.splice(i+1,0,c); openId=c.id; drawAdmin(); return; }
+    if(act==="del"){ if(confirm(`'${P[i].name}' 을(를) 삭제할까요?`)){ P.splice(i,1); drawAdmin(); } return; }
+    if(b.classList.contains("c-go")){
+      const p=P[i], pct=parseFloat(it.querySelector(".c-pct").value);
+      if(!isNum(p.list)||isNaN(pct)) return toast("출고가와 할인율을 먼저 입력하세요.");
+      p.price = Math.round(p.list*(1-pct/100)/100)*100;
+      it.querySelector('[data-k="price"]').value = p.price.toLocaleString(); it.querySelector(".c-pct").value=""; drawStatus(it.querySelector('[data-k="price"]'));
+      return;
+    }
+    if(b.id==="p-add"){ const c={id:"p"+Date.now(),cat:DATA.categories[0]||"",name:"새 제품",model:"",specs:[],img:"",list:null,price:null,badge:"",hidden:false}; P.push(c); openId=c.id; drawAdmin(); setTimeout(()=>document.querySelector(".pitem.open")?.scrollIntoView({block:"center"}),50); return; }
+    if(b.id==="g-save"||b.id==="g-test"){
+      const g={owner:$("#g-owner").value.trim(),repo:$("#g-repo").value.trim(),branch:$("#g-branch").value.trim()||"main",token:$("#g-token").value.trim()};
+      LS.set("gb_gh", JSON.stringify(g));
+      if(b.id==="g-save") return toast("이 기기에 저장했습니다.");
+      return ghGet("data.json").then(r=>toast(r?"연결 성공 — data.json 확인됨":"연결은 되었지만 data.json 이 없습니다.")).catch(err=>toast("연결 실패: "+err.message,4000));
+    }
+    if(b.id==="g-clear"){ LS.del("gb_gh"); drawAdmin(); return toast("토큰을 삭제했습니다."); }
+    if(b.id==="dl") return download();
+    if(b.id==="rv"){ if(confirm("저장하지 않은 수정 내용을 모두 되돌릴까요?")){ DATA=JSON.parse(JSON.stringify(ORIGINAL)); LS.del("gb_draft"); $("#draftbar").classList.remove("show"); render(); drawAdmin(); } return; }
+    if(b.id==="pw-set"){ const n=$("#newpw").value; if(n.length<4) return toast("4자 이상 입력하세요."); sha256(n).then(h=>{ DATA.site.pwHash=h; $("#newpw").value=""; toast("저장·배포하면 새 비밀번호가 적용됩니다."); }); }
+  };
+}
+function drawStatus(el){
+  const it = el.closest(".pitem"); if(!it) return;
+  const p = DATA.products[+it.dataset.i], ok = isNum(p.list)&&isNum(p.price), st = it.querySelector(".st");
+  st.textContent = ok?"가격완료":"가격미정"; st.classList.toggle("ok", ok);
+}
+
+/* ===== 저장: 깃허브 API 또는 파일 다운로드 ===== */
+function gh(){ const g = JSON.parse(LS.get("gb_gh")||"{}"); return (g.owner&&g.repo&&g.token) ? g : null; }
+function b64(str){ const bytes = new TextEncoder().encode(str); let s=""; bytes.forEach(b=>s+=String.fromCharCode(b)); return btoa(s); }
+async function ghReq(path, opt={}){
+  const g = gh(); if(!g) throw new Error("저장 설정이 없습니다");
+  const url = `https://api.github.com/repos/${g.owner}/${g.repo}/contents/${path}` + (opt.method ? "" : `?ref=${encodeURIComponent(g.branch)}`);
+  const r = await fetch(url, {...opt, headers:{Authorization:`Bearer ${g.token}`,Accept:"application/vnd.github+json"}});
+  if(r.status===404 && !opt.method) return null;
+  if(!r.ok){ const t = await r.json().catch(()=>({})); throw new Error(t.message || r.status); }
+  return r.json();
+}
+const ghGet = p => ghReq(p);
+async function ghPut(path, base64, msg){
+  const g = gh(), cur = await ghGet(path).catch(()=>null);
+  return ghReq(path, {method:"PUT", body:JSON.stringify({message:msg, content:base64, branch:g.branch, ...(cur&&cur.sha?{sha:cur.sha}:{})})});
+}
+function download(){
+  const blob = new Blob([JSON.stringify(DATA,null,2)], {type:"application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "data.json"; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 2000);
+  toast("data.json 을 저장소의 같은 파일과 교체하세요.", 3500);
+}
+$("#ad-save").onclick = async ()=>{
+  if(!gh()){ download(); return; }
+  const btn = $("#ad-save"); btn.disabled = true; btn.textContent = "저장 중…";
+  try{
+    await ghPut("data.json", b64(JSON.stringify(DATA,null,2)), "공동구매 데이터 업데이트");
+    ORIGINAL = JSON.parse(JSON.stringify(DATA)); LS.del("gb_draft"); $("#draftbar").classList.remove("show"); render();
+    toast("저장 완료 — 1~2분 뒤 모든 사람에게 반영됩니다.", 4000);
+  }catch(err){ toast("저장 실패: "+err.message+" (다운로드로 대체하세요)", 4500); }
+  btn.disabled = false; btn.textContent = "저장·배포";
+};
+
+/* 이미지: 최대 900px JPEG 로 줄여서 images/ 에 업로드 */
+async function uploadImage(p, file){
+  const dataUrl = await new Promise(res=>{
+    const img = new Image(); img.onload = ()=>{
+      const sc = Math.min(1, 900/Math.max(img.width,img.height)), c = document.createElement("canvas");
+      c.width = Math.round(img.width*sc); c.height = Math.round(img.height*sc);
+      const x = c.getContext("2d"); x.fillStyle="#fff"; x.fillRect(0,0,c.width,c.height); x.drawImage(img,0,0,c.width,c.height);
+      res(c.toDataURL("image/jpeg",.86)); URL.revokeObjectURL(img.src);
+    }; img.src = URL.createObjectURL(file);
+  });
+  if(!gh()){ p.img = dataUrl; drawAdmin(); return toast("토큰이 없어 이 기기 미리보기용으로만 넣었습니다. 실제 배포는 images/ 폴더에 파일을 올리고 주소를 적어주세요.", 5000); }
+  const name = `images/${(p.model||p.id).replace(/[^A-Za-z0-9_-]/g,"")||p.id}.jpg`;
+  toast("이미지 업로드 중…");
+  try{ await ghPut(name, dataUrl.split(",")[1], `이미지 ${name}`); p.img = name + "?v=" + Date.now(); drawAdmin(); toast("업로드 완료 — 저장·배포를 눌러 반영하세요.", 3500); }
+  catch(err){ toast("업로드 실패: "+err.message, 4000); }
+}
+
+load();
+</script>
+</body>
+</html>
