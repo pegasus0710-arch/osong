@@ -43,7 +43,7 @@
         "무풍 1Way 천장형 카세트",
         "SmartThings 앱 원격 제어"
       ],
-      "img": "",
+      "img": "images/DVM-HOME-2room.png",
       "list": null,
       "price": null,
       "badge": "입주 필수",
@@ -59,7 +59,7 @@
         "무풍 1Way 천장형 카세트",
         "SmartThings 앱 원격 제어"
       ],
-      "img": "",
+      "img": "images/DVM-HOME-3room.png",
       "list": null,
       "price": null,
       "badge": "",
@@ -75,7 +75,7 @@
         "무풍 1Way 천장형 카세트",
         "SmartThings 앱 원격 제어"
       ],
-      "img": "",
+      "img": "images/DVM-HOME-4room.png",
       "list": null,
       "price": null,
       "badge": "추천",
@@ -91,7 +91,7 @@
         "무풍 1Way 천장형 카세트",
         "SmartThings 앱 원격 제어"
       ],
-      "img": "",
+      "img": "images/DVM-HOME-5room.png",
       "list": null,
       "price": null,
       "badge": "",
@@ -203,7 +203,7 @@
         "냉장고·김치냉장고와 조합 설치",
         "키친핏 설치"
       ],
-      "img": "",
+      "img": "images/RZ34C785501.png",
       "list": null,
       "price": null,
       "badge": "",
@@ -219,7 +219,7 @@
         "냉동고·김치냉장고와 조합 설치",
         "키친핏 설치"
       ],
-      "img": "",
+      "img": "images/RR40C798501.png",
       "list": null,
       "price": null,
       "badge": "",
@@ -283,7 +283,7 @@
         "키친핏 설치",
         "칸별 독립 보관"
       ],
-      "img": "",
+      "img": "images/RQ33DB744101.png",
       "list": null,
       "price": null,
       "badge": "",
@@ -292,14 +292,14 @@
     {
       "id": "kc5",
       "cat": "김치냉장고",
-      "name": "Bespoke 김치플러스 1도어 키친핏 348L",
+      "name": "Bespoke 김치플러스 1도어 키친핏 347L",
       "model": "RQ34C793501",
       "specs": [
         "1도어 단독형",
         "냉장고·냉동고와 조합 설치",
         "키친핏 설치"
       ],
-      "img": "",
+      "img": "images/RQ34C793501.png",
       "list": null,
       "price": null,
       "badge": "",
