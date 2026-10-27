@@ -19,7 +19,7 @@
     ],
     "showDiscount": true,
     "pwHash": "de64b116d208c12f41504cf04f5ef7352c2d4b1f7895fa8b0f9e62a2b2aeab9c",
-    "ver": "3"
+    "ver": "4"
   },
   "categories": [
     "시스템에어컨",
@@ -160,7 +160,7 @@
       "specs": [
         "냉장 523L + 냉동 366L",
         "하이브리드 쿨링 (컴프레서+펠티어)",
-        "에너지효율 1등급 · 투명 쇼케이스"
+        "에너지효율 1등급 · 투명 쇼케이스 · 코타화이트"
       ],
       "img": "images/RM80F91K1A.png",
       "list": null,
@@ -176,7 +176,7 @@
       "specs": [
         "냉장 535L + 냉동 366L",
         "AI 하이브리드 쿨링 · UV 탈취",
-        "에너지효율 1등급"
+        "에너지효율 1등급 · 코타화이트"
       ],
       "img": "images/RM70H91RMA.png",
       "list": null,
@@ -192,7 +192,7 @@
       "specs": [
         "냉장 376L + 냉동 235L",
         "키친핏 Max 설치 · 푸드 쇼케이스",
-        "에너지효율 2등급"
+        "에너지효율 2등급 · 코타화이트"
       ],
       "img": "images/RM80F64L2A.png",
       "list": null,
@@ -203,14 +203,14 @@
     {
       "id": "rf4",
       "cat": "냉장고",
-      "name": "Bespoke AI 냉동고 1도어 키친핏 347L",
+      "name": "Bespoke AI 냉동고 1도어 키친핏 347L (코타화이트)",
       "model": "RZ34C785501",
       "specs": [
-        "냉동 전용 1도어",
+        "냉동 전용 1도어 · 우열림",
         "냉장고·김치냉장고와 조합 설치",
-        "키친핏 설치"
+        "키친핏 설치 · 코타화이트"
       ],
-      "img": "images/RZ34C785501.png",
+      "img": "images/RZ34C785501.png?v=3",
       "list": null,
       "price": null,
       "badge": "",
@@ -219,14 +219,14 @@
     {
       "id": "rf5",
       "cat": "냉장고",
-      "name": "Bespoke AI 냉장고 1도어 키친핏 409L",
+      "name": "Bespoke AI 냉장고 1도어 키친핏 409L (코타화이트)",
       "model": "RR40C798501",
       "specs": [
-        "냉장 전용 1도어",
+        "냉장 전용 1도어 · 좌열림",
         "냉동고·김치냉장고와 조합 설치",
-        "키친핏 설치"
+        "키친핏 설치 · 코타화이트"
       ],
-      "img": "images/RR40C798501.png",
+      "img": "images/RR40C798501.png?v=3",
       "list": null,
       "price": null,
       "badge": "",
@@ -240,7 +240,7 @@
       "specs": [
         "독립냉각 · 김치통 114.9L",
         "오토 오픈 도어",
-        "에너지효율 1등급"
+        "에너지효율 1등급 · 클린화이트"
       ],
       "img": "images/RK80F49C1W.png",
       "list": null,
@@ -256,7 +256,7 @@
       "specs": [
         "독립냉각 · 김치통 114.9L",
         "냄새케어 김치통",
-        "에너지효율 1등급"
+        "에너지효율 1등급 · 다크메탈"
       ],
       "img": "images/RK70F49F1DD.png",
       "list": null,
@@ -272,7 +272,7 @@
       "specs": [
         "독립냉각 · 김치통 124.8L",
         "도어 디스플레이",
-        "에너지효율 1등급"
+        "에너지효율 1등급 · 리파인드 이녹스"
       ],
       "img": "images/RQ33DG71G1S9.png",
       "list": null,
@@ -283,14 +283,14 @@
     {
       "id": "kc4",
       "cat": "김치냉장고",
-      "name": "Bespoke 김치플러스 3도어 키친핏 313L",
+      "name": "Bespoke 김치플러스 3도어 키친핏 313L (코타화이트)",
       "model": "RQ33DB744101",
       "specs": [
         "스탠드형 3도어",
         "키친핏 설치",
-        "칸별 독립 보관"
+        "칸별 독립 보관 · 코타화이트"
       ],
-      "img": "images/RQ33DB744101.png",
+      "img": "images/RQ33DB744101.png?v=3",
       "list": null,
       "price": null,
       "badge": "",
@@ -352,7 +352,7 @@
       "specs": [
         "세탁 25kg + 건조 22kg 원바디",
         "인버터 히트펌프 + 히터 건조",
-        "7형(177.8mm) LCD"
+        "7형(177.8mm) LCD · 다크스틸"
       ],
       "img": "images/WH90F2522AAHS.png",
       "list": null,
