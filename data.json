@@ -18,7 +18,8 @@
       "시스템에어컨은 세대 구조에 따라 설치 사양이 달라질 수 있습니다."
     ],
     "showDiscount": true,
-    "pwHash": "de64b116d208c12f41504cf04f5ef7352c2d4b1f7895fa8b0f9e62a2b2aeab9c"
+    "pwHash": "de64b116d208c12f41504cf04f5ef7352c2d4b1f7895fa8b0f9e62a2b2aeab9c",
+    "ver": "3"
   },
   "categories": [
     "시스템에어컨",
@@ -104,14 +105,16 @@
       "model": "KQ75QNH70AFXKR",
       "specs": [
         "Supreme Mini LED Dimming · 4K UHD",
-        "HDR10+ (Adaptive)",
+        "HDR10+ (Adaptive) · DLG 120Hz",
         "2026년형"
       ],
       "img": "images/KQ75QNH70AFXKR.png",
       "list": null,
       "price": null,
       "badge": "",
-      "hidden": false
+      "hidden": false,
+      "optLabel": "벽걸이 설치 시",
+      "optPrice": null
     },
     {
       "id": "tv2",
@@ -120,14 +123,16 @@
       "model": "KQ65QNH70AFXKR",
       "specs": [
         "Supreme Mini LED Dimming · 4K UHD",
-        "HDR10+ (Adaptive)",
+        "HDR10+ (Adaptive) · DLG 120Hz",
         "2026년형"
       ],
       "img": "images/KQ65QNH70AFXKR.png",
       "list": null,
       "price": null,
       "badge": "",
-      "hidden": false
+      "hidden": false,
+      "optLabel": "벽걸이 설치 시",
+      "optPrice": null
     },
     {
       "id": "tv3",
@@ -143,7 +148,9 @@
       "list": null,
       "price": null,
       "badge": "",
-      "hidden": false
+      "hidden": false,
+      "optLabel": "벽걸이 설치 시",
+      "optPrice": null
     },
     {
       "id": "rf1",
@@ -196,10 +203,10 @@
     {
       "id": "rf4",
       "cat": "냉장고",
-      "name": "Bespoke 1도어 키친핏 냉동고",
+      "name": "Bespoke AI 냉동고 1도어 키친핏 347L",
       "model": "RZ34C785501",
       "specs": [
-        "1도어 단독형 냉동고",
+        "냉동 전용 1도어",
         "냉장고·김치냉장고와 조합 설치",
         "키친핏 설치"
       ],
@@ -212,10 +219,10 @@
     {
       "id": "rf5",
       "cat": "냉장고",
-      "name": "Bespoke 1도어 키친핏 냉장고",
+      "name": "Bespoke AI 냉장고 1도어 키친핏 409L",
       "model": "RR40C798501",
       "specs": [
-        "1도어 단독형 냉장고",
+        "냉장 전용 1도어",
         "냉동고·김치냉장고와 조합 설치",
         "키친핏 설치"
       ],
@@ -276,7 +283,7 @@
     {
       "id": "kc4",
       "cat": "김치냉장고",
-      "name": "Bespoke 김치플러스 3도어 키친핏",
+      "name": "Bespoke 김치플러스 3도어 키친핏 313L",
       "model": "RQ33DB744101",
       "specs": [
         "스탠드형 3도어",
@@ -292,14 +299,14 @@
     {
       "id": "kc5",
       "cat": "김치냉장고",
-      "name": "Bespoke 김치플러스 1도어 키친핏 347L",
+      "name": "Bespoke AI 김치플러스 1도어 키친핏 347L (코타화이트)",
       "model": "RQ34C793501",
       "specs": [
-        "1도어 단독형",
+        "1도어 단독형 · 좌열림",
         "냉장고·냉동고와 조합 설치",
-        "키친핏 설치"
+        "키친핏 설치 · 코타화이트"
       ],
-      "img": "images/RQ34C793501.png",
+      "img": "images/RQ34C793501.png?v=2",
       "list": null,
       "price": null,
       "badge": "",
@@ -468,14 +475,14 @@
     {
       "id": "dw2",
       "cat": "식기세척기",
-      "name": "Bespoke AI 식기세척기 빌트인 14인용",
+      "name": "Bespoke AI 식기세척기 빌트인 14인용 (새틴 베이지)",
       "model": "DW90F79F1USBT",
       "specs": [
         "14인용 빌트인",
         "열풍건조",
         "SmartThings 연동"
       ],
-      "img": "images/DW90F79F1USBT.png",
+      "img": "images/DW90F79F1USBT.png?v=2",
       "list": null,
       "price": null,
       "badge": "",
