@@ -176,10 +176,18 @@ footer{padding:26px 0 calc(30px + env(safe-area-inset-bottom));text-align:center
 .pd-top b{flex:1;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pd-x{width:36px;height:36px;border-radius:50%;background:#f1f3f7;font-size:18px;flex:none}
 .pd-body{flex:1;overflow:auto;-webkit-overflow-scrolling:touch}
-.pd-gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;background:linear-gradient(160deg,#fafbfd,#eef1f6);scrollbar-width:none}
+.pd-gwrap{position:relative;min-width:0}
+.pd-split>div{min-width:0}
+.pd-gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-x:contain;touch-action:pan-x pan-y;cursor:grab;user-select:none;-webkit-user-select:none;background:linear-gradient(160deg,#fafbfd,#eef1f6);scrollbar-width:none}
 .pd-gal::-webkit-scrollbar{display:none}
 .pd-gal div{flex:0 0 100%;scroll-snap-align:center;aspect-ratio:4/3;display:grid;place-items:center}
-.pd-gal img{width:100%;height:100%;object-fit:contain;padding:6%}
+.pd-gal img{width:100%;height:100%;object-fit:contain;padding:6%;pointer-events:none;-webkit-user-drag:none}
+.pd-gal.drag{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto}
+.pd-nav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.92);box-shadow:0 4px 14px -4px rgba(13,27,46,.35);font-size:20px;font-weight:700;color:var(--ink);display:grid;place-items:center;z-index:2}
+.pd-nav.l{left:10px}.pd-nav.r{right:10px}
+.pd-nav[disabled]{opacity:0;pointer-events:none}
+.pd-cnt{position:absolute;right:12px;bottom:12px;background:rgba(13,27,46,.6);color:#fff;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;z-index:2}
+.pd-dots i{cursor:pointer;transition:.2s}
 .pd-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 0}
 .pd-dots i{width:6px;height:6px;border-radius:50%;background:#cfd6e2}
 .pd-dots i.on{background:var(--ink);width:16px;border-radius:3px}
@@ -409,7 +417,10 @@ async function openDetail(id, push=true){
   $("#pd-body").innerHTML = `
     <div class="pd-split">
       <div>
-        <div class="pd-gal" id="pd-gal">${gal.length ? gal.map(u=>`<div><img src="${esc(u)}" alt="" loading="lazy"></div>`).join("") : `<div>${iconSvg(p.cat)}</div>`}</div>
+        <div class="pd-gwrap">
+          <div class="pd-gal" id="pd-gal">${gal.length ? gal.map(u=>`<div><img src="${esc(u)}" alt="" draggable="false"></div>`).join("") : `<div>${iconSvg(p.cat)}</div>`}</div>
+          ${gal.length>1 ? `<button class="pd-nav l" id="pd-prev" aria-label="이전 사진">‹</button><button class="pd-nav r" id="pd-next" aria-label="다음 사진">›</button><span class="pd-cnt" id="pd-cnt">1 / ${gal.length}</span>` : ""}
+        </div>
         ${gal.length>1 ? `<div class="pd-dots" id="pd-dots">${gal.map((_,i)=>`<i class="${i?"":"on"}"></i>`).join("")}</div>` : ""}
       </div>
       <div>
@@ -431,10 +442,29 @@ async function openDetail(id, push=true){
   $("#pd-frame").removeAttribute("src"); $("#pd-ext").href = url;
   $("#pd-body").scrollTop = 0; document.body.style.overflow = "hidden";
   const g = $("#pd-gal"), dots = $("#pd-dots");
-  if(g && dots) g.addEventListener("scroll", ()=>{ const i = Math.round(g.scrollLeft / g.clientWidth); dots.querySelectorAll("i").forEach((d,k)=>d.classList.toggle("on",k===i)); }, {passive:true});
+  if(g && dots) setupGallery(g, dots, gal.length);
   const w = $("#pd-web"); if(w) w.onclick = ()=>{ $("#pd-frame").src = url; pd.classList.add("web"); };
   if(push) history.pushState({pd:id}, "", "#p=" + encodeURIComponent(id));
 }
+function setupGallery(g, dots, n){
+  const prev = $("#pd-prev"), next = $("#pd-next"), cnt = $("#pd-cnt");
+  const idx = ()=> Math.round(g.scrollLeft / g.clientWidth);
+  const go = i => { i = Math.max(0, Math.min(n-1, i)); g.scrollTo({left: i * g.clientWidth, behavior:"smooth"}); };
+  const sync = ()=>{ const i = idx(); dots.querySelectorAll("i").forEach((d,k)=>d.classList.toggle("on",k===i)); if(cnt) cnt.textContent = `${i+1} / ${n}`; if(prev) prev.disabled = i<=0; if(next) next.disabled = i>=n-1; };
+  g.addEventListener("scroll", sync, {passive:true}); sync();
+  prev && (prev.onclick = e=>{ e.stopPropagation(); go(idx()-1); });
+  next && (next.onclick = e=>{ e.stopPropagation(); go(idx()+1); });
+  dots.querySelectorAll("i").forEach((d,k)=> d.onclick = ()=> go(k));
+  // 마우스 드래그 (PC)
+  let sx=0, sl=0, down=false, moved=false;
+  g.addEventListener("pointerdown", e=>{ if(e.pointerType!=="mouse") return; down=true; moved=false; sx=e.clientX; sl=g.scrollLeft; g.classList.add("drag"); g.setPointerCapture(e.pointerId); });
+  g.addEventListener("pointermove", e=>{ if(!down) return; const dx=e.clientX-sx; if(Math.abs(dx)>3) moved=true; g.scrollLeft = sl - dx; });
+  const end = e=>{ if(!down) return; down=false; g.classList.remove("drag"); const dx = (e.clientX||sx) - sx; const base = Math.round(sl / g.clientWidth); go(Math.abs(dx) > g.clientWidth*0.15 ? base + (dx<0?1:-1) : base); };
+  g.addEventListener("pointerup", end); g.addEventListener("pointercancel", end);
+  GAL_KEYS = e=>{ if(e.key==="ArrowRight") go(idx()+1); if(e.key==="ArrowLeft") go(idx()-1); };
+}
+let GAL_KEYS = null;
+document.addEventListener("keydown", e=>{ if($("#pd").classList.contains("open") && !$("#pd").classList.contains("web") && GAL_KEYS) GAL_KEYS(e); });
 function closeDetail(fromPop=false){
   const pd = $("#pd"); if(!pd.classList.contains("open")) return;
   pd.classList.remove("open","web"); pd.setAttribute("aria-hidden","true"); $("#pd-frame").removeAttribute("src");
