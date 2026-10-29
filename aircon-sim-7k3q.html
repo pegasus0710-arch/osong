@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>시스템에어컨 가격 시뮬레이션</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--ink:#0d1b2e;--ink2:#43526a;--mute:#8592a6;--line:#e4e8ef;--bg:#f4f6f9;--card:#fff;--blue:#1428a0;--blue2:#2d4bd6;--sky:#e9eefc;--accent:#c7a76c;--red:#e2463a;--warn:#fff7e6;--warnb:#f3d9a4}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;word-break:keep-all;padding-bottom:calc(32px + env(safe-area-inset-bottom))}
+button,select,input{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header{background:linear-gradient(150deg,#0a1530,#13286e 60%,#1d3fae);color:#fff}
+header .wrap{padding-top:22px;padding-bottom:26px}
+.kicker{font-size:12.5px;letter-spacing:.08em;opacity:.85}
+.kicker b{letter-spacing:.14em}
+header h1{margin-top:10px;font-size:clamp(22px,5.6vw,32px);font-weight:800;letter-spacing:-.02em}
+header p{margin-top:6px;font-size:14px;opacity:.8}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:16px}
+.layout>*{min-width:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+.card h2{font-size:16px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card h2 small{font-weight:600;color:var(--mute);font-size:12.5px}
+.lbl{font-size:12.5px;font-weight:700;color:var(--ink2);margin:12px 0 6px}
+.lbl:first-of-type{margin-top:0}
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;background:#eef1f6;border-radius:12px;padding:4px;gap:4px}
+.seg button{height:42px;border-radius:9px;font-weight:700;font-size:14.5px;color:var(--ink2)}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 2px 6px -2px rgba(13,27,46,.25)}
+.seg button small{display:block;font-size:10.5px;font-weight:600;color:var(--mute);margin-top:-3px}
+.row{display:flex;align-items:center;gap:8px;padding:9px 0;border-top:1px solid #f0f2f6}
+.row:first-child{border-top:0}
+.row .nm{flex:1;min-width:0;font-weight:700;font-size:14px}
+.row .nm small{display:block;font-weight:500;color:var(--mute);font-size:11.5px}
+select{height:40px;border:1px solid #d5dbe5;border-radius:10px;padding:0 30px 0 10px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238592a6' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;-webkit-appearance:none;appearance:none;font-size:14px;font-weight:600}
+.step{display:flex;align-items:center;border:1px solid #d5dbe5;border-radius:10px;overflow:hidden;height:40px;flex:none}
+.step button{width:38px;height:100%;font-size:18px;font-weight:700;color:var(--ink2)}
+.step button:disabled{opacity:.3;cursor:default}
+.step input{width:40px;height:100%;border:0;border-left:1px solid #eef1f6;border-right:1px solid #eef1f6;text-align:center;font-weight:700;font-size:15px;-moz-appearance:textfield}
+.step input::-webkit-outer-spin-button,.step input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.auto{font-size:11px;font-weight:700;color:var(--blue2);background:var(--sky);border-radius:6px;padding:1px 6px;margin-left:4px}
+.manual{font-size:11px;font-weight:700;color:#9a6b12;background:var(--warn);border-radius:6px;padding:1px 6px;margin-left:4px;cursor:pointer}
+.rm{width:34px;height:34px;border-radius:9px;background:#f4f5f8;color:var(--mute);font-size:16px;flex:none}
+.rm:disabled{opacity:.3;cursor:default}
+.add{width:100%;height:42px;border:1px dashed #c4ccda;border-radius:11px;color:var(--blue2);font-weight:700;margin-top:8px}
+.add:disabled{opacity:.4;cursor:default}
+.mini{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.mini button{padding:8px 12px;border-radius:9px;background:#eef1f6;font-size:13px;font-weight:700}
+.warn{margin-top:12px;background:var(--warn);border:1px solid var(--warnb);border-radius:12px;padding:10px 12px;font-size:12.5px;color:#7a5410;display:none}
+.warn.show{display:block}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{font-size:12px;color:var(--mute);font-weight:700;text-align:left;padding:0 6px 8px;border-bottom:1px solid var(--line)}
+td{padding:9px 6px;border-bottom:1px solid #f0f2f6;vertical-align:top}
+td.n,th.n{text-align:right;white-space:nowrap}
+td .md{font-size:12px;color:var(--mute);font-weight:600;word-break:break-all}
+td .kd{font-weight:700}
+tr.grp td{background:#f8fafc;font-size:12px;font-weight:800;color:var(--ink2);padding:6px}
+.sum{margin-top:12px;display:grid;gap:6px;font-size:14px}
+.sum div{display:flex;justify-content:space-between}
+.sum .tot{margin-top:6px;padding-top:12px;border-top:2px solid var(--ink);font-size:18px;font-weight:800}
+.sum .tot span:last-child{color:var(--blue)}
+.vat{font-size:11.5px;color:var(--mute);text-align:right;margin-top:4px}
+.acts{display:flex;gap:8px;margin-top:14px}
+.acts button{flex:1;height:44px;border-radius:11px;font-weight:700;font-size:14px}
+.p1{background:var(--ink);color:#fff}.p2{background:#eef1f6}
+.cmp-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.cmp-head h2{margin:0}
+.chk{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #d5dbe5;border-radius:10px;font-size:13.5px;font-weight:700;cursor:pointer;user-select:none;background:#fff}
+.chk input{width:18px;height:18px;accent-color:var(--blue)}
+.chk.on{border-color:var(--blue2);background:var(--sky);color:var(--blue)}
+.cg{padding:12px 0;border-top:1px solid #f0f2f6}
+.cg:first-child{border-top:0;padding-top:0}
+.cg-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.cg-h b{font-size:15px}
+.cg-h small{font-size:12px;color:var(--mute);font-weight:600}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{border:1px solid var(--line);border-radius:12px;padding:10px 11px;text-align:left;background:#fff;display:flex;flex-direction:column;gap:2px;min-width:0}
+.tile .tl{font-size:12px;color:var(--mute);font-weight:700}
+.tile .tv{font-size:16px;font-weight:800;letter-spacing:-.01em}
+.tile .ts{display:flex;justify-content:space-between;gap:6px;font-size:12.5px;color:var(--ink2)}
+.tile .ts b{font-weight:800;color:var(--ink)}
+.tile .tt{display:flex;justify-content:space-between;gap:6px;font-size:12px;color:var(--mute);border-top:1px dashed var(--line);margin-top:3px;padding-top:4px}
+.tile.cur{border-color:var(--blue2);background:var(--sky)}
+.tile.cur .tv,.tile.cur .ts b{color:var(--blue)}
+.cmp-note{font-size:11.5px;color:var(--mute);margin-top:10px}
+@media (min-width:700px){ .tiles{grid-template-columns:repeat(4,1fr)} }
+/* lock */
+#lock{position:fixed;inset:0;z-index:100;background:linear-gradient(150deg,#0a1530,#13286e 60%,#1d3fae);display:grid;place-items:center;padding:20px}
+#lock .pane{width:100%;max-width:340px;background:#fff;border-radius:20px;padding:24px 20px}
+#lock h3{font-size:18px;font-weight:800}
+#lock p{font-size:13px;color:var(--mute);margin:4px 0 16px}
+#lock input,.pwbox input{width:100%;height:48px;border:1px solid #d5dbe5;border-radius:12px;padding:0 14px;font-size:18px;letter-spacing:.2em;text-align:center}
+#lock button,.pwbox .go{width:100%;height:48px;border-radius:12px;background:var(--ink);color:#fff;font-weight:800;font-size:15px;margin-top:10px}
+#lock .err{color:var(--red);font-size:12.5px;margin-top:8px;min-height:18px;text-align:center}
+body.locked main,body.locked header{visibility:hidden}
+.hd-row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.gear{flex:none;padding:7px 10px;border-radius:9px;background:rgba(255,255,255,.12);font-size:12px;font-weight:700;color:#fff}
+#pwdlg{position:fixed;inset:0;z-index:90;background:rgba(10,15,30,.55);display:none;place-items:center;padding:20px}
+#pwdlg.open{display:grid}
+.pwbox{width:100%;max-width:360px;background:#fff;border-radius:18px;padding:20px}
+.pwbox h3{font-size:16px;font-weight:800;margin-bottom:12px}
+.pwbox input{font-size:16px;letter-spacing:normal;text-align:left;margin-bottom:8px}
+.pwbox .sub{background:#eef1f6;color:var(--ink);margin-top:6px}
+.pwbox p{font-size:12px;color:var(--mute);margin-top:8px;line-height:1.5}
+details.pt summary{cursor:pointer;font-weight:800;font-size:15px;list-style:none;display:flex;justify-content:space-between}
+details.pt summary::-webkit-details-marker{display:none}
+details.pt summary:after{content:"+";color:var(--mute)}
+details.pt[open] summary:after{content:"−"}
+details.pt table{margin-top:10px}
+.foot{font-size:12px;color:var(--mute);margin:18px 4px 0;display:grid;gap:4px}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 16px;border-radius:11px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:30}
+.toast.show{opacity:1}
+@media (min-width:900px){
+  .layout{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:start}
+  .span{grid-column:1/-1}
+    body{padding-bottom:40px}
+}
+@media print{
+  header,  body{background:#fff;padding:0}
+  .layout{display:block}
+  .card{border:0;padding:0}
+  .print-h{display:block!important}
+}
+.print-h{display:none;margin-bottom:12px}
+</style>
+</head>
+<body class="locked">
+<header><div class="wrap">
+  <div class="hd-row"><div class="kicker"><b>SAMSUNG STORE</b> · 힐스테이트 오송역 퍼스트</div><button class="gear" id="pw-open">비밀번호 변경</button></div>
+  <h1>DVM HOME 시스템에어컨 가격 시뮬레이션</h1>
+  <p>제품 라인·배관 방식·실 수를 고르면 구성 모델과 금액이 바로 계산됩니다.</p>
+</div></header>
+
+<main class="wrap">
+  <div class="layout">
+    <section class="card cfg">
+      <h2>1. 기본 선택</h2>
+      <div class="lbl">제품 라인</div>
+      <div class="seg" id="s-line">
+        <button data-v="general">일반형<small>1Way</small></button>
+        <button data-v="infinite">인피니트<small>Infinite</small></button>
+      </div>
+      <div class="lbl">배관 방식</div>
+      <div class="seg" id="s-pipe">
+        <button data-v="multi">다배관</button>
+        <button data-v="single">단배관<small>분기관 포함</small></button>
+      </div>
+      <div class="lbl">실 수 (실내기 대수)</div>
+      <div class="seg" id="s-rooms">
+        <button data-v="2">2실</button><button data-v="3">3실</button><button data-v="4">4실</button><button data-v="5">5실</button>
+      </div>
+
+      <h2 style="margin-top:22px">2. 구성 편집 <small>모델을 직접 바꿔 조합할 수 있어요</small></h2>
+      <div class="row">
+        <div class="nm">실외기<small id="out-model"></small></div>
+        <select id="out-hp" aria-label="실외기 용량"></select>
+      </div>
+      <div id="rooms"></div>
+      <button class="add" id="add">+ 실내기 추가</button>
+      <div class="row" style="margin-top:6px;border-top:1px solid #f0f2f6">
+        <div class="nm">리모컨<span id="rc-tag"></span><small id="rc-model"></small></div>
+        <div class="step"><button id="rc-minus" aria-label="리모컨 줄이기">−</button><input id="rc-qty" type="number" inputmode="numeric" min="0" max="20" aria-label="리모컨 수량"><button id="rc-plus" aria-label="리모컨 늘리기">+</button></div>
+      </div>
+      <div class="mini"><button id="reset">추천 구성으로 되돌리기</button></div>
+      <div class="warn" id="warn"></div>
+    </section>
+
+    <section class="card side">
+      <div class="print-h"><h2 id="ph"></h2></div>
+      <h2>3. 견적 내역 <small id="title-sm"></small></h2>
+      <table>
+        <thead><tr><th>구분 / 모델</th><th class="n">수량</th><th class="n">단가</th><th class="n">금액</th></tr></thead>
+        <tbody id="lines"></tbody>
+      </table>
+      <div class="sum">
+        <div><span>제품 합계</span><span id="t-prod"></span></div>
+        <div><span>설치비 <small id="t-inst-n" style="color:var(--mute)"></small></span><span id="t-inst"></span></div>
+        <div class="tot"><span>총 합계</span><span id="t-all"></span></div>
+      </div>
+      <div class="vat">단가·금액 모두 부가세 포함</div>
+      <div class="acts"><button class="p2" id="copy">견적 복사</button><button class="p1" id="print">인쇄 / PDF</button></div>
+    </section>
+
+    <section class="card span cmp-card">
+      <div class="cmp-head"><h2>한눈에 비교 <small>추천 구성 기준 · 누르면 적용</small></h2>
+        <label class="chk" id="split-lbl"><input type="checkbox" id="split"> 설치비 분리</label></div>
+      <div id="cmp"></div>
+      <div class="cmp-note">* 4·5실은 임시 구성 기준 · 금액은 부가세 포함</div>
+    </section>
+
+    <section class="card span pt-card">
+      <details class="pt"><summary>단가표 (부가세 포함)</summary><div style="overflow-x:auto"><table id="pt"></table></div></details>
+    </section>
+  </div>
+
+  <div class="foot">
+    <div>· 설치비는 실내기 대수 기준 일괄 산정입니다 (2실 1,254,000원 / 3실 1,771,000원 / 4실 2,288,000원 / 5실 2,805,000원).</div>
+    <div>· 판넬은 실내기 1대당 1개 (18평형 = 대형, 그 외 = 중형), 리모컨은 실내기 1대당 1개 기준입니다 (수량 직접 수정 가능).</div>
+    <div>· 단배관은 분기관(AXJ-YA1509N)이 실내기 대수 −1개 포함됩니다.</div>
+    <div>· 본 금액은 시뮬레이션용이며 현장 여건(배관 길이·추가 자재 등)에 따라 달라질 수 있습니다.</div>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+<div id="lock"><form class="pane" id="lock-f" autocomplete="off">
+  <h3>가격 시뮬레이션</h3><p>담당자 전용 페이지입니다. 비밀번호를 입력하세요.</p>
+  <input type="password" id="lock-pw" inputmode="numeric" autocomplete="current-password" aria-label="비밀번호">
+  <button type="submit">확인</button><div class="err" id="lock-err"></div>
+</form></div>
+<div id="pwdlg"><div class="pwbox">
+  <h3>비밀번호 변경</h3>
+  <input type="password" id="np1" placeholder="새 비밀번호 (4자 이상)" autocomplete="new-password">
+  <input type="password" id="np2" placeholder="새 비밀번호 확인" autocomplete="new-password">
+  <button class="go" id="np-save">변경</button><button class="go sub" id="np-close">닫기</button>
+  <p>메인 제안서 관리자 모드에 깃허브 토큰을 저장해 둔 기기라면 바로 저장됩니다. 아니면 수정된 파일이 내려받아지니, 저장소의 같은 파일과 교체하세요.</p>
+</div></div>
+
+<script>
+/* ===== 비밀번호 (초기값 1234, SHA-256) ===== */
+const PW_HASH = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
+async function sha256(t){ const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join(""); }
+(function(){
+  let ok=false; try{ ok = sessionStorage.getItem("dvm_auth")===PW_HASH; }catch(e){}
+  if(ok){ document.body.classList.remove("locked"); document.getElementById("lock").remove(); return; }
+  const f=document.getElementById("lock-f"), i=document.getElementById("lock-pw");
+  setTimeout(()=>i.focus(),100);
+  f.onsubmit = async e=>{ e.preventDefault();
+    if(await sha256(i.value)===PW_HASH){ try{ sessionStorage.setItem("dvm_auth",PW_HASH); }catch(e){} document.body.classList.remove("locked"); document.getElementById("lock").remove(); }
+    else{ document.getElementById("lock-err").textContent="비밀번호가 올바르지 않습니다."; i.value=""; i.focus(); } };
+})();
+
+/* ===== 단가표 (부가세 포함) — 엑셀 '시스템에어컨 모델 선정' 기준 ===== */
+const P = {
+  outdoor: {
+    multi:  { 3:["AJ030RXH4BC1",841000], 4:["AJ040RXH4BC1",990000] },
+    single: { 3:["AJ030MXHNBC1",841000], 4:["AJ040MXHNBC1",990000] }
+  },
+  indoor: {
+    general:  { 5:["AJ020BN1PBC1",307000], 6:["AJ023BN1PBC1",314000], 8:["AJ032BN1PBC1",320000], 18:["AJ072BN1PBC1",484000] },
+    infinite: { 5:["AJ020CN1FBC1",314000], 6:["AJ023CN1FBC1",358000], 8:["AJ032CN1FBC1",370000], 18:["AJ072CN1FBC1",524000] }
+  },
+  panel: {
+    general:  { L:["PC1BWSK3NW",124000], M:["PC1NWSK3NW",88000] },
+    infinite: { L:["PC1ZNWK1NW",288000], M:["PC1YNWK1NW",214000] }
+  },
+  branch: ["AXJ-YA1509N",48000],
+  remote: { general:["AR-EC05",15000], infinite:["AR-CH01",36000] },
+  install: { 2:1254000, 3:1771000, 4:2288000, 5:2805000 }
+};
+const SIZES = [5,6,8,18];
+const ROOM_NAMES = ["거실","안방","침실1","침실2","침실3"];
+const LINE_NM = { general:"일반형", infinite:"인피니트" }, PIPE_NM = { multi:"다배관", single:"단배관" };
+/* 추천 구성 — 2·3실은 엑셀 구성 그대로, 4·5실은 임시 구성 */
+const PRESET = {
+  2:{ hp:3, sizes:[18,6] },
+  3:{ hp:4, sizes:[18,6,5] },
+  4:{ hp:4, sizes:[18,8,6,5], tentative:true },
+  5:{ hp:4, sizes:[18,8,6,6,5], tentative:true }
+};
+
+const $ = s => document.querySelector(s);
+const won = n => n.toLocaleString("ko-KR") + "원";
+let S = { line:"general", pipe:"multi", hp:3, sizes:[18,6], preset:2, custom:false };
+try{ const q = JSON.parse(sessionStorage.getItem("dvm_sim")||"null"); if(q && q.sizes) S = q; }catch(e){}
+
+function calc(st){
+  const L=[], n=st.sizes.length;
+  const o = P.outdoor[st.pipe][st.hp]; L.push({g:"실외기", k:`${PIPE_NM[st.pipe]} ${st.hp}마력`, m:o[0], q:1, u:o[1]});
+  const cnt = {}; st.sizes.forEach(s=>cnt[s]=(cnt[s]||0)+1);
+  [...SIZES].reverse().forEach(s=>{ if(cnt[s]){ const r=P.indoor[st.line][s]; L.push({g:"실내기", k:`${s}평형`, m:r[0], q:cnt[s], u:r[1]}); } });
+  const big = cnt[18]||0, mid = n-big;
+  if(big){ const r=P.panel[st.line].L; L.push({g:"판넬", k:"대형", m:r[0], q:big, u:r[1]}); }
+  if(mid){ const r=P.panel[st.line].M; L.push({g:"판넬", k:"중형", m:r[0], q:mid, u:r[1]}); }
+  if(st.pipe==="single" && n>1) L.push({g:"분기관", k:"단배관용", m:P.branch[0], q:n-1, u:P.branch[1]});
+  const rq = (st.remoteQty==null) ? n : st.remoteQty;
+  const rc=P.remote[st.line]; if(rq>0) L.push({g:"리모컨", k:st.line==="infinite"?"인피니트용":"일반", m:rc[0], q:rq, u:rc[1]});
+  L.forEach(x=>x.a=x.q*x.u);
+  const prod = L.reduce((a,x)=>a+x.a,0), inst = P.install[n]||0;
+  return {L, prod, inst, total:prod+inst, n};
+}
+
+function seg(id, val){ document.querySelectorAll(`#${id} button`).forEach(b=>b.classList.toggle("on", b.dataset.v==String(val))); }
+function applyPreset(n){ const p=PRESET[n]; S.preset=n; S.hp=p.hp; S.sizes=[...p.sizes]; S.custom=false; S.remoteQty=null; }
+function isPreset(){ const p=PRESET[S.sizes.length]; return p && p.hp===S.hp && p.sizes.join()===S.sizes.join() && S.remoteQty==null; }
+
+function render(){
+  seg("s-line",S.line); seg("s-pipe",S.pipe); seg("s-rooms",S.sizes.length);
+  $("#out-hp").innerHTML = [3,4].map(h=>`<option value="${h}" ${h===S.hp?"selected":""}>${h}마력</option>`).join("");
+  $("#out-model").textContent = P.outdoor[S.pipe][S.hp][0];
+  $("#rooms").innerHTML = S.sizes.map((s,i)=>`<div class="row">
+      <div class="nm">${ROOM_NAMES[i]}<small>${P.indoor[S.line][s][0]} · 판넬 ${s===18?"대형":"중형"}</small></div>
+      <select data-i="${i}" aria-label="${ROOM_NAMES[i]} 평형">${SIZES.map(z=>`<option value="${z}" ${z===s?"selected":""}>${z}평형</option>`).join("")}</select>
+      <button class="rm" data-rm="${i}" ${S.sizes.length<=2?"disabled":""} aria-label="삭제">✕</button></div>`).join("");
+  $("#add").disabled = S.sizes.length>=5;
+  const rq = S.remoteQty==null ? S.sizes.length : S.remoteQty;
+  $("#rc-qty").value = rq; $("#rc-minus").disabled = rq<=0; $("#rc-plus").disabled = rq>=20;
+  $("#rc-model").textContent = `${P.remote[S.line][0]} · ${P.remote[S.line][1].toLocaleString()}원`;
+  $("#rc-tag").innerHTML = S.remoteQty==null ? `<span class="auto">실내기 수 자동</span>` : `<span class="manual" id="rc-auto" title="실내기 수에 맞추기">직접 입력 · 되돌리기</span>`;
+
+  const r = calc(S); let last="";
+  $("#lines").innerHTML = r.L.map(x=>{ const head = x.g!==last ? `<tr class="grp"><td colspan="4">${x.g}</td></tr>` : ""; last=x.g;
+    return head + `<tr><td><div class="kd">${x.k}</div><div class="md">${x.m}</div></td><td class="n">${x.q}</td><td class="n">${x.u.toLocaleString()}</td><td class="n">${x.a.toLocaleString()}</td></tr>`; }).join("")
+    + `<tr class="grp"><td colspan="4">설치비</td></tr><tr><td><div class="kd">실내기 ${r.n}대 일괄</div></td><td class="n">1</td><td class="n">${r.inst.toLocaleString()}</td><td class="n">${r.inst.toLocaleString()}</td></tr>`;
+  $("#t-prod").textContent = won(r.prod); $("#t-inst").textContent = won(r.inst); $("#t-inst-n").textContent = `(${r.n}실)`; $("#t-all").textContent = won(r.total);
+  const title = `${LINE_NM[S.line]} · ${PIPE_NM[S.pipe]} · ${r.n}실${isPreset()?"":" (직접 구성)"}`;
+  $("#title-sm").textContent = title; 
+  $("#ph").textContent = `힐스테이트 오송역 퍼스트 · DVM HOME 견적 — ${title}`;
+
+  const w=[]; const pr=PRESET[r.n];
+  if(pr && pr.tentative && isPreset()) w.push(`${r.n}실 추천 구성은 엑셀 시트에 없어 임시로 넣은 조합입니다. 실외기 용량·평형 구성을 확정해 주세요.`);
+  const pyeong = S.sizes.reduce((a,b)=>a+b,0);
+  if(S.hp===3 && r.n>=3) w.push(`실내기 ${r.n}대(합계 ${pyeong}평형)에 3마력 실외기를 선택했습니다. 연결 용량을 확인하세요.`);
+  if(r.n>=4) w.push(`단가표에 4마력보다 큰 실외기가 없어 4마력으로 계산했습니다. 실내기 합계 ${pyeong}평형 — 실외기 용량 확인이 필요합니다.`);
+  $("#warn").innerHTML = w.map(x=>"⚠ "+x).join("<br>"); $("#warn").classList.toggle("show", w.length>0);
+
+  const split = !!S.split; $("#split").checked = split; $("#split-lbl").classList.toggle("on", split);
+  const OPTS=[["general","multi","일반 · 다배관"],["general","single","일반 · 단배관"],["infinite","multi","인피 · 다배관"],["infinite","single","인피 · 단배관"]];
+  $("#cmp").innerHTML = [2,3,4,5].map(n=>`<div class="cg"><div class="cg-h"><b>${n}실${PRESET[n].tentative?" *":""}</b><small>설치비 ${P.install[n].toLocaleString()}원</small></div><div class="tiles">${OPTS.map(([l,p,nm])=>{
+      const c = calc({line:l,pipe:p,hp:PRESET[n].hp,sizes:PRESET[n].sizes,remoteQty:null});
+      const cur = isPreset() && S.line===l && S.pipe===p && S.sizes.length===n;
+      const body = split
+        ? `<div class="ts"><span>제품</span><b>${c.prod.toLocaleString()}</b></div><div class="ts"><span>설치</span><b>${c.inst.toLocaleString()}</b></div><div class="tt"><span>합계</span><span>${c.total.toLocaleString()}</span></div>`
+        : `<div class="tv">${c.total.toLocaleString()}</div>`;
+      return `<button class="tile ${cur?"cur":""}" data-c="${l},${p},${n}"><span class="tl">${nm}</span>${body}</button>`; }).join("")}</div></div>`).join("");
+  try{ sessionStorage.setItem("dvm_sim", JSON.stringify(S)); }catch(e){}
+}
+
+function priceTable(){
+  const rows=[["실외기","다배관 3마력",...P.outdoor.multi[3]],["실외기","다배관 4마력",...P.outdoor.multi[4]],["실외기","단배관 3마력",...P.outdoor.single[3]],["실외기","단배관 4마력",...P.outdoor.single[4]]];
+  ["general","infinite"].forEach(l=>SIZES.forEach(s=>rows.push(["실내기",`${LINE_NM[l]} ${s}평형`,...P.indoor[l][s]])));
+  ["general","infinite"].forEach(l=>{ rows.push(["판넬",`${LINE_NM[l]} 대형`,...P.panel[l].L]); rows.push(["판넬",`${LINE_NM[l]} 중형`,...P.panel[l].M]); });
+  rows.push(["분기관","단배관용",...P.branch]); rows.push(["리모컨","일반",...P.remote.general]); rows.push(["리모컨","인피니트",...P.remote.infinite]);
+  $("#pt").innerHTML = `<thead><tr><th>구분</th><th>규격</th><th>모델</th><th class="n">단가</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="md" style="font-size:12.5px">${r[2]}</td><td class="n">${r[3].toLocaleString()}</td></tr>`).join("")}</tbody>`;
+}
+
+/* ===== 이벤트 ===== */
+$("#s-line").onclick = e=>{ const b=e.target.closest("button"); if(b){ S.line=b.dataset.v; render(); } };
+$("#s-pipe").onclick = e=>{ const b=e.target.closest("button"); if(b){ S.pipe=b.dataset.v; render(); } };
+$("#s-rooms").onclick = e=>{ const b=e.target.closest("button"); if(b){ applyPreset(+b.dataset.v); render(); } };
+$("#out-hp").onchange = e=>{ S.hp=+e.target.value; render(); };
+$("#rooms").onchange = e=>{ const s=e.target.closest("select"); if(s){ S.sizes[+s.dataset.i]=+s.value; render(); } };
+$("#rooms").onclick = e=>{ const b=e.target.closest("[data-rm]"); if(b && S.sizes.length>2){ S.sizes.splice(+b.dataset.rm,1); render(); } };
+$("#add").onclick = ()=>{ if(S.sizes.length<5){ S.sizes.push(6); if(S.sizes.length>=3 && S.hp<4) S.hp=4; render(); } };
+const setRc = v=>{ v = Math.max(0, Math.min(20, parseInt(v)||0)); S.remoteQty = (v===S.sizes.length) ? null : v; render(); };
+$("#rc-minus").onclick = ()=> setRc((+$("#rc-qty").value)-1);
+$("#rc-plus").onclick = ()=> setRc((+$("#rc-qty").value)+1);
+$("#rc-qty").onchange = e=> setRc(e.target.value);
+$("#rc-tag").onclick = e=>{ if(e.target.closest("#rc-auto")){ S.remoteQty=null; render(); } };
+$("#reset").onclick = ()=>{ applyPreset(S.sizes.length); render(); };
+$("#split").onchange = e=>{ S.split = e.target.checked; render(); };
+$("#cmp").onclick = e=>{ const td=e.target.closest("[data-c]"); if(!td) return; const [l,p,n]=td.dataset.c.split(","); S.line=l; S.pipe=p; applyPreset(+n); render(); if(innerWidth<900) $(".side").scrollIntoView({behavior:"smooth"}); };
+$("#print").onclick = ()=>window.print();
+$("#copy").onclick = async ()=>{
+  const r=calc(S);
+  const t = [`[DVM HOME 견적] ${LINE_NM[S.line]} · ${PIPE_NM[S.pipe]} · ${r.n}실`, ...r.L.map(x=>`- ${x.g} ${x.k} ${x.m} × ${x.q} = ${won(x.a)}`), `- 설치비 (${r.n}실 일괄) = ${won(r.inst)}`, `제품 합계 ${won(r.prod)} / 설치비 ${won(r.inst)}`, `총 합계 ${won(r.total)} (부가세 포함)`].join("\n");
+  try{ await navigator.clipboard.writeText(t); toast("견적 내용을 복사했습니다."); }
+  catch(e){ const a=document.createElement("textarea"); a.value=t; document.body.appendChild(a); a.select(); document.execCommand("copy"); a.remove(); toast("견적 내용을 복사했습니다."); }
+};
+function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),2000); }
+
+/* ===== 비밀번호 변경 ===== */
+$("#pw-open").onclick = ()=>{ $("#pwdlg").classList.add("open"); $("#np1").value=$("#np2").value=""; setTimeout(()=>$("#np1").focus(),50); };
+$("#np-close").onclick = ()=> $("#pwdlg").classList.remove("open");
+function b64e(str){ const by=new TextEncoder().encode(str); let s=""; by.forEach(b=>s+=String.fromCharCode(b)); return btoa(s); }
+function b64d(b){ const bin=atob(b.replace(/\n/g,"")); return new TextDecoder().decode(Uint8Array.from(bin,c=>c.charCodeAt(0))); }
+$("#np-save").onclick = async ()=>{
+  const a=$("#np1").value, b=$("#np2").value;
+  if(a.length<4) return toast("4자 이상 입력하세요."); if(a!==b) return toast("두 비밀번호가 다릅니다.");
+  const h = await sha256(a), file = decodeURIComponent(location.pathname.split("/").pop() || "index.html");
+  const swap = src => src.replace(/const PW_HASH = "[0-9a-f]{64}";/, `const PW_HASH = "${h}";`);
+  let g=null; try{ g = JSON.parse(localStorage.getItem("gb_gh")||"null"); }catch(e){}
+  try{
+    if(g && g.owner && g.repo && g.token){
+      const api = `https://api.github.com/repos/${g.owner}/${g.repo}/contents/${file}`, hd = {Authorization:`Bearer ${g.token}`, Accept:"application/vnd.github+json"};
+      const cur = await (await fetch(`${api}?ref=${encodeURIComponent(g.branch||"main")}`, {headers:hd})).json();
+      if(!cur.content) throw new Error(cur.message||"파일을 찾지 못했습니다");
+      const r = await fetch(api, {method:"PUT", headers:hd, body:JSON.stringify({message:"시뮬레이션 비밀번호 변경", content:b64e(swap(b64d(cur.content))), sha:cur.sha, branch:g.branch||"main"})});
+      if(!r.ok) throw new Error((await r.json()).message||r.status);
+      try{ sessionStorage.setItem("dvm_auth",h); }catch(e){}
+      $("#pwdlg").classList.remove("open"); return toast("변경했습니다. 1~2분 뒤 적용됩니다.");
+    }
+    const src = await (await fetch(location.href.split("#")[0], {cache:"no-store"})).text();
+    const bl = new Blob([swap(src)], {type:"text/html"}), el = document.createElement("a");
+    el.href = URL.createObjectURL(bl); el.download = file; el.click();
+    $("#pwdlg").classList.remove("open"); toast("수정된 파일을 저장소에 교체하세요.");
+  }catch(err){ toast("변경 실패: " + err.message); }
+};
+
+priceTable(); render();
+</script>
+</body>
+</html>
