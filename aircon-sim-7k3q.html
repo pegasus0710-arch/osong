@@ -43,6 +43,8 @@ select{height:40px;border:1px solid #d5dbe5;border-radius:10px;padding:0 30px 0 
 .step input::-webkit-outer-spin-button,.step input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .auto{font-size:11px;font-weight:700;color:var(--blue2);background:var(--sky);border-radius:6px;padding:1px 6px;margin-left:4px}
 .manual{font-size:11px;font-weight:700;color:#9a6b12;background:var(--warn);border-radius:6px;padding:1px 6px;margin-left:4px;cursor:pointer}
+.qty{min-width:56px;height:40px;border-radius:10px;background:#f4f5f8;display:grid;place-items:center;font-weight:800;font-size:15px;flex:none;padding:0 10px}
+.qty.off{color:var(--mute);font-size:12.5px;font-weight:700}
 .rm{width:34px;height:34px;border-radius:9px;background:#f4f5f8;color:var(--mute);font-size:16px;flex:none}
 .rm:disabled{opacity:.3;cursor:default}
 .add{width:100%;height:42px;border:1px dashed #c4ccda;border-radius:11px;color:var(--blue2);font-weight:700;margin-top:8px}
@@ -164,6 +166,10 @@ details.pt table{margin-top:10px}
       <div id="rooms"></div>
       <button class="add" id="add">+ 실내기 추가</button>
       <div class="row" style="margin-top:6px;border-top:1px solid #f0f2f6">
+        <div class="nm">분기관<span id="br-tag"></span><small id="br-model"></small></div>
+        <div class="qty" id="br-qty"></div>
+      </div>
+      <div class="row">
         <div class="nm">리모컨<span id="rc-tag"></span><small id="rc-model"></small></div>
         <div class="step"><button id="rc-minus" aria-label="리모컨 줄이기">−</button><input id="rc-qty" type="number" inputmode="numeric" min="0" max="20" aria-label="리모컨 수량"><button id="rc-plus" aria-label="리모컨 늘리기">+</button></div>
       </div>
@@ -298,6 +304,10 @@ function render(){
       <select data-i="${i}" aria-label="${ROOM_NAMES[i]} 평형">${SIZES.map(z=>`<option value="${z}" ${z===s?"selected":""}>${z}평형</option>`).join("")}</select>
       <button class="rm" data-rm="${i}" ${S.sizes.length<=2?"disabled":""} aria-label="삭제">✕</button></div>`).join("");
   $("#add").disabled = S.sizes.length>=5;
+  const single = S.pipe==="single", bq = single ? S.sizes.length-1 : 0;
+  $("#br-model").textContent = single ? `${P.branch[0]} · ${P.branch[1].toLocaleString()}원 · 실 수 −1` : "다배관은 분기관이 필요 없어요";
+  $("#br-qty").textContent = single ? `${bq}개` : "없음"; $("#br-qty").classList.toggle("off", !single);
+  $("#br-tag").innerHTML = single ? `<span class="auto">단배관 자동</span>` : "";
   const rq = S.remoteQty==null ? S.sizes.length : S.remoteQty;
   $("#rc-qty").value = rq; $("#rc-minus").disabled = rq<=0; $("#rc-plus").disabled = rq>=20;
   $("#rc-model").textContent = `${P.remote[S.line][0]} · ${P.remote[S.line][1].toLocaleString()}원`;
