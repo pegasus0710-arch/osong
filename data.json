@@ -503,7 +503,7 @@
       "list": null,
       "price": null,
       "badge": "",
-      "hidden": false
+      "hidden": true
     },
     {
       "id": "rb1",
