@@ -289,7 +289,7 @@ body.locked>header,body.locked>main{visibility:hidden}
   <div class="hd-row"><div class="kicker">SAMSUNG STORE · DVM HOME</div><a class="hd-link" href="aircon-admin-7k3q.html">관리자</a></div>
   <h1>시스템에어컨<br>견적 시뮬레이터</h1>
   <p id="hd-site">힐스테이트 오송역 퍼스트 입주민 공동구매</p>
-  <div class="steps-mini"><span><b>01</b>제품 라인</span><span><b>02</b>배관 방식</span><span><b>03</b>실 수</span><span><b>04</b>구성 조정</span></div>
+  <div class="steps-mini"><span><b>01</b>제품 라인</span><span><b>02</b>배관 방식</span><span><b>03</b>실내기 대수</span><span><b>04</b>구성 조정</span></div>
 </div></header>
 
 <main class="wrap">
@@ -306,11 +306,11 @@ body.locked>header,body.locked>main{visibility:hidden}
         <div class="sh"><span class="no">02</span><h2>배관 방식</h2></div>
         <div class="opts" id="s-pipe">
           <button class="opt" data-v="multi"><span class="t">다배관</span><span class="d">실내기마다 배관을 따로 연결</span></button>
-          <button class="opt" data-v="single"><span class="t">단배관</span><span class="d">배관 1개 + 분기관 (실 수 −1개 자동)</span></button>
+          <button class="opt" data-v="single"><span class="t">단배관</span><span class="d">배관 1개 + 분기관 (실내기 대수 −1개 자동)</span></button>
         </div>
       </div>
       <div class="step">
-        <div class="sh"><span class="no">03</span><h2>실 수</h2><small>실내기 대수 · 설치비 일괄</small></div>
+        <div class="sh"><span class="no">03</span><h2>실내기 대수</h2><small>대수 기준 설치비 일괄</small></div>
         <div class="rooms-pick" id="s-rooms"></div>
       </div>
       <div class="step">
@@ -353,7 +353,7 @@ body.locked>header,body.locked>main{visibility:hidden}
   </div>
 
   <div class="foot">
-    <div>· 판넬은 실내기 1대당 1개, 리모컨은 실내기 대수 기준(수정 가능), 단배관은 분기관 실 수 −1개가 자동 포함됩니다.</div>
+    <div>· 판넬은 실내기 1대당 1개, 리모컨은 실내기 대수 기준(수정 가능), 단배관은 분기관이 실내기 대수 −1개로 자동 포함됩니다.</div>
     <div>· 본 금액은 시뮬레이션용이며 현장 여건에 따라 달라질 수 있습니다.</div>
   </div>
 </main>
@@ -469,7 +469,7 @@ function renderCompare(){
   const fmt = v => `<span class="full">${v.toLocaleString()}</span><span class="man">${(v/10000).toLocaleString("ko-KR",{minimumFractionDigits:1,maximumFractionDigits:1})}</span>`;
   const OPTS=[["general","multi"],["general","single"],["infinite","multi"],["infinite","single"]];
   const head=`<thead><tr><th></th>${split?"<th></th>":""}<th colspan="2">일반형</th><th colspan="2" class="inf">인피니트</th></tr>
-    <tr><th>실 수</th>${split?"<th>설치비</th>":""}<th>다배관</th><th>단배관</th><th class="inf l">다배관</th><th class="inf r">단배관</th></tr></thead>`;
+    <tr><th>실내기</th>${split?"<th>설치비</th>":""}<th>다배관</th><th>단배관</th><th class="inf l">다배관</th><th class="inf r">단배관</th></tr></thead>`;
   const body=ROOMS().map(n=>{ const p=preset(n); return `<tr><td>${n}실${p.tentative?" *":""}</td>${split?`<td class="ins">${fmt(P.install[n])}</td>`:""}${OPTS.map(([l,pp],k)=>{
       const c=calc({line:l,pipe:pp,hp:p.hp,sizes:p.sizes,remoteQty:null});
       const cur=isPreset() && S.line===l && S.pipe===pp && S.sizes.length===n;
