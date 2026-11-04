@@ -274,6 +274,8 @@ footer{padding:26px 0 calc(30px + env(safe-area-inset-bottom));text-align:center
 .fld input,.fld textarea,.fld select{border-color:var(--line)}
 .lock .pane h3{font-family:var(--serif)}
 input[type=checkbox]{accent-color:var(--navy)}
+.prices .lbl{white-space:nowrap}
+@media (max-width:639px){ .prices .row{flex-direction:column;align-items:flex-start;gap:0} .prices .row>:last-child{align-self:flex-end} }
 /* 노출 스위치 */
 .sw{position:relative;display:inline-flex;align-items:center;gap:6px;flex:none;cursor:pointer;font-size:11.5px;font-weight:700;color:var(--mute)}
 .sw input{position:absolute;opacity:0;pointer-events:none}
@@ -415,7 +417,7 @@ function priceBlock(p){
   const hasL = isNum(p.list), hasP = isNum(p.price);
   const pct = (hasL && hasP && s.showDiscount && Number(p.price) < Number(p.list)) ? Math.round((1 - p.price / p.list) * 100) : 0;
   return `<div class="prices">
-    <div class="row"><span class="lbl">출고가</span>${hasL ? `<span class="list-v num">${won(p.list)}</span>` : `<span class="list-v ph-l">출고가</span>`}</div>
+    <div class="row"><span class="lbl">희망 권장소비자가</span>${hasL ? `<span class="list-v num">${won(p.list)}</span>` : `<span class="list-v ph-l">희망 권장소비자가</span>`}</div>
     <div class="row gb"><span class="lbl">공동구매가</span>${hasP ? `<span class="gb-v">${pct?`<span class="pct">${pct}%</span>`:""}${won(p.price)}</span>` : `<span class="ph">공동구매가</span>`}</div>
   </div>`;
 }
@@ -598,7 +600,7 @@ function adProducts(){
   const done = DATA.products.filter(p=>isNum(p.list)&&isNum(p.price)).length;
   return `<div class="box"><h3>가격 입력 현황 ${done} / ${DATA.products.length}</h3>
     <div class="chk"><input type="checkbox" id="s-disc" ${DATA.site.showDiscount?"checked":""}><label for="s-disc">공동구매가 앞에 할인율(%) 자동 표시</label></div>
-    <div style="font-size:12.5px;color:var(--mute)">가격을 비워두면 고객 화면에 ‘출고가 / 공동구매가’ 글자로 표시됩니다. 내부 정책 DC율은 저장하지 마세요 — data.json 은 공개 파일입니다.</div>
+    <div style="font-size:12.5px;color:var(--mute)">가격을 비워두면 고객 화면에 ‘희망 권장소비자가 / 공동구매가’ 글자로 표시됩니다. 내부 정책 DC율은 저장하지 마세요 — data.json 은 공개 파일입니다.</div>
     <div class="pfilter">
       <div class="seg2" id="f-vis">${[["all","전체",DATA.products.length],["on","노출",DATA.products.filter(p=>!p.hidden).length],["off","숨김",DATA.products.filter(p=>p.hidden).length]].map(([k,n,c])=>`<button data-fv="${k}" class="${AF.vis===k?"on":""}">${n} ${c}</button>`).join("")}</div>
       <select id="f-cat"><option value="">모든 품목</option>${[...new Set([...DATA.categories,...DATA.products.map(p=>p.cat)])].map(c=>`<option ${AF.cat===c?"selected":""}>${esc(c)}</option>`).join("")}</select>
@@ -614,10 +616,10 @@ function adProducts(){
         <button class="mini" data-act="up">↑</button><button class="mini" data-act="down">↓</button></div>
       <div class="pbody">
         <div class="two">
-          <label class="fld"><span>출고가 (원)</span><input inputmode="numeric" data-k="list" value="${isNum(p.list)?Number(p.list).toLocaleString():""}" placeholder="비우면 '출고가' 표시"></label>
+          <label class="fld"><span>희망 권장소비자가 (원)</span><input inputmode="numeric" data-k="list" value="${isNum(p.list)?Number(p.list).toLocaleString():""}" placeholder="비우면 '희망 권장소비자가' 표시"></label>
           <label class="fld"><span>공동구매가 (원)</span><input inputmode="numeric" data-k="price" value="${isNum(p.price)?Number(p.price).toLocaleString():""}" placeholder="비우면 '공동구매가' 표시"></label>
         </div>
-        <div class="calc">계산기: 출고가에서 <input inputmode="decimal" class="c-pct" placeholder="%"> % 할인 → <button class="btn c-go" style="padding:6px 10px">공동구매가에 적용</button><em style="font-style:normal;color:var(--mute)">(%는 저장되지 않음)</em></div>
+        <div class="calc">계산기: 희망 권장소비자가에서 <input inputmode="decimal" class="c-pct" placeholder="%"> % 할인 → <button class="btn c-go" style="padding:6px 10px">공동구매가에 적용</button><em style="font-style:normal;color:var(--mute)">(%는 저장되지 않음)</em></div>
         <label class="fld"><span>제품명</span><input data-k="name" value="${esc(p.name)}"></label>
         <div class="two">
           <label class="fld"><span>모델명</span><input data-k="model" value="${esc(p.model)}"></label>
@@ -681,14 +683,14 @@ let AF = { vis:"all", cat:"" };
 let BULK = { text:"", rows:null, addNew:false, clearEmpty:false };
 function redrawKeep(){ const sc=document.querySelector(".ad-body"), t=sc?sc.scrollTop:0; drawAdmin(); if(sc) sc.scrollTop=t; }
 function copyText(t){ return (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).catch(()=>{ const a=document.createElement("textarea"); a.value=t; document.body.appendChild(a); a.select(); document.execCommand("copy"); a.remove(); }); }
-const BCOLS = ["모델명","제품명","품목","출고가","공동구매가","옵션금액","노출"];
+const BCOLS = ["모델명","제품명","품목","희망 권장소비자가","공동구매가","옵션금액","노출"];
 function listTSV(){ return [BCOLS.join("\t"), ...DATA.products.map(p=>[p.model,p.name,p.cat,isNum(p.list)?p.list:"",isNum(p.price)?p.price:"",isNum(p.optPrice)?p.optPrice:"",p.hidden?"N":"Y"].join("\t"))].join("\n"); }
 const normM = s => String(s||"").toUpperCase().replace(/[\s\-_·.]/g,"");
 function parseBulk(text){
   const lines = text.replace(/\r/g,"").split("\n").map(l=>l.replace(/\s+$/,"")).filter(l=>l.trim());
   if(!lines.length) return [];
   const split = l => l.includes("\t") ? l.split("\t") : l.split(/\s*,\s*(?![0-9]{3}(?:[^0-9]|$))|\s{2,}/);
-  const HD = [["model",/모델|model/i],["name",/제품명|상품명|품명|이름|name/i],["cat",/품목|카테고리|분류|category/i],["list",/출고/],["price",/공동|공구|판매가|특가|할인가|price/i],["opt",/옵션|벽걸이|추가/],["vis",/노출|표시|숨김|공개/]];
+  const HD = [["model",/모델|model/i],["name",/제품명|상품명|품명|이름|name/i],["cat",/품목|카테고리|분류|category/i],["list",/출고|권장|소비자가/],["price",/공동|공구|판매가|특가|할인가|price/i],["opt",/옵션|벽걸이|추가/],["vis",/노출|표시|숨김|공개/]];
   let cols = ["model","list","price","opt"], start = 0;
   const first = split(lines[0]);
   if(first.some(c=>/모델|model/i.test(c))){ cols = first.map(c=>{ const h=HD.find(([,r])=>r.test(c.trim())); return h?h[0]:null; }); start = 1; }
@@ -720,10 +722,10 @@ function bulkPlan(){
 }
 function adBulk(){
   return `<div class="box"><h3>엑셀 붙여넣기로 한번에 입력</h3>
-    <ol class="howto"><li><b>현재 목록 복사</b>를 눌러 엑셀에 붙여넣기</li><li>엑셀에서 출고가·공동구매가·옵션금액·노출(Y/N)을 입력</li><li>제목 줄까지 표 전체를 복사해 아래 칸에 붙여넣기 → <b>미리보기</b> → <b>적용하기</b></li></ol>
+    <ol class="howto"><li><b>현재 목록 복사</b>를 눌러 엑셀에 붙여넣기</li><li>엑셀에서 희망 권장소비자가·공동구매가·옵션금액·노출(Y/N)을 입력</li><li>제목 줄까지 표 전체를 복사해 아래 칸에 붙여넣기 → <b>미리보기</b> → <b>적용하기</b></li></ol>
     <div class="row-btn"><button class="btn" id="b-copy">현재 목록 복사 (엑셀용)</button><button class="btn" id="b-form">빈 양식 복사</button></div>
-    <label class="fld" style="margin-top:14px"><span>여기에 붙여넣기</span><textarea id="b-text" class="bulk-ta" spellcheck="false" placeholder="모델명&#9;출고가&#9;공동구매가&#10;KQ75QNH70AFXKR&#9;3,490,000&#9;2,890,000">${esc(BULK.text)}</textarea>
-      <em>제목 줄이 있으면 열 이름(${BCOLS.join("·")})으로 자동 인식해요. 필요한 열만 있어도 됩니다. 제목이 없으면 ‘모델명 / 출고가 / 공동구매가 / 옵션금액’ 순서로 읽어요.</em></label>
+    <label class="fld" style="margin-top:14px"><span>여기에 붙여넣기</span><textarea id="b-text" class="bulk-ta" spellcheck="false" placeholder="모델명&#9;희망 권장소비자가&#9;공동구매가&#10;KQ75QNH70AFXKR&#9;3,490,000&#9;2,890,000">${esc(BULK.text)}</textarea>
+      <em>제목 줄이 있으면 열 이름(${BCOLS.join("·")})으로 자동 인식해요. 필요한 열만 있어도 됩니다. 제목이 없으면 ‘모델명 / 희망 권장소비자가 / 공동구매가 / 옵션금액’ 순서로 읽어요.</em></label>
     <div class="chk"><input type="checkbox" id="b-new" ${BULK.addNew?"checked":""}><label for="b-new">목록에 없는 모델은 새 제품으로 추가</label></div>
     <div class="chk"><input type="checkbox" id="b-clear" ${BULK.clearEmpty?"checked":""}><label for="b-clear">빈 가격 칸은 가격 지우기 <span style="color:var(--mute)">(해제하면 기존 값 유지)</span></label></div>
     <div class="row-btn"><button class="btn blue" id="b-prev">미리보기</button>${BULK.rows&&BULK.rows.length?`<button class="btn gold" id="b-apply">적용하기</button><button class="btn" id="b-reset">지우기</button>`:""}</div></div>
@@ -736,11 +738,11 @@ function bulkPreview(){
   const tag = {chg:'<span class="tag c">변경</span>',same:'<span class="tag s">동일</span>',none:'<span class="tag n">목록에 없음</span>',add:'<span class="tag a">새로 추가</span>'};
   return `<div class="box"><h3>미리보기</h3>
     <div class="bsum"><span class="c">변경 ${c("chg")}</span><span>동일 ${c("same")}</span>${c("add")?`<span class="a">새로 추가 ${c("add")}</span>`:""}${c("none")?`<span class="n">목록에 없음 ${c("none")}</span>`:""}</div>
-    <div class="btw"><table class="bt"><thead><tr><th>상태</th><th>모델 / 제품명</th><th>출고가</th><th>공동구매가</th><th>옵션</th><th>노출</th></tr></thead><tbody>
+    <div class="btw"><table class="bt"><thead><tr><th>상태</th><th>모델 / 제품명</th><th>희망 권장소비자가</th><th>공동구매가</th><th>옵션</th><th>노출</th></tr></thead><tbody>
     ${plan.map(x=>{ const p=x.p||{}; const warn = isNum(x.list)&&isNum(x.price)&&Number(x.price)>Number(x.list);
       return `<tr><td>${tag[x.status]}</td><td><b>${esc(x.r.model)}</b><s style="text-decoration:none">${esc(x.p?x.name:(x.r.name||""))}</s></td>
         <td class="r">${x.p?cell(p.list,x.list):(isNum(x.list)?Number(x.list).toLocaleString():"-")}</td>
-        <td class="r">${x.p?cell(p.price,x.price):(isNum(x.price)?Number(x.price).toLocaleString():"-")}${warn?'<span class="w">출고가보다 높음</span>':""}</td>
+        <td class="r">${x.p?cell(p.price,x.price):(isNum(x.price)?Number(x.price).toLocaleString():"-")}${warn?'<span class="w">희망 권장소비자가보다 높음</span>':""}</td>
         <td class="r">${x.p?cell(p.optPrice,x.opt):(isNum(x.opt)?Number(x.opt).toLocaleString():"-")}</td>
         <td>${x.p && x.hidden!==!!p.hidden ? `<span class="chg">${x.hidden?"숨김":"노출"}</span>` : (x.hidden?"숨김":"노출")}</td></tr>`; }).join("")}
     </tbody></table></div></div>`;
@@ -811,7 +813,7 @@ function bindAdmin(){
     if(act==="del"){ if(confirm(`'${P[i].name}' 을(를) 삭제할까요?`)){ P.splice(i,1); drawAdmin(); } return; }
     if(b.classList.contains("c-go")){
       const p=P[i], pct=parseFloat(it.querySelector(".c-pct").value);
-      if(!isNum(p.list)||isNaN(pct)) return toast("출고가와 할인율을 먼저 입력하세요.");
+      if(!isNum(p.list)||isNaN(pct)) return toast("희망 권장소비자가와 할인율을 먼저 입력하세요.");
       p.price = Math.round(p.list*(1-pct/100)/100)*100;
       it.querySelector('[data-k="price"]').value = p.price.toLocaleString(); it.querySelector(".c-pct").value=""; drawStatus(it.querySelector('[data-k="price"]'));
       return;
