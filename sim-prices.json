@@ -1,0 +1,40 @@
+{
+  "ver": 2,
+  "pwHash": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+  "outdoor": [
+    {"hp": 3, "multi": ["AJ030RXH4BC1", 841000], "single": ["AJ030MXHNBC1", 841000]},
+    {"hp": 4, "multi": ["AJ040RXH4BC1", 990000], "single": ["AJ040MXHNBC1", 990000]}
+  ],
+  "indoor": [
+    {"size": 5,  "panel": "M", "general": ["AJ020BN1PBC1", 307000], "infinite": ["AJ020CN1FBC1", 314000]},
+    {"size": 6,  "panel": "M", "general": ["AJ023BN1PBC1", 314000], "infinite": ["AJ023CN1FBC1", 358000]},
+    {"size": 8,  "panel": "M", "general": ["AJ032BN1PBC1", 320000], "infinite": ["AJ032CN1FBC1", 370000]},
+    {"size": 18, "panel": "L", "general": ["AJ072BN1PBC1", 484000], "infinite": ["AJ072CN1FBC1", 524000]}
+  ],
+  "panel": {
+    "general":  {"L": ["PC1BWSK3NW", 124000], "M": ["PC1NWSK3NW", 88000]},
+    "infinite": {"L": ["PC1ZNWK1NW", 288000], "M": ["PC1YNWK1NW", 214000]}
+  },
+  "branch": ["AXJ-YA1509N", 48000],
+  "remote": {"general": ["AR-EC05", 15000], "infinite": ["AR-CH01", 36000]},
+  "install": {"2": 1254000, "3": 1771000, "4": 2288000, "5": 2805000},
+  "presets": {
+    "2": {"hp": 3, "sizes": [18, 6]},
+    "3": {"hp": 4, "sizes": [18, 6, 5]},
+    "4": {"hp": 4, "sizes": [18, 8, 6, 5], "tentative": true},
+    "5": {"hp": 4, "sizes": [18, 8, 6, 6, 5], "tentative": true}
+  },
+  "quote": {
+    "store": "삼성스토어",
+    "site": "힐스테이트 오송역 퍼스트",
+    "manager": "",
+    "phone": "",
+    "validity": "견적일로부터 30일",
+    "notes": [
+      "상기 금액은 부가세 포함 금액입니다.",
+      "설치비는 실내기 대수 기준 일괄 산정 금액입니다.",
+      "현장 여건(배관 길이·추가 자재·타공 등)에 따라 금액이 변동될 수 있습니다.",
+      "본 견적은 힐스테이트 오송역 퍼스트 입주 세대에 한해 적용됩니다."
+    ]
+  }
+}

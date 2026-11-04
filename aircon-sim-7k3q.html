@@ -4,408 +4,525 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>시스템에어컨 가격 시뮬레이션</title>
+<title>DVM HOME 견적 시뮬레이터</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#0d1b2e;--ink2:#43526a;--mute:#8592a6;--line:#e4e8ef;--bg:#f4f6f9;--card:#fff;--blue:#1428a0;--blue2:#2d4bd6;--sky:#e9eefc;--accent:#c7a76c;--red:#e2463a;--warn:#fff7e6;--warnb:#f3d9a4}
+:root{
+  --navy:#0d1830;--navy2:#172848;--ink:#14181f;--ink2:#4a5263;--mute:#8b909b;--line:#e7e2d8;--line2:#f0ece4;
+  --bg:#f5f3ee;--card:#fff;--gold:#a7823f;--gold2:#c9a467;--goldbg:#f6f0e4;--blue:#1d3a8a;--red:#b7372b;
+  --serif:"Noto Serif KR",serif;
+}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
-body{font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;word-break:keep-all;padding-bottom:calc(32px + env(safe-area-inset-bottom))}
-button,select,input{font:inherit;color:inherit}
+body{font-family:"Pretendard Variable",Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;word-break:keep-all;padding-bottom:calc(36px + env(safe-area-inset-bottom))}
+button,input,textarea{font:inherit;color:inherit}
 button{cursor:pointer;border:0;background:none}
-.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
-header{background:linear-gradient(150deg,#0a1530,#13286e 60%,#1d3fae);color:#fff}
-header .wrap{padding-top:22px;padding-bottom:26px}
-.kicker{font-size:12.5px;letter-spacing:.08em;opacity:.85}
-.kicker b{letter-spacing:.14em}
-header h1{margin-top:10px;font-size:clamp(22px,5.6vw,32px);font-weight:800;letter-spacing:-.02em}
-header p{margin-top:6px;font-size:14px;opacity:.8}
-.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:16px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.num{font-variant-numeric:tabular-nums}
+
+/* header */
+header{background:radial-gradient(700px 300px at 90% -20%,rgba(201,164,103,.28),transparent 70%),linear-gradient(160deg,#0a1326,#13244a 70%,#1a3063);color:#fff}
+header .wrap{padding-top:20px;padding-bottom:30px}
+.hd-row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.kicker{font-size:11px;letter-spacing:.22em;color:var(--gold2);font-weight:700}
+.hd-link{font-size:12px;font-weight:700;color:rgba(255,255,255,.75);padding:7px 11px;border:1px solid rgba(255,255,255,.18);border-radius:999px;text-decoration:none}
+header h1{margin-top:22px;font-family:var(--serif);font-size:clamp(24px,6vw,36px);font-weight:700;letter-spacing:-.01em;line-height:1.3}
+header p{margin-top:8px;font-size:14px;color:rgba(255,255,255,.7)}
+.steps-mini{display:flex;gap:6px;margin-top:18px;flex-wrap:wrap}
+.steps-mini span{font-size:12px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8)}
+.steps-mini b{color:var(--gold2);margin-right:4px}
+
+/* layout */
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;margin-top:-14px}
 .layout>*{min-width:0}
-.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
-.card h2{font-size:16px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.card h2 small{font-weight:600;color:var(--mute);font-size:12.5px}
-.lbl{font-size:12.5px;font-weight:700;color:var(--ink2);margin:12px 0 6px}
-.lbl:first-of-type{margin-top:0}
-.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;background:#eef1f6;border-radius:12px;padding:4px;gap:4px}
-.seg button{height:42px;border-radius:9px;font-weight:700;font-size:14.5px;color:var(--ink2)}
-.seg button.on{background:#fff;color:var(--ink);box-shadow:0 2px 6px -2px rgba(13,27,46,.25)}
-.seg button small{display:block;font-size:10.5px;font-weight:600;color:var(--mute);margin-top:-3px}
-.row{display:flex;align-items:center;gap:8px;padding:9px 0;border-top:1px solid #f0f2f6}
-.row:first-child{border-top:0}
-.row .nm{flex:1;min-width:0;font-weight:700;font-size:14px}
-.row .nm small{display:block;font-weight:500;color:var(--mute);font-size:11.5px}
-select{height:40px;border:1px solid #d5dbe5;border-radius:10px;padding:0 30px 0 10px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238592a6' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;-webkit-appearance:none;appearance:none;font-size:14px;font-weight:600}
-.step{display:flex;align-items:center;border:1px solid #d5dbe5;border-radius:10px;overflow:hidden;height:40px;flex:none}
-.step button{width:38px;height:100%;font-size:18px;font-weight:700;color:var(--ink2)}
-.step button:disabled{opacity:.3;cursor:default}
-.step input{width:40px;height:100%;border:0;border-left:1px solid #eef1f6;border-right:1px solid #eef1f6;text-align:center;font-weight:700;font-size:15px;-moz-appearance:textfield}
-.step input::-webkit-outer-spin-button,.step input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.auto{font-size:11px;font-weight:700;color:var(--blue2);background:var(--sky);border-radius:6px;padding:1px 6px;margin-left:4px}
-.manual{font-size:11px;font-weight:700;color:#9a6b12;background:var(--warn);border-radius:6px;padding:1px 6px;margin-left:4px;cursor:pointer}
-.qty{min-width:56px;height:40px;border-radius:10px;background:#f4f5f8;display:grid;place-items:center;font-weight:800;font-size:15px;flex:none;padding:0 10px}
-.qty.off{color:var(--mute);font-size:12.5px;font-weight:700}
-.rm{width:34px;height:34px;border-radius:9px;background:#f4f5f8;color:var(--mute);font-size:16px;flex:none}
-.rm:disabled{opacity:.3;cursor:default}
-.add{width:100%;height:42px;border:1px dashed #c4ccda;border-radius:11px;color:var(--blue2);font-weight:700;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 18px;box-shadow:0 1px 0 rgba(13,24,48,.02),0 12px 30px -24px rgba(13,24,48,.25)}
+.step{padding:4px 0 22px;border-bottom:1px solid var(--line2);margin-bottom:22px}
+.step:last-child{border:0;margin:0;padding-bottom:0}
+.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.sh .no{font-family:var(--serif);font-size:13px;color:var(--gold);font-weight:700;letter-spacing:.06em}
+.sh h2{font-size:17px;font-weight:800;letter-spacing:-.01em}
+.sh small{margin-left:auto;font-size:12px;color:var(--mute);font-weight:600}
+
+/* option cards */
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{position:relative;text-align:left;border:1.5px solid var(--line);border-radius:16px;padding:14px 14px 13px;background:#fff;transition:.15s;display:flex;flex-direction:column;gap:3px;min-height:92px}
+.opt .t{font-size:16px;font-weight:800}
+.opt .d{font-size:12.5px;color:var(--ink2);line-height:1.45}
+.opt .tag{align-self:flex-start;font-size:10.5px;font-weight:800;letter-spacing:.08em;color:var(--gold);margin-bottom:2px}
+.opt:after{content:"";position:absolute;top:13px;right:13px;width:20px;height:20px;border-radius:50%;border:1.5px solid #d6d1c6;background:#fff}
+.opt.on{border-color:var(--navy);background:linear-gradient(180deg,#fff,#fbf9f4);box-shadow:0 8px 20px -14px rgba(13,24,48,.5)}
+.opt.on:after{border-color:var(--navy);background:var(--navy) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c9a467' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/13px no-repeat}
+.rooms-pick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.rp{border:1.5px solid var(--line);border-radius:16px;padding:12px 4px 10px;text-align:center;background:#fff;transition:.15s}
+.rp .n{font-family:var(--serif);font-size:26px;font-weight:700;line-height:1}
+.rp .n small{font-family:inherit;font-size:13px;margin-left:1px}
+.rp .s{display:block;font-size:11px;color:var(--mute);margin-top:6px;font-weight:600}
+.rp.on{border-color:var(--navy);background:var(--navy);color:#fff}
+.rp.on .s{color:var(--gold2)}
+
+/* composition */
+.unit{border:1px solid var(--line2);border-radius:14px;padding:12px;margin-bottom:8px;background:#fdfcfa}
+.unit-h{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.unit-h b{font-size:14.5px;font-weight:800}
+.unit-h .md{font-size:11.5px;color:var(--mute);font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.unit-h .x{margin-left:auto;width:28px;height:28px;border-radius:8px;color:var(--mute);font-size:14px;flex:none}
+.unit-h .x:hover{background:#f1eee8}
+.unit-h .x:disabled{opacity:.25;cursor:default}
+.chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(56px,1fr));gap:6px}
+.chip{height:38px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:13.5px;font-weight:700;color:var(--ink2)}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.chip:disabled{opacity:.35;cursor:default}
+.add{width:100%;height:44px;border:1.5px dashed #d3cdbf;border-radius:12px;color:var(--gold);font-weight:800;margin:2px 0 10px}
 .add:disabled{opacity:.4;cursor:default}
-.mini{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.mini button{padding:8px 12px;border-radius:9px;background:#eef1f6;font-size:13px;font-weight:700}
-.warn{margin-top:12px;background:var(--warn);border:1px solid var(--warnb);border-radius:12px;padding:10px 12px;font-size:12.5px;color:#7a5410;display:none}
+.acc{display:flex;align-items:center;gap:10px;padding:11px 2px;border-top:1px solid var(--line2)}
+.acc .l{flex:1;min-width:0}
+.acc .l b{font-size:14.5px;font-weight:800}
+.acc .l small{display:block;font-size:11.5px;color:var(--mute);font-weight:600}
+.badge{display:inline-block;font-size:10.5px;font-weight:800;border-radius:6px;padding:1px 6px;margin-left:5px;vertical-align:1px}
+.badge.auto{background:#e9eefb;color:var(--blue)}
+.badge.man{background:var(--goldbg);color:var(--gold);cursor:pointer}
+.qbox{min-width:62px;height:40px;border-radius:10px;background:#f3f1ec;display:grid;place-items:center;font-weight:800;padding:0 10px}
+.qbox.off{color:var(--mute);font-size:12.5px}
+.stepper{display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;height:40px;overflow:hidden;background:#fff}
+.stepper button{width:38px;height:100%;font-size:18px;font-weight:700;color:var(--ink2)}
+.stepper button:disabled{opacity:.3}
+.stepper input{width:40px;height:100%;border:0;border-left:1px solid var(--line2);border-right:1px solid var(--line2);text-align:center;font-weight:800;font-size:15px;-moz-appearance:textfield;background:#fff}
+.stepper input::-webkit-inner-spin-button,.stepper input::-webkit-outer-spin-button{-webkit-appearance:none}
+.reset{margin-top:10px;font-size:12.5px;font-weight:700;color:var(--ink2);padding:8px 12px;border-radius:9px;background:#f3f1ec}
+.warn{margin-top:12px;background:#fdf6e8;border:1px solid #efdcb5;border-radius:12px;padding:10px 12px;font-size:12.5px;color:#7a5410;display:none;line-height:1.55}
 .warn.show{display:block}
-table{width:100%;border-collapse:collapse;font-size:13.5px}
-th{font-size:12px;color:var(--mute);font-weight:700;text-align:left;padding:0 6px 8px;border-bottom:1px solid var(--line)}
-td{padding:9px 6px;border-bottom:1px solid #f0f2f6;vertical-align:top}
-td.n,th.n{text-align:right;white-space:nowrap}
-td .md{font-size:12px;color:var(--mute);font-weight:600;word-break:break-all}
-td .kd{font-weight:700}
-tr.grp td{background:#f8fafc;font-size:12px;font-weight:800;color:var(--ink2);padding:6px}
-.sum{margin-top:12px;display:grid;gap:6px;font-size:14px}
-.sum div{display:flex;justify-content:space-between}
-.sum .tot{margin-top:6px;padding-top:12px;border-top:2px solid var(--ink);font-size:18px;font-weight:800}
-.sum .tot span:last-child{color:var(--blue)}
-.vat{font-size:11.5px;color:var(--mute);text-align:right;margin-top:4px}
-.acts{display:flex;gap:8px;margin-top:14px}
-.acts button{flex:1;height:44px;border-radius:11px;font-weight:700;font-size:14px}
-.p1{background:var(--ink);color:#fff}.p2{background:#eef1f6}
+
+/* result */
+.result{background:linear-gradient(165deg,#0d1830,#172848);color:#fff;border:0}
+.result .cfg{font-size:12.5px;color:rgba(255,255,255,.65);font-weight:600}
+.result .cfg b{color:#fff}
+.result .lbl{margin-top:14px;font-size:12px;letter-spacing:.14em;color:var(--gold2);font-weight:700}
+.result .tot{font-family:var(--serif);font-size:clamp(32px,8vw,40px);font-weight:700;letter-spacing:-.01em;line-height:1.2;margin-top:2px}
+.result .tot small{font-size:16px;margin-left:3px;font-weight:500}
+.result .vat{font-size:11.5px;color:rgba(255,255,255,.5)}
+.split2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.split2 div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px}
+.split2 span{display:block;font-size:11.5px;color:rgba(255,255,255,.55);font-weight:600}
+.split2 b{font-size:16px;font-weight:800}
+.items{margin-top:16px;border-top:1px solid rgba(255,255,255,.1)}
+.it{display:flex;gap:8px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:13px}
+.it .g{width:48px;flex:none;color:var(--gold2);font-weight:700;font-size:12px;padding-top:1px}
+.it .m{flex:1;min-width:0}
+.it .m b{font-weight:700}
+.it .m small{display:block;color:rgba(255,255,255,.5);font-size:11.5px}
+.it .a{text-align:right;white-space:nowrap;font-weight:700}
+.it .a small{display:block;color:rgba(255,255,255,.5);font-size:11.5px;font-weight:500}
+.rbtns{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:16px}
+.btn-gold{height:50px;border-radius:13px;background:linear-gradient(180deg,#d1ae72,#b08a47);color:#1b1407;font-weight:800;font-size:15px;box-shadow:0 10px 24px -12px rgba(201,164,103,.8)}
+.btn-ghost{height:50px;padding:0 16px;border-radius:13px;border:1px solid rgba(255,255,255,.2);color:#fff;font-weight:700;font-size:14px}
+
+/* compare */
 .cmp-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
-.cmp-head h2{margin:0}
-.chk{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #d5dbe5;border-radius:10px;font-size:13.5px;font-weight:700;cursor:pointer;user-select:none;background:#fff}
-.chk input{width:18px;height:18px;accent-color:var(--blue)}
-.chk.on{border-color:var(--blue2);background:var(--sky);color:var(--blue)}
-.ct-wrap{overflow-x:auto;margin:0 -4px;padding:0 4px}
-.ct{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;min-width:330px}
-.ct th,.ct td{padding:9px 6px;text-align:right;white-space:nowrap;border-bottom:1px solid #eef1f6}
+.chk{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;user-select:none;background:#fff}
+.chk input{width:17px;height:17px;accent-color:var(--navy)}
+.chk.on{border-color:var(--navy);background:#f1f3f8}
+.ct-wrap{overflow-x:auto}
+.ct{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px}
+.ct th,.ct td{padding:10px 6px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line2)}
 .ct th{font-size:11.5px;color:var(--mute);font-weight:700}
 .ct thead tr:first-child th{font-size:12.5px;color:var(--ink);font-weight:800;border-bottom:0;padding-bottom:2px;text-align:center}
 .ct th:first-child,.ct td:first-child{text-align:left;font-weight:800;color:var(--ink)}
 .ct td.ins{color:var(--ink2);font-weight:600}
 .ct td.v{font-weight:700;cursor:pointer;font-variant-numeric:tabular-nums}
-.man,.unit{display:none}
-@media (hover:hover){ .ct td.v:hover{background:#f2f5fb} .ct .inf.v:hover{background:#efe6d2} }
-.ct .inf{background:#f6f1e6}
-.ct thead tr:first-child th.inf{border-radius:12px 12px 0 0;color:#7a5a1e}
+.ct .inf{background:var(--goldbg)}
+.ct thead tr:first-child th.inf{border-radius:12px 12px 0 0;color:var(--gold)}
 .ct tbody tr:last-child td.inf{border-bottom:0}
 .ct tbody tr:last-child td.inf.r{border-radius:0 0 12px 0}
 .ct tbody tr:last-child td.inf.l{border-radius:0 0 0 12px}
-.ct td.cur{color:var(--blue);background:var(--sky)!important;box-shadow:inset 0 0 0 2px var(--blue2);border-radius:8px}
-.ct td small{display:block;font-size:11px;color:var(--mute);font-weight:600}
-@media (max-width:560px){ .full{display:none} .man{display:inline} .unit{display:block} .ct{min-width:0;font-size:13px} .ct th,.ct td{padding:9px 4px} }
-.unit{font-size:11px;color:var(--mute);text-align:right;margin-bottom:4px}
-/* lock */
-#lock{position:fixed;inset:0;z-index:100;background:linear-gradient(150deg,#0a1530,#13286e 60%,#1d3fae);display:grid;place-items:center;padding:20px}
-#lock .pane{width:100%;max-width:340px;background:#fff;border-radius:20px;padding:24px 20px}
-#lock h3{font-size:18px;font-weight:800}
-#lock p{font-size:13px;color:var(--mute);margin:4px 0 16px}
-#lock input,.pwbox input{width:100%;height:48px;border:1px solid #d5dbe5;border-radius:12px;padding:0 14px;font-size:18px;letter-spacing:.2em;text-align:center}
-#lock button,.pwbox .go{width:100%;height:48px;border-radius:12px;background:var(--ink);color:#fff;font-weight:800;font-size:15px;margin-top:10px}
-#lock .err{color:var(--red);font-size:12.5px;margin-top:8px;min-height:18px;text-align:center}
-body.locked main,body.locked header{visibility:hidden}
-.hd-row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.gear{flex:none;padding:7px 10px;border-radius:9px;background:rgba(255,255,255,.12);font-size:12px;font-weight:700;color:#fff}
-#pwdlg{position:fixed;inset:0;z-index:90;background:rgba(10,15,30,.55);display:none;place-items:center;padding:20px}
-#pwdlg.open{display:grid}
-.pwbox{width:100%;max-width:360px;background:#fff;border-radius:18px;padding:20px}
-.pwbox h3{font-size:16px;font-weight:800;margin-bottom:12px}
-.pwbox input{font-size:16px;letter-spacing:normal;text-align:left;margin-bottom:8px}
-.pwbox .sub{background:#eef1f6;color:var(--ink);margin-top:6px}
-.pwbox p{font-size:12px;color:var(--mute);margin-top:8px;line-height:1.5}
-details.pt summary{cursor:pointer;font-weight:800;font-size:15px;list-style:none;display:flex;justify-content:space-between}
-details.pt summary::-webkit-details-marker{display:none}
-details.pt summary:after{content:"+";color:var(--mute)}
-details.pt[open] summary:after{content:"−"}
-details.pt table{margin-top:10px}
-.foot{font-size:12px;color:var(--mute);margin:18px 4px 0;display:grid;gap:4px}
-.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#111827;color:#fff;padding:10px 16px;border-radius:11px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:30}
-.toast.show{opacity:1}
-@media (min-width:900px){
-  .layout{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:start}
+.ct td.cur{color:#fff;background:var(--navy)!important;border-radius:8px}
+@media (hover:hover){.ct td.v:not(.cur):hover{background:#efebe2}}
+.man,.u-man{display:none}
+.note{font-size:11.5px;color:var(--mute);margin-top:10px}
+@media (max-width:560px){ .full{display:none} .man{display:inline} .u-man{display:block;font-size:11px;color:var(--mute);text-align:right;margin-bottom:4px} .ct{font-size:13px} .ct th,.ct td{padding:9px 4px} }
+
+.foot{font-size:12px;color:var(--mute);margin:20px 4px 0;display:grid;gap:4px}
+
+@media (min-width:920px){
+  .layout{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);align-items:start}
   .span{grid-column:1/-1}
-    body{padding-bottom:40px}
+  .card{padding:24px 24px}
 }
+
+/* lock */
+#lock{position:fixed;inset:0;z-index:100;background:radial-gradient(600px 300px at 80% 0%,rgba(201,164,103,.25),transparent 70%),linear-gradient(160deg,#0a1326,#13244a 70%,#1a3063);display:grid;place-items:center;padding:20px}
+#lock .pane{width:100%;max-width:340px;background:#fff;border-radius:22px;padding:26px 22px}
+#lock .k{font-size:11px;letter-spacing:.2em;color:var(--gold);font-weight:800}
+#lock h3{font-family:var(--serif);font-size:21px;margin-top:6px}
+#lock p{font-size:13px;color:var(--mute);margin:4px 0 16px}
+#lock input{width:100%;height:50px;border:1px solid var(--line);border-radius:12px;padding:0 14px;font-size:18px;letter-spacing:.3em;text-align:center}
+#lock button{width:100%;height:50px;border-radius:12px;background:var(--navy);color:#fff;font-weight:800;margin-top:10px}
+#lock .err{color:var(--red);font-size:12.5px;margin-top:8px;min-height:18px;text-align:center}
+body.locked>header,body.locked>main{visibility:hidden}
+
+/* quote modal */
+#qm{position:fixed;inset:0;z-index:80;background:#2a2f38;display:none;flex-direction:column}
+#qm.open{display:flex}
+.qm-bar{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#14181f;color:#fff}
+.qm-bar b{flex:1;font-size:14px}
+.qm-bar button{height:38px;padding:0 12px;border-radius:10px;font-size:13px;font-weight:700;background:rgba(255,255,255,.1);color:#fff}
+.qm-bar .pri{background:linear-gradient(180deg,#d1ae72,#b08a47);color:#1b1407}
+.qm-form{background:#1d2129;color:#fff;padding:10px 12px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.qm-form label{font-size:11px;color:rgba(255,255,255,.6);font-weight:700}
+.qm-form input{display:block;width:100%;margin-top:3px;height:36px;border-radius:9px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#fff;padding:0 10px;font-size:13.5px}
+.qm-form .w2{grid-column:1/-1}
+.qm-form.hide{display:none}
+@media (min-width:760px){.qm-form{grid-template-columns:repeat(5,minmax(0,1fr))}.qm-form .w2{grid-column:span 2}}
+.qm-view{flex:1;overflow:auto;padding:16px 12px 40px}
+.sheet-wrap{margin:0 auto;position:relative}
+#sheet{width:794px;height:1123px;background:#fff;color:#14181f;transform-origin:top left;box-shadow:0 20px 50px -20px rgba(0,0,0,.6);position:absolute;left:0;top:0;padding:44px 54px 34px;display:flex;flex-direction:column;font-size:12.5px;overflow:hidden}
+
+/* A4 sheet */
+.s-top{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:16px;border-bottom:2px solid #0d1830}
+.s-brand .b1{font-size:11px;letter-spacing:.28em;color:#a7823f;font-weight:800}
+.s-brand .b2{font-size:15px;font-weight:800;margin-top:3px}
+.s-no{text-align:right;font-size:11px;color:#6b7080;line-height:1.7}
+.s-no b{color:#14181f}
+.s-title{text-align:center;margin:18px 0 2px}
+.s-title h2{font-family:var(--serif);font-size:30px;font-weight:700;letter-spacing:.6em;margin-right:-.6em}
+.s-title p{font-size:12px;color:#6b7080;margin-top:4px;letter-spacing:.06em}
+.s-info{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;margin-top:14px}
+.s-info dl{display:grid;grid-template-columns:70px 1fr;border-top:1px solid #d9d4c8}
+.s-info dt,.s-info dd{padding:5px 0;border-bottom:1px solid #ece8de;font-size:12px}
+.s-info dt{color:#6b7080;font-weight:700}
+.s-info dd{font-weight:600}
+.s-amt{margin-top:14px;background:#0d1830;color:#fff;border-radius:6px;padding:11px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.s-amt .l{font-size:11px;letter-spacing:.14em;color:#c9a467;font-weight:700}
+.s-amt .k{font-size:14px;font-weight:700;margin-top:2px}
+.s-amt .v{font-family:var(--serif);font-size:26px;font-weight:700;white-space:nowrap}
+.s-cfg{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.s-cfg span{font-size:11.5px;border:1px solid #d9d4c8;border-radius:4px;padding:3px 9px;color:#4a5263;font-weight:600}
+.s-cfg b{color:#14181f}
+.s-tb{width:100%;border-collapse:collapse;margin-top:10px;font-size:12px}
+.s-tb th{background:#f4f1ea;font-size:11px;color:#4a5263;font-weight:800;padding:6px 6px;border-top:1.5px solid #0d1830;border-bottom:1px solid #d9d4c8;text-align:center}
+.s-tb td{padding:5px 6px;border-bottom:1px solid #ece8de;text-align:center}
+.s-tb td.l{text-align:left}
+.s-tb td.r{text-align:right;font-variant-numeric:tabular-nums}
+.s-tb td.md{font-size:11px;color:#4a5263;letter-spacing:.02em}
+.s-tb tr.ins td{background:#faf8f3}
+.s-sum{margin-left:auto;width:300px;margin-top:10px;font-size:12.5px}
+.s-sum div{display:flex;justify-content:space-between;padding:4px 2px;border-bottom:1px solid #ece8de}
+.s-sum .t{border-bottom:2px solid #0d1830;border-top:1.5px solid #0d1830;font-weight:800;font-size:14px;padding:6px 2px}
+.s-sum .t span:last-child{color:#a7823f}
+.s-notes{margin-top:auto;padding-top:10px}
+.s-notes h4{font-size:11.5px;font-weight:800;color:#4a5263;margin-bottom:5px}
+.s-notes ul{list-style:none;font-size:11px;color:#4a5263;line-height:1.6}
+.s-notes li:before{content:"·";margin-right:6px;color:#a7823f;font-weight:800}
+.s-memo{border:1px solid #ece8de;border-radius:4px;padding:6px 10px;font-size:11.5px;margin-bottom:8px;white-space:pre-wrap}
+.s-foot{margin-top:10px;padding-top:8px;border-top:1px solid #d9d4c8;display:flex;justify-content:space-between;align-items:flex-end;font-size:11px;color:#6b7080}
+.s-foot .st{font-family:var(--serif);font-size:15px;color:#14181f;font-weight:700}
+.s-seal{width:46px;height:46px;border:2px solid rgba(183,55,43,.75);border-radius:50%;color:rgba(183,55,43,.85);display:grid;place-items:center;font-size:11px;font-weight:800;text-align:center;line-height:1.2;transform:rotate(-8deg);margin-left:10px}
+
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#14181f;color:#fff;padding:10px 16px;border-radius:11px;font-size:14px;opacity:0;transition:.2s;pointer-events:none;z-index:120;max-width:90vw;text-align:center}
+.toast.show{opacity:1}
+
+@page{size:A4;margin:0}
 @media print{
-  header,  body{background:#fff;padding:0}
-  .layout{display:block}
-  .card{border:0;padding:0}
-  .print-h{display:block!important}
+  html,body{background:#fff!important;padding:0!important;margin:0!important}
+  body>*:not(#qm){display:none!important}
+  .qm-bar,.qm-form{display:none!important}
+  #qm{display:block!important;position:static!important;background:#fff!important}
+  .qm-view{padding:0!important;overflow:visible!important}
+  .sheet-wrap{width:auto!important;height:auto!important}
+  #sheet{position:relative!important;transform:none!important;box-shadow:none!important;width:210mm!important;height:296.5mm!important;overflow:hidden;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
-.print-h{display:none;margin-bottom:12px}
 </style>
 </head>
 <body class="locked">
+
 <header><div class="wrap">
-  <div class="hd-row"><div class="kicker"><b>SAMSUNG STORE</b> · 힐스테이트 오송역 퍼스트</div><button class="gear" id="pw-open">비밀번호 변경</button></div>
-  <h1>DVM HOME 시스템에어컨 가격 시뮬레이션</h1>
-  <p>제품 라인·배관 방식·실 수를 고르면 구성 모델과 금액이 바로 계산됩니다.</p>
+  <div class="hd-row"><div class="kicker">SAMSUNG STORE · DVM HOME</div><a class="hd-link" href="aircon-admin-7k3q.html">관리자</a></div>
+  <h1>시스템에어컨<br>견적 시뮬레이터</h1>
+  <p id="hd-site">힐스테이트 오송역 퍼스트 입주민 공동구매</p>
+  <div class="steps-mini"><span><b>01</b>제품 라인</span><span><b>02</b>배관 방식</span><span><b>03</b>실 수</span><span><b>04</b>구성 조정</span></div>
 </div></header>
 
 <main class="wrap">
   <div class="layout">
-    <section class="card cfg">
-      <h2>1. 기본 선택</h2>
-      <div class="lbl">제품 라인</div>
-      <div class="seg" id="s-line">
-        <button data-v="general">일반형<small>1Way</small></button>
-        <button data-v="infinite">인피니트<small>Infinite</small></button>
+    <section class="card">
+      <div class="step">
+        <div class="sh"><span class="no">01</span><h2>제품 라인</h2></div>
+        <div class="opts" id="s-line">
+          <button class="opt" data-v="general"><span class="tag">STANDARD</span><span class="t">일반형</span><span class="d">1Way 카세트 · 합리적인 기본 구성</span></button>
+          <button class="opt" data-v="infinite"><span class="tag">PREMIUM</span><span class="t">인피니트</span><span class="d">무풍 인피니트 · 프리미엄 판넬</span></button>
+        </div>
       </div>
-      <div class="lbl">배관 방식</div>
-      <div class="seg" id="s-pipe">
-        <button data-v="multi">다배관</button>
-        <button data-v="single">단배관<small>분기관 포함</small></button>
+      <div class="step">
+        <div class="sh"><span class="no">02</span><h2>배관 방식</h2></div>
+        <div class="opts" id="s-pipe">
+          <button class="opt" data-v="multi"><span class="t">다배관</span><span class="d">실내기마다 배관을 따로 연결</span></button>
+          <button class="opt" data-v="single"><span class="t">단배관</span><span class="d">배관 1개 + 분기관 (실 수 −1개 자동)</span></button>
+        </div>
       </div>
-      <div class="lbl">실 수 (실내기 대수)</div>
-      <div class="seg" id="s-rooms">
-        <button data-v="2">2실</button><button data-v="3">3실</button><button data-v="4">4실</button><button data-v="5">5실</button>
+      <div class="step">
+        <div class="sh"><span class="no">03</span><h2>실 수</h2><small>실내기 대수 · 설치비 일괄</small></div>
+        <div class="rooms-pick" id="s-rooms"></div>
       </div>
-
-      <h2 style="margin-top:22px">2. 구성 편집 <small>모델을 직접 바꿔 조합할 수 있어요</small></h2>
-      <div class="row">
-        <div class="nm">실외기<small id="out-model"></small></div>
-        <select id="out-hp" aria-label="실외기 용량"></select>
+      <div class="step">
+        <div class="sh"><span class="no">04</span><h2>구성 조정</h2><small>모델을 바꿔 조합 가능</small></div>
+        <div class="unit">
+          <div class="unit-h"><b>실외기</b><span class="md" id="out-md"></span></div>
+          <div class="chips" id="out-hp"></div>
+        </div>
+        <div id="rooms"></div>
+        <button class="add" id="add">+ 실내기 추가</button>
+        <div class="acc">
+          <div class="l"><b>분기관</b><span id="br-tag"></span><small id="br-md"></small></div>
+          <div class="qbox" id="br-q"></div>
+        </div>
+        <div class="acc">
+          <div class="l"><b>리모컨</b><span id="rc-tag"></span><small id="rc-md"></small></div>
+          <div class="stepper"><button id="rc-m" aria-label="줄이기">−</button><input id="rc-q" type="number" inputmode="numeric" aria-label="리모컨 수량"><button id="rc-p" aria-label="늘리기">+</button></div>
+        </div>
+        <button class="reset" id="reset">추천 구성으로 되돌리기</button>
+        <div class="warn" id="warn"></div>
       </div>
-      <div id="rooms"></div>
-      <button class="add" id="add">+ 실내기 추가</button>
-      <div class="row" style="margin-top:6px;border-top:1px solid #f0f2f6">
-        <div class="nm">분기관<span id="br-tag"></span><small id="br-model"></small></div>
-        <div class="qty" id="br-qty"></div>
-      </div>
-      <div class="row">
-        <div class="nm">리모컨<span id="rc-tag"></span><small id="rc-model"></small></div>
-        <div class="step"><button id="rc-minus" aria-label="리모컨 줄이기">−</button><input id="rc-qty" type="number" inputmode="numeric" min="0" max="20" aria-label="리모컨 수량"><button id="rc-plus" aria-label="리모컨 늘리기">+</button></div>
-      </div>
-      <div class="mini"><button id="reset">추천 구성으로 되돌리기</button></div>
-      <div class="warn" id="warn"></div>
     </section>
 
-    <section class="card side">
-      <div class="print-h"><h2 id="ph"></h2></div>
-      <h2>3. 견적 내역 <small id="title-sm"></small></h2>
-      <table>
-        <thead><tr><th>구분 / 모델</th><th class="n">수량</th><th class="n">단가</th><th class="n">금액</th></tr></thead>
-        <tbody id="lines"></tbody>
-      </table>
-      <div class="sum">
-        <div><span>제품 합계</span><span id="t-prod"></span></div>
-        <div><span>설치비 <small id="t-inst-n" style="color:var(--mute)"></small></span><span id="t-inst"></span></div>
-        <div class="tot"><span>총 합계</span><span id="t-all"></span></div>
-      </div>
-      <div class="vat">단가·금액 모두 부가세 포함</div>
-      <div class="acts"><button class="p2" id="copy">견적 복사</button><button class="p1" id="print">인쇄 / PDF</button></div>
+    <section class="card result">
+      <div class="cfg" id="r-cfg"></div>
+      <div class="lbl">TOTAL ESTIMATE</div>
+      <div class="tot num" id="r-tot"></div>
+      <div class="vat">부가세 포함</div>
+      <div class="split2"><div><span>제품 합계</span><b class="num" id="r-prod"></b></div><div><span id="r-inst-l">설치비</span><b class="num" id="r-inst"></b></div></div>
+      <div class="items" id="r-items"></div>
+      <div class="rbtns"><button class="btn-gold" id="open-q">A4 견적서 보기</button><button class="btn-ghost" id="copy">복사</button></div>
     </section>
 
-    <section class="card span cmp-card">
-      <div class="cmp-head"><h2>한눈에 비교 <small>추천 구성 기준 · 누르면 적용</small></h2>
-        <label class="chk" id="split-lbl"><input type="checkbox" id="split"> 설치비 분리</label></div>
+    <section class="card span">
+      <div class="cmp-head"><div class="sh" style="margin:0"><h2>한눈에 비교</h2><small style="margin-left:6px">추천 구성 · 누르면 적용</small></div>
+        <label class="chk" id="split-l"><input type="checkbox" id="split"> 설치비 분리</label></div>
       <div id="cmp"></div>
-      <div class="cmp-note" id="cmp-note"></div>
-    </section>
-
-    <section class="card span pt-card">
-      <details class="pt"><summary>단가표 (부가세 포함)</summary><div style="overflow-x:auto"><table id="pt"></table></div></details>
+      <div class="note" id="cmp-note"></div>
     </section>
   </div>
 
   <div class="foot">
-    <div>· 설치비는 실내기 대수 기준 일괄 산정입니다 (2실 1,254,000원 / 3실 1,771,000원 / 4실 2,288,000원 / 5실 2,805,000원).</div>
-    <div>· 판넬은 실내기 1대당 1개 (18평형 = 대형, 그 외 = 중형), 리모컨은 실내기 1대당 1개 기준입니다 (수량 직접 수정 가능).</div>
-    <div>· 단배관은 분기관(AXJ-YA1509N)이 실내기 대수 −1개 포함됩니다.</div>
-    <div>· 본 금액은 시뮬레이션용이며 현장 여건(배관 길이·추가 자재 등)에 따라 달라질 수 있습니다.</div>
+    <div>· 판넬은 실내기 1대당 1개, 리모컨은 실내기 대수 기준(수정 가능), 단배관은 분기관 실 수 −1개가 자동 포함됩니다.</div>
+    <div>· 본 금액은 시뮬레이션용이며 현장 여건에 따라 달라질 수 있습니다.</div>
   </div>
 </main>
 
-<div class="toast" id="toast"></div>
+<!-- A4 견적서 -->
+<div id="qm">
+  <div class="qm-bar"><button id="q-close">✕</button><b>견적서 미리보기</b><button id="q-edit">정보 입력</button><button id="q-img">이미지</button><button class="pri" id="q-print">인쇄·PDF</button></div>
+  <div class="qm-form hide" id="q-form">
+    <label>고객명<input id="f-cust" placeholder="홍길동"></label>
+    <label>동 · 호수<input id="f-unit" placeholder="101동 1001호"></label>
+    <label>담당자<input id="f-mgr"></label>
+    <label>연락처<input id="f-tel" inputmode="tel"></label>
+    <label class="w2">비고<input id="f-memo" placeholder="예: 거실 18평, 안방 6평 위치 협의"></label>
+  </div>
+  <div class="qm-view" id="q-view"><div class="sheet-wrap" id="sheet-wrap"><div id="sheet"></div></div></div>
+</div>
+
 <div id="lock"><form class="pane" id="lock-f" autocomplete="off">
-  <h3>가격 시뮬레이션</h3><p>담당자 전용 페이지입니다. 비밀번호를 입력하세요.</p>
-  <input type="password" id="lock-pw" inputmode="numeric" autocomplete="current-password" aria-label="비밀번호">
+  <div class="k">STAFF ONLY</div><h3>견적 시뮬레이터</h3><p>담당자 전용 페이지입니다.</p>
+  <input type="password" id="lock-pw" inputmode="numeric" aria-label="비밀번호">
   <button type="submit">확인</button><div class="err" id="lock-err"></div>
 </form></div>
-<div id="pwdlg"><div class="pwbox">
-  <h3>비밀번호 변경</h3>
-  <input type="password" id="np1" placeholder="새 비밀번호 (4자 이상)" autocomplete="new-password">
-  <input type="password" id="np2" placeholder="새 비밀번호 확인" autocomplete="new-password">
-  <button class="go" id="np-save">변경</button><button class="go sub" id="np-close">닫기</button>
-  <p>메인 제안서 관리자 모드에 깃허브 토큰을 저장해 둔 기기라면 바로 저장됩니다. 아니면 수정된 파일이 내려받아지니, 저장소의 같은 파일과 교체하세요.</p>
-</div></div>
+<div class="toast" id="toast"></div>
 
 <script>
-/* ===== 비밀번호 (초기값 1234, SHA-256) ===== */
-const PW_HASH = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4";
-async function sha256(t){ const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join(""); }
-(function(){
-  let ok=false; try{ ok = sessionStorage.getItem("dvm_auth")===PW_HASH; }catch(e){}
-  if(ok){ document.body.classList.remove("locked"); document.getElementById("lock").remove(); return; }
-  const f=document.getElementById("lock-f"), i=document.getElementById("lock-pw");
-  setTimeout(()=>i.focus(),100);
-  f.onsubmit = async e=>{ e.preventDefault();
-    if(await sha256(i.value)===PW_HASH){ try{ sessionStorage.setItem("dvm_auth",PW_HASH); }catch(e){} document.body.classList.remove("locked"); document.getElementById("lock").remove(); }
-    else{ document.getElementById("lock-err").textContent="비밀번호가 올바르지 않습니다."; i.value=""; i.focus(); } };
-})();
-
-/* ===== 단가표 (부가세 포함) — 엑셀 '시스템에어컨 모델 선정' 기준 ===== */
-const P = {
-  outdoor: {
-    multi:  { 3:["AJ030RXH4BC1",841000], 4:["AJ040RXH4BC1",990000] },
-    single: { 3:["AJ030MXHNBC1",841000], 4:["AJ040MXHNBC1",990000] }
-  },
-  indoor: {
-    general:  { 5:["AJ020BN1PBC1",307000], 6:["AJ023BN1PBC1",314000], 8:["AJ032BN1PBC1",320000], 18:["AJ072BN1PBC1",484000] },
-    infinite: { 5:["AJ020CN1FBC1",314000], 6:["AJ023CN1FBC1",358000], 8:["AJ032CN1FBC1",370000], 18:["AJ072CN1FBC1",524000] }
-  },
-  panel: {
-    general:  { L:["PC1BWSK3NW",124000], M:["PC1NWSK3NW",88000] },
-    infinite: { L:["PC1ZNWK1NW",288000], M:["PC1YNWK1NW",214000] }
-  },
-  branch: ["AXJ-YA1509N",48000],
-  remote: { general:["AR-EC05",15000], infinite:["AR-CH01",36000] },
-  install: { 2:1254000, 3:1771000, 4:2288000, 5:2805000 }
-};
-const SIZES = [5,6,8,18];
-const ROOM_NAMES = ["거실","안방","침실1","침실2","침실3"];
-const LINE_NM = { general:"일반형", infinite:"인피니트" }, PIPE_NM = { multi:"다배관", single:"단배관" };
-/* 추천 구성 — 2·3실은 엑셀 구성 그대로, 4·5실은 임시 구성 */
-const PRESET = {
-  2:{ hp:3, sizes:[18,6] },
-  3:{ hp:4, sizes:[18,6,5] },
-  4:{ hp:4, sizes:[18,8,6,5], tentative:true },
-  5:{ hp:4, sizes:[18,8,6,6,5], tentative:true }
-};
+/* ===== 기본 단가 (sim-prices.json 을 못 불러올 때 사용) ===== */
+const DEFAULT = {"ver": 2, "pwHash": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "outdoor": [{"hp": 3, "multi": ["AJ030RXH4BC1", 841000], "single": ["AJ030MXHNBC1", 841000]}, {"hp": 4, "multi": ["AJ040RXH4BC1", 990000], "single": ["AJ040MXHNBC1", 990000]}], "indoor": [{"size": 5, "panel": "M", "general": ["AJ020BN1PBC1", 307000], "infinite": ["AJ020CN1FBC1", 314000]}, {"size": 6, "panel": "M", "general": ["AJ023BN1PBC1", 314000], "infinite": ["AJ023CN1FBC1", 358000]}, {"size": 8, "panel": "M", "general": ["AJ032BN1PBC1", 320000], "infinite": ["AJ032CN1FBC1", 370000]}, {"size": 18, "panel": "L", "general": ["AJ072BN1PBC1", 484000], "infinite": ["AJ072CN1FBC1", 524000]}], "panel": {"general": {"L": ["PC1BWSK3NW", 124000], "M": ["PC1NWSK3NW", 88000]}, "infinite": {"L": ["PC1ZNWK1NW", 288000], "M": ["PC1YNWK1NW", 214000]}}, "branch": ["AXJ-YA1509N", 48000], "remote": {"general": ["AR-EC05", 15000], "infinite": ["AR-CH01", 36000]}, "install": {"2": 1254000, "3": 1771000, "4": 2288000, "5": 2805000}, "presets": {"2": {"hp": 3, "sizes": [18, 6]}, "3": {"hp": 4, "sizes": [18, 6, 5]}, "4": {"hp": 4, "sizes": [18, 8, 6, 5], "tentative": true}, "5": {"hp": 4, "sizes": [18, 8, 6, 6, 5], "tentative": true}}, "quote": {"store": "삼성스토어", "site": "힐스테이트 오송역 퍼스트", "manager": "", "phone": "", "validity": "견적일로부터 30일", "notes": ["상기 금액은 부가세 포함 금액입니다.", "설치비는 실내기 대수 기준 일괄 산정 금액입니다.", "현장 여건(배관 길이·추가 자재·타공 등)에 따라 금액이 변동될 수 있습니다.", "본 견적은 힐스테이트 오송역 퍼스트 입주 세대에 한해 적용됩니다."]}};
+let P = DEFAULT;
 
 const $ = s => document.querySelector(s);
-const won = n => n.toLocaleString("ko-KR") + "원";
-let S = { line:"general", pipe:"multi", hp:3, sizes:[18,6], preset:2, custom:false };
-try{ const q = JSON.parse(sessionStorage.getItem("dvm_sim")||"null"); if(q && q.sizes) S = q; }catch(e){}
+const won = n => Number(n).toLocaleString("ko-KR") + "원";
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const SS = { get(k){ try{ return sessionStorage.getItem(k) }catch(e){ return null } }, set(k,v){ try{ sessionStorage.setItem(k,v) }catch(e){} } };
+const ROOM_NAMES = ["거실","안방","침실1","침실2","침실3","침실4"];
+const LINE_NM = { general:"일반형", infinite:"인피니트" }, PIPE_NM = { multi:"다배관", single:"단배관" };
+function toast(m,ms=2200){ const t=$("#toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),ms); }
+async function sha256(t){ const b=await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join(""); }
+
+/* ===== 데이터 헬퍼 ===== */
+const SIZES = () => P.indoor.map(x=>x.size).sort((a,b)=>a-b);
+const indoorOf = s => P.indoor.find(x=>x.size===s);
+const HPS = () => P.outdoor.map(o=>o.hp).sort((a,b)=>a-b);
+const outOf = h => P.outdoor.find(o=>o.hp===h);
+const ROOMS = () => Object.keys(P.install).map(Number).sort((a,b)=>a-b);
+const preset = n => P.presets[n] || { hp: HPS()[HPS().length-1], sizes: Array(n).fill(SIZES()[0]), tentative:true };
+
+let S = { line:"general", pipe:"multi", hp:3, sizes:[18,6], remoteQty:null, split:false };
+let Q = { cust:"", unit:"", mgr:"", tel:"", memo:"" };
 
 function calc(st){
-  const L=[], n=st.sizes.length;
-  const o = P.outdoor[st.pipe][st.hp]; L.push({g:"실외기", k:`${PIPE_NM[st.pipe]} ${st.hp}마력`, m:o[0], q:1, u:o[1]});
-  const cnt = {}; st.sizes.forEach(s=>cnt[s]=(cnt[s]||0)+1);
-  [...SIZES].reverse().forEach(s=>{ if(cnt[s]){ const r=P.indoor[st.line][s]; L.push({g:"실내기", k:`${s}평형`, m:r[0], q:cnt[s], u:r[1]}); } });
-  const big = cnt[18]||0, mid = n-big;
+  const L=[], n=st.sizes.length, o=(outOf(st.hp)||{})[st.pipe] || ["-",0];
+  L.push({g:"실외기", k:`${PIPE_NM[st.pipe]} ${st.hp}마력`, m:o[0], q:1, u:o[1]});
+  const cnt={}; st.sizes.forEach(s=>cnt[s]=(cnt[s]||0)+1);
+  [...SIZES()].reverse().forEach(s=>{ if(cnt[s]){ const r=(indoorOf(s)||{})[st.line]||["-",0]; L.push({g:"실내기", k:`${s}평형`, m:r[0], q:cnt[s], u:r[1]}); } });
+  let big=0; st.sizes.forEach(s=>{ if((indoorOf(s)||{}).panel==="L") big++; }); const mid=n-big;
   if(big){ const r=P.panel[st.line].L; L.push({g:"판넬", k:"대형", m:r[0], q:big, u:r[1]}); }
   if(mid){ const r=P.panel[st.line].M; L.push({g:"판넬", k:"중형", m:r[0], q:mid, u:r[1]}); }
   if(st.pipe==="single" && n>1) L.push({g:"분기관", k:"단배관용", m:P.branch[0], q:n-1, u:P.branch[1]});
-  const rq = (st.remoteQty==null) ? n : st.remoteQty;
-  const rc=P.remote[st.line]; if(rq>0) L.push({g:"리모컨", k:st.line==="infinite"?"인피니트용":"일반", m:rc[0], q:rq, u:rc[1]});
+  const rq = st.remoteQty==null ? n : st.remoteQty, rc=P.remote[st.line];
+  if(rq>0) L.push({g:"리모컨", k:LINE_NM[st.line], m:rc[0], q:rq, u:rc[1]});
   L.forEach(x=>x.a=x.q*x.u);
-  const prod = L.reduce((a,x)=>a+x.a,0), inst = P.install[n]||0;
+  const prod=L.reduce((a,x)=>a+x.a,0), inst=P.install[n]||0;
   return {L, prod, inst, total:prod+inst, n};
 }
+function applyPreset(n){ const p=preset(n); S.hp=p.hp; S.sizes=[...p.sizes]; S.remoteQty=null; }
+function isPreset(){ const p=P.presets[S.sizes.length]; return !!p && p.hp===S.hp && p.sizes.join()===S.sizes.join() && S.remoteQty==null; }
 
-function seg(id, val){ document.querySelectorAll(`#${id} button`).forEach(b=>b.classList.toggle("on", b.dataset.v==String(val))); }
-function applyPreset(n){ const p=PRESET[n]; S.preset=n; S.hp=p.hp; S.sizes=[...p.sizes]; S.custom=false; S.remoteQty=null; }
-function isPreset(){ const p=PRESET[S.sizes.length]; return p && p.hp===S.hp && p.sizes.join()===S.sizes.join() && S.remoteQty==null; }
-
+/* ===== 렌더 ===== */
+function on(id,val){ document.querySelectorAll(`#${id} [data-v]`).forEach(b=>b.classList.toggle("on", b.dataset.v==String(val))); }
 function render(){
-  seg("s-line",S.line); seg("s-pipe",S.pipe); seg("s-rooms",S.sizes.length);
-  $("#out-hp").innerHTML = [3,4].map(h=>`<option value="${h}" ${h===S.hp?"selected":""}>${h}마력</option>`).join("");
-  $("#out-model").textContent = P.outdoor[S.pipe][S.hp][0];
-  $("#rooms").innerHTML = S.sizes.map((s,i)=>`<div class="row">
-      <div class="nm">${ROOM_NAMES[i]}<small>${P.indoor[S.line][s][0]} · 판넬 ${s===18?"대형":"중형"}</small></div>
-      <select data-i="${i}" aria-label="${ROOM_NAMES[i]} 평형">${SIZES.map(z=>`<option value="${z}" ${z===s?"selected":""}>${z}평형</option>`).join("")}</select>
-      <button class="rm" data-rm="${i}" ${S.sizes.length<=2?"disabled":""} aria-label="삭제">✕</button></div>`).join("");
-  $("#add").disabled = S.sizes.length>=5;
-  const single = S.pipe==="single", bq = single ? S.sizes.length-1 : 0;
-  $("#br-model").textContent = single ? `${P.branch[0]} · ${P.branch[1].toLocaleString()}원 · 실 수 −1` : "다배관은 분기관이 필요 없어요";
-  $("#br-qty").textContent = single ? `${bq}개` : "없음"; $("#br-qty").classList.toggle("off", !single);
-  $("#br-tag").innerHTML = single ? `<span class="auto">단배관 자동</span>` : "";
-  const rq = S.remoteQty==null ? S.sizes.length : S.remoteQty;
-  $("#rc-qty").value = rq; $("#rc-minus").disabled = rq<=0; $("#rc-plus").disabled = rq>=20;
-  $("#rc-model").textContent = `${P.remote[S.line][0]} · ${P.remote[S.line][1].toLocaleString()}원`;
-  $("#rc-tag").innerHTML = S.remoteQty==null ? `<span class="auto">실내기 수 자동</span>` : `<span class="manual" id="rc-auto" title="실내기 수에 맞추기">직접 입력 · 되돌리기</span>`;
+  const r = calc(S), n = r.n, rooms = ROOMS();
+  on("s-line",S.line); on("s-pipe",S.pipe);
+  $("#s-rooms").innerHTML = rooms.map(k=>`<button class="rp ${k===n?"on":""}" data-v="${k}"><span class="n">${k}<small>실</small></span><span class="s">설치 ${(P.install[k]/10000).toLocaleString()}만</span></button>`).join("");
+  const o = (outOf(S.hp)||{})[S.pipe]||["-",0];
+  $("#out-md").textContent = `${o[0]} · ${won(o[1])}`;
+  $("#out-hp").innerHTML = HPS().map(h=>`<button class="chip ${h===S.hp?"on":""}" data-hp="${h}">${h}마력</button>`).join("");
+  $("#rooms").innerHTML = S.sizes.map((s,i)=>{ const d=indoorOf(s)||{}; const m=(d[S.line]||["-"])[0];
+    return `<div class="unit"><div class="unit-h"><b>${ROOM_NAMES[i]||("실"+(i+1))}</b><span class="md">${m} · 판넬 ${d.panel==="L"?"대형":"중형"}</span><button class="x" data-rm="${i}" ${n<=rooms[0]?"disabled":""} aria-label="삭제">✕</button></div>
+      <div class="chips">${SIZES().map(z=>`<button class="chip ${z===s?"on":""}" data-i="${i}" data-z="${z}">${z}평</button>`).join("")}</div></div>`; }).join("");
+  $("#add").disabled = n>=rooms[rooms.length-1];
+  const single=S.pipe==="single";
+  $("#br-q").textContent = single ? `${n-1}개` : "없음"; $("#br-q").classList.toggle("off",!single);
+  $("#br-md").textContent = single ? `${P.branch[0]} · ${won(P.branch[1])}` : "다배관은 필요 없음";
+  $("#br-tag").innerHTML = single ? `<span class="badge auto">자동</span>` : "";
+  const rq = S.remoteQty==null ? n : S.remoteQty;
+  $("#rc-q").value = rq; $("#rc-m").disabled = rq<=0; $("#rc-p").disabled = rq>=20;
+  $("#rc-md").textContent = `${P.remote[S.line][0]} · ${won(P.remote[S.line][1])}`;
+  $("#rc-tag").innerHTML = S.remoteQty==null ? `<span class="badge auto">실내기 수 자동</span>` : `<span class="badge man" id="rc-auto">직접 입력 · 되돌리기</span>`;
 
-  const r = calc(S); let last="";
-  $("#lines").innerHTML = r.L.map(x=>{ const head = x.g!==last ? `<tr class="grp"><td colspan="4">${x.g}</td></tr>` : ""; last=x.g;
-    return head + `<tr><td><div class="kd">${x.k}</div><div class="md">${x.m}</div></td><td class="n">${x.q}</td><td class="n">${x.u.toLocaleString()}</td><td class="n">${x.a.toLocaleString()}</td></tr>`; }).join("")
-    + `<tr class="grp"><td colspan="4">설치비</td></tr><tr><td><div class="kd">실내기 ${r.n}대 일괄</div></td><td class="n">1</td><td class="n">${r.inst.toLocaleString()}</td><td class="n">${r.inst.toLocaleString()}</td></tr>`;
-  $("#t-prod").textContent = won(r.prod); $("#t-inst").textContent = won(r.inst); $("#t-inst-n").textContent = `(${r.n}실)`; $("#t-all").textContent = won(r.total);
-  const title = `${LINE_NM[S.line]} · ${PIPE_NM[S.pipe]} · ${r.n}실${isPreset()?"":" (직접 구성)"}`;
-  $("#title-sm").textContent = title; 
-  $("#ph").textContent = `힐스테이트 오송역 퍼스트 · DVM HOME 견적 — ${title}`;
-
-  const w=[]; const pr=PRESET[r.n];
-  if(pr && pr.tentative && isPreset()) w.push(`${r.n}실 추천 구성은 엑셀 시트에 없어 임시로 넣은 조합입니다. 실외기 용량·평형 구성을 확정해 주세요.`);
-  const pyeong = S.sizes.reduce((a,b)=>a+b,0);
-  if(S.hp===3 && r.n>=3) w.push(`실내기 ${r.n}대(합계 ${pyeong}평형)에 3마력 실외기를 선택했습니다. 연결 용량을 확인하세요.`);
-  if(r.n>=4) w.push(`단가표에 4마력보다 큰 실외기가 없어 4마력으로 계산했습니다. 실내기 합계 ${pyeong}평형 — 실외기 용량 확인이 필요합니다.`);
+  const w=[], pr=P.presets[n], sum=S.sizes.reduce((a,b)=>a+b,0), maxHp=HPS()[HPS().length-1];
+  if(pr && pr.tentative && isPreset()) w.push(`${n}실 추천 구성은 확정 전 임시 구성입니다.`);
+  if(S.hp<maxHp && n>=3) w.push(`실내기 ${n}대(합계 ${sum}평형)에 ${S.hp}마력 실외기 — 연결 용량을 확인하세요.`);
+  if(S.hp===maxHp && n>=4) w.push(`최대 ${maxHp}마력 실외기로 계산했습니다. 실내기 합계 ${sum}평형 — 실외기 용량 확인이 필요합니다.`);
   $("#warn").innerHTML = w.map(x=>"⚠ "+x).join("<br>"); $("#warn").classList.toggle("show", w.length>0);
 
-  const split = !!S.split; $("#split").checked = split; $("#split-lbl").classList.toggle("on", split);
+  const title = `<b>${LINE_NM[S.line]}</b> · ${PIPE_NM[S.pipe]} · ${n}실${isPreset()?"":" · 직접 구성"}`;
+  $("#r-cfg").innerHTML = title;
+  $("#r-tot").innerHTML = `${r.total.toLocaleString()}<small>원</small>`;
+  $("#r-prod").textContent = won(r.prod); $("#r-inst").textContent = won(r.inst); $("#r-inst-l").textContent = `설치비 (${n}실 일괄)`;
+  $("#r-items").innerHTML = r.L.map(x=>`<div class="it"><span class="g">${x.g}</span><span class="m"><b>${x.k}</b><small>${x.m}</small></span><span class="a num">${x.a.toLocaleString()}<small>${x.u.toLocaleString()} × ${x.q}</small></span></div>`).join("")
+    + `<div class="it"><span class="g">설치비</span><span class="m"><b>실내기 ${n}대 일괄</b></span><span class="a num">${r.inst.toLocaleString()}</span></div>`;
+
+  renderCompare();
+  SS.set("dvm_sim", JSON.stringify(S));
+  if($("#qm").classList.contains("open")) renderSheet();
+}
+function renderCompare(){
+  const split=!!S.split; $("#split").checked=split; $("#split-l").classList.toggle("on",split);
   const fmt = v => `<span class="full">${v.toLocaleString()}</span><span class="man">${(v/10000).toLocaleString("ko-KR",{minimumFractionDigits:1,maximumFractionDigits:1})}</span>`;
   const OPTS=[["general","multi"],["general","single"],["infinite","multi"],["infinite","single"]];
-  const head = `<thead><tr><th></th>${split?"<th></th>":""}<th colspan="2">일반형</th><th colspan="2" class="inf">인피니트</th></tr>
-    <tr><th>실 수</th>${split?'<th>설치비</th>':""}<th>다배관</th><th>단배관</th><th class="inf l">다배관</th><th class="inf r">단배관</th></tr></thead>`;
-  const body = [2,3,4,5].map(n=>`<tr><td>${n}실${PRESET[n].tentative?" *":""}</td>${split?`<td class="ins">${fmt(P.install[n])}</td>`:""}${OPTS.map(([l,p],k)=>{
-      const c = calc({line:l,pipe:p,hp:PRESET[n].hp,sizes:PRESET[n].sizes,remoteQty:null});
-      const cur = isPreset() && S.line===l && S.pipe===p && S.sizes.length===n;
-      const cls = ["v", l==="infinite"?"inf":"", k===2?"l":"", k===3?"r":"", cur?"cur":""].join(" ");
-      return `<td class="${cls}" data-c="${l},${p},${n}">${fmt(split?c.prod:c.total)}</td>`; }).join("")}</tr>`).join("");
-  $("#cmp").innerHTML = `<div class="unit">단위: 만원</div><div class="ct-wrap"><table class="ct">${head}<tbody>${body}</tbody></table></div>`;
-  $("#cmp-note").textContent = split ? "* 설치비 분리: 각 칸은 제품가 (설치비 별도) · 4·5실은 임시 구성 · 부가세 포함" : "* 각 칸은 제품가 + 설치비 총 합계 · 4·5실은 임시 구성 · 부가세 포함";
-  try{ sessionStorage.setItem("dvm_sim", JSON.stringify(S)); }catch(e){}
+  const head=`<thead><tr><th></th>${split?"<th></th>":""}<th colspan="2">일반형</th><th colspan="2" class="inf">인피니트</th></tr>
+    <tr><th>실 수</th>${split?"<th>설치비</th>":""}<th>다배관</th><th>단배관</th><th class="inf l">다배관</th><th class="inf r">단배관</th></tr></thead>`;
+  const body=ROOMS().map(n=>{ const p=preset(n); return `<tr><td>${n}실${p.tentative?" *":""}</td>${split?`<td class="ins">${fmt(P.install[n])}</td>`:""}${OPTS.map(([l,pp],k)=>{
+      const c=calc({line:l,pipe:pp,hp:p.hp,sizes:p.sizes,remoteQty:null});
+      const cur=isPreset() && S.line===l && S.pipe===pp && S.sizes.length===n;
+      return `<td class="v ${l==="infinite"?"inf":""} ${k===2?"l":""} ${k===3?"r":""} ${cur?"cur":""}" data-c="${l},${pp},${n}">${fmt(split?c.prod:c.total)}</td>`; }).join("")}</tr>`; }).join("");
+  $("#cmp").innerHTML = `<div class="u-man">단위: 만원</div><div class="ct-wrap"><table class="ct">${head}<tbody>${body}</tbody></table></div>`;
+  $("#cmp-note").textContent = (split ? "설치비 분리 — 각 칸은 제품가(설치비 별도)" : "각 칸은 제품가 + 설치비 총액") + " · * 임시 구성 · 부가세 포함";
 }
 
-function priceTable(){
-  const rows=[["실외기","다배관 3마력",...P.outdoor.multi[3]],["실외기","다배관 4마력",...P.outdoor.multi[4]],["실외기","단배관 3마력",...P.outdoor.single[3]],["실외기","단배관 4마력",...P.outdoor.single[4]]];
-  ["general","infinite"].forEach(l=>SIZES.forEach(s=>rows.push(["실내기",`${LINE_NM[l]} ${s}평형`,...P.indoor[l][s]])));
-  ["general","infinite"].forEach(l=>{ rows.push(["판넬",`${LINE_NM[l]} 대형`,...P.panel[l].L]); rows.push(["판넬",`${LINE_NM[l]} 중형`,...P.panel[l].M]); });
-  rows.push(["분기관","단배관용",...P.branch]); rows.push(["리모컨","일반",...P.remote.general]); rows.push(["리모컨","인피니트",...P.remote.infinite]);
-  $("#pt").innerHTML = `<thead><tr><th>구분</th><th>규격</th><th>모델</th><th class="n">단가</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td class="md" style="font-size:12.5px">${r[2]}</td><td class="n">${r[3].toLocaleString()}</td></tr>`).join("")}</tbody>`;
+/* ===== A4 견적서 ===== */
+function hangul(n){
+  if(!n) return "영"; const d=["","일","이","삼","사","오","육","칠","팔","구"], u=["","십","백","천"], b=["","만","억","조"];
+  let s="", i=0;
+  while(n>0){ const c=n%10000; if(c){ let t=""; String(c).padStart(4,"0").split("").forEach((ch,k)=>{ const v=+ch; if(v) t+=d[v]+u[3-k]; }); s=t+b[i]+s; } n=Math.floor(n/10000); i++; }
+  return s;
+}
+function qno(){ const t=new Date(), p=x=>String(x).padStart(2,"0"); return `OS-${t.getFullYear()}${p(t.getMonth()+1)}${p(t.getDate())}-${p(t.getHours())}${p(t.getMinutes())}`; }
+function renderSheet(){
+  const r=calc(S), q=P.quote||{}, t=new Date(), date=`${t.getFullYear()}. ${t.getMonth()+1}. ${t.getDate()}.`;
+  let i=0;
+  const rows = r.L.map(x=>`<tr><td>${++i}</td><td>${x.g}</td><td class="l">${x.k}</td><td class="md">${esc(x.m)}</td><td>${x.q}</td><td class="r">${x.u.toLocaleString()}</td><td class="r">${x.a.toLocaleString()}</td></tr>`).join("")
+    + `<tr class="ins"><td>${++i}</td><td>설치비</td><td class="l">실내기 ${r.n}대 일괄 설치</td><td class="md">-</td><td>1</td><td class="r">${r.inst.toLocaleString()}</td><td class="r">${r.inst.toLocaleString()}</td></tr>`;
+  $("#sheet").innerHTML = `
+    <div class="s-top"><div class="s-brand"><div class="b1">SAMSUNG STORE</div><div class="b2">${esc(q.store||"삼성스토어")} · 입주민 공동구매</div></div>
+      <div class="s-no">견적번호 <b>${qno()}</b><br>견적일자 <b>${date}</b></div></div>
+    <div class="s-title"><h2>견적서</h2><p>DVM HOME 시스템에어컨 · ${LINE_NM[S.line]} ${PIPE_NM[S.pipe]} ${r.n}실</p></div>
+    <div class="s-info">
+      <dl><dt>수 신</dt><dd>${esc(Q.cust)||"&nbsp;"} ${Q.cust?"귀하":""}</dd><dt>현 장</dt><dd>${esc(q.site||"")} ${esc(Q.unit)}</dd><dt>유효기간</dt><dd>${esc(q.validity||"")}</dd></dl>
+      <dl><dt>공 급</dt><dd>${esc(q.store||"삼성스토어")}</dd><dt>담당자</dt><dd>${esc(Q.mgr||q.manager)||"&nbsp;"}</dd><dt>연락처</dt><dd>${esc(Q.tel||q.phone)||"&nbsp;"}</dd></dl>
+    </div>
+    <div class="s-amt"><div><div class="l">TOTAL AMOUNT · 부가세 포함</div><div class="k">일금 ${hangul(r.total)}원정</div></div><div class="v">₩ ${r.total.toLocaleString()}</div></div>
+    <div class="s-cfg"><span>제품 라인 <b>${LINE_NM[S.line]}</b></span><span>배관 <b>${PIPE_NM[S.pipe]}</b></span><span>실외기 <b>${S.hp}마력</b></span><span>실내기 <b>${S.sizes.map(s=>s+"평").join(" · ")}</b></span></div>
+    <table class="s-tb"><thead><tr><th style="width:34px">No</th><th style="width:62px">구분</th><th>품목</th><th style="width:150px">모델명</th><th style="width:44px">수량</th><th style="width:90px">단가</th><th style="width:100px">금액</th></tr></thead><tbody>${rows}</tbody></table>
+    <div class="s-sum"><div><span>제품 합계</span><span>${r.prod.toLocaleString()}원</span></div><div><span>설치비</span><span>${r.inst.toLocaleString()}원</span></div><div class="t"><span>총 합계</span><span>${r.total.toLocaleString()}원</span></div></div>
+    <div class="s-notes">${Q.memo?`<h4>비 고</h4><div class="s-memo">${esc(Q.memo)}</div>`:""}<h4>유의사항</h4><ul>${(q.notes||[]).map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+    <div class="s-foot"><div>본 견적서는 ${esc(q.site||"")} 입주민 공동구매 전용으로 발행되었습니다.</div><div style="display:flex;align-items:center"><span class="st">${esc(q.store||"삼성스토어")}</span><span style="margin-left:10px;font-size:11px;color:#8b909b">(인)</span></div></div>`;
+  fitSheet();
+}
+function fitSheet(){ const v=$("#q-view"), w=v.clientWidth-24, sc=Math.min(1, w/794); $("#sheet").style.transform=`scale(${sc})`; $("#sheet-wrap").style.width=(794*sc)+"px"; $("#sheet-wrap").style.height=(1123*sc)+"px"; }
+function openQuote(){ const q=P.quote||{}; if(!Q.mgr) Q.mgr=q.manager||""; if(!Q.tel) Q.tel=q.phone||"";
+  ["cust","unit","mgr","tel","memo"].forEach(k=>$("#f-"+({cust:"cust",unit:"unit",mgr:"mgr",tel:"tel",memo:"memo"}[k])).value=Q[k]||"");
+  $("#qm").classList.add("open"); document.body.style.overflow="hidden"; renderSheet(); }
+function closeQuote(){ $("#qm").classList.remove("open"); document.body.style.overflow=""; }
+let h2c=null;
+function loadH2C(){ if(h2c) return h2c; h2c=new Promise((res,rej)=>{ const s=document.createElement("script"); s.src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"; s.onload=()=>res(window.html2canvas); s.onerror=rej; document.head.appendChild(s); }); return h2c; }
+async function saveImage(){
+  toast("이미지를 만드는 중…");
+  try{
+    const H=await loadH2C(), sh=$("#sheet"), prev=sh.style.transform; sh.style.transform="none";
+    const cv=await H(sh,{scale:2,backgroundColor:"#ffffff",useCORS:true,width:794,height:1123,windowWidth:1200});
+    sh.style.transform=prev;
+    const name=`견적서_${(Q.cust||"고객")}_${qno()}.png`;
+    const blob=await new Promise(r=>cv.toBlob(r,"image/png"));
+    const file=new File([blob],name,{type:"image/png"});
+    if(navigator.canShare && navigator.canShare({files:[file]})){ try{ await navigator.share({files:[file],title:"견적서"}); return; }catch(e){ if(e.name==="AbortError") return; } }
+    const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=name; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),3000);
+    toast("이미지를 저장했습니다.");
+  }catch(e){ toast("이미지 저장 실패: "+e.message); }
 }
 
 /* ===== 이벤트 ===== */
-$("#s-line").onclick = e=>{ const b=e.target.closest("button"); if(b){ S.line=b.dataset.v; render(); } };
-$("#s-pipe").onclick = e=>{ const b=e.target.closest("button"); if(b){ S.pipe=b.dataset.v; render(); } };
-$("#s-rooms").onclick = e=>{ const b=e.target.closest("button"); if(b){ applyPreset(+b.dataset.v); render(); } };
-$("#out-hp").onchange = e=>{ S.hp=+e.target.value; render(); };
-$("#rooms").onchange = e=>{ const s=e.target.closest("select"); if(s){ S.sizes[+s.dataset.i]=+s.value; render(); } };
-$("#rooms").onclick = e=>{ const b=e.target.closest("[data-rm]"); if(b && S.sizes.length>2){ S.sizes.splice(+b.dataset.rm,1); render(); } };
-$("#add").onclick = ()=>{ if(S.sizes.length<5){ S.sizes.push(6); if(S.sizes.length>=3 && S.hp<4) S.hp=4; render(); } };
-const setRc = v=>{ v = Math.max(0, Math.min(20, parseInt(v)||0)); S.remoteQty = (v===S.sizes.length) ? null : v; render(); };
-$("#rc-minus").onclick = ()=> setRc((+$("#rc-qty").value)-1);
-$("#rc-plus").onclick = ()=> setRc((+$("#rc-qty").value)+1);
-$("#rc-qty").onchange = e=> setRc(e.target.value);
-$("#rc-tag").onclick = e=>{ if(e.target.closest("#rc-auto")){ S.remoteQty=null; render(); } };
-$("#reset").onclick = ()=>{ applyPreset(S.sizes.length); render(); };
-$("#split").onchange = e=>{ S.split = e.target.checked; render(); };
-$("#cmp").onclick = e=>{ const td=e.target.closest("[data-c]"); if(!td) return; const [l,p,n]=td.dataset.c.split(","); S.line=l; S.pipe=p; applyPreset(+n); render(); if(innerWidth<900) $(".side").scrollIntoView({behavior:"smooth"}); };
-$("#print").onclick = ()=>window.print();
-$("#copy").onclick = async ()=>{
+$("#s-line").onclick=e=>{ const b=e.target.closest("[data-v]"); if(b){ S.line=b.dataset.v; render(); } };
+$("#s-pipe").onclick=e=>{ const b=e.target.closest("[data-v]"); if(b){ S.pipe=b.dataset.v; render(); } };
+$("#s-rooms").onclick=e=>{ const b=e.target.closest("[data-v]"); if(b){ applyPreset(+b.dataset.v); render(); } };
+$("#out-hp").onclick=e=>{ const b=e.target.closest("[data-hp]"); if(b){ S.hp=+b.dataset.hp; render(); } };
+$("#rooms").onclick=e=>{
+  const z=e.target.closest("[data-z]"); if(z){ S.sizes[+z.dataset.i]=+z.dataset.z; render(); return; }
+  const x=e.target.closest("[data-rm]"); if(x && S.sizes.length>ROOMS()[0]){ S.sizes.splice(+x.dataset.rm,1); render(); }
+};
+$("#add").onclick=()=>{ const R=ROOMS(); if(S.sizes.length<R[R.length-1]){ S.sizes.push(SIZES()[1]||SIZES()[0]); render(); } };
+const setRc=v=>{ v=Math.max(0,Math.min(20,parseInt(v)||0)); S.remoteQty=(v===S.sizes.length)?null:v; render(); };
+$("#rc-m").onclick=()=>setRc(+$("#rc-q").value-1);
+$("#rc-p").onclick=()=>setRc(+$("#rc-q").value+1);
+$("#rc-q").onchange=e=>setRc(e.target.value);
+$("#rc-tag").onclick=e=>{ if(e.target.closest("#rc-auto")){ S.remoteQty=null; render(); } };
+$("#reset").onclick=()=>{ applyPreset(S.sizes.length); render(); };
+$("#split").onchange=e=>{ S.split=e.target.checked; renderCompare(); SS.set("dvm_sim",JSON.stringify(S)); };
+$("#cmp").onclick=e=>{ const td=e.target.closest("[data-c]"); if(!td) return; const [l,p,n]=td.dataset.c.split(","); S.line=l; S.pipe=p; applyPreset(+n); render(); if(innerWidth<920) $(".result").scrollIntoView({behavior:"smooth",block:"start"}); };
+$("#open-q").onclick=openQuote;
+$("#q-close").onclick=closeQuote;
+$("#q-edit").onclick=()=>$("#q-form").classList.toggle("hide");
+$("#q-form").oninput=()=>{ Q={cust:$("#f-cust").value,unit:$("#f-unit").value,mgr:$("#f-mgr").value,tel:$("#f-tel").value,memo:$("#f-memo").value}; SS.set("dvm_q",JSON.stringify(Q)); renderSheet(); };
+$("#q-print").onclick=()=>window.print();
+$("#q-img").onclick=saveImage;
+addEventListener("resize",()=>{ if($("#qm").classList.contains("open")) fitSheet(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeQuote(); });
+$("#copy").onclick=async()=>{
   const r=calc(S);
-  const t = [`[DVM HOME 견적] ${LINE_NM[S.line]} · ${PIPE_NM[S.pipe]} · ${r.n}실`, ...r.L.map(x=>`- ${x.g} ${x.k} ${x.m} × ${x.q} = ${won(x.a)}`), `- 설치비 (${r.n}실 일괄) = ${won(r.inst)}`, `제품 합계 ${won(r.prod)} / 설치비 ${won(r.inst)}`, `총 합계 ${won(r.total)} (부가세 포함)`].join("\n");
-  try{ await navigator.clipboard.writeText(t); toast("견적 내용을 복사했습니다."); }
-  catch(e){ const a=document.createElement("textarea"); a.value=t; document.body.appendChild(a); a.select(); document.execCommand("copy"); a.remove(); toast("견적 내용을 복사했습니다."); }
-};
-function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),2000); }
-
-/* ===== 비밀번호 변경 ===== */
-$("#pw-open").onclick = ()=>{ $("#pwdlg").classList.add("open"); $("#np1").value=$("#np2").value=""; setTimeout(()=>$("#np1").focus(),50); };
-$("#np-close").onclick = ()=> $("#pwdlg").classList.remove("open");
-function b64e(str){ const by=new TextEncoder().encode(str); let s=""; by.forEach(b=>s+=String.fromCharCode(b)); return btoa(s); }
-function b64d(b){ const bin=atob(b.replace(/\n/g,"")); return new TextDecoder().decode(Uint8Array.from(bin,c=>c.charCodeAt(0))); }
-$("#np-save").onclick = async ()=>{
-  const a=$("#np1").value, b=$("#np2").value;
-  if(a.length<4) return toast("4자 이상 입력하세요."); if(a!==b) return toast("두 비밀번호가 다릅니다.");
-  const h = await sha256(a), file = decodeURIComponent(location.pathname.split("/").pop() || "index.html");
-  const swap = src => src.replace(/const PW_HASH = "[0-9a-f]{64}";/, `const PW_HASH = "${h}";`);
-  let g=null; try{ g = JSON.parse(localStorage.getItem("gb_gh")||"null"); }catch(e){}
-  try{
-    if(g && g.owner && g.repo && g.token){
-      const api = `https://api.github.com/repos/${g.owner}/${g.repo}/contents/${file}`, hd = {Authorization:`Bearer ${g.token}`, Accept:"application/vnd.github+json"};
-      const cur = await (await fetch(`${api}?ref=${encodeURIComponent(g.branch||"main")}`, {headers:hd})).json();
-      if(!cur.content) throw new Error(cur.message||"파일을 찾지 못했습니다");
-      const r = await fetch(api, {method:"PUT", headers:hd, body:JSON.stringify({message:"시뮬레이션 비밀번호 변경", content:b64e(swap(b64d(cur.content))), sha:cur.sha, branch:g.branch||"main"})});
-      if(!r.ok) throw new Error((await r.json()).message||r.status);
-      try{ sessionStorage.setItem("dvm_auth",h); }catch(e){}
-      $("#pwdlg").classList.remove("open"); return toast("변경했습니다. 1~2분 뒤 적용됩니다.");
-    }
-    const src = await (await fetch(location.href.split("#")[0], {cache:"no-store"})).text();
-    const bl = new Blob([swap(src)], {type:"text/html"}), el = document.createElement("a");
-    el.href = URL.createObjectURL(bl); el.download = file; el.click();
-    $("#pwdlg").classList.remove("open"); toast("수정된 파일을 저장소에 교체하세요.");
-  }catch(err){ toast("변경 실패: " + err.message); }
+  const t=[`[DVM HOME 견적] ${LINE_NM[S.line]} · ${PIPE_NM[S.pipe]} · ${r.n}실`,...r.L.map(x=>`- ${x.g} ${x.k} ${x.m} × ${x.q} = ${won(x.a)}`),`- 설치비 (${r.n}실 일괄) = ${won(r.inst)}`,`제품 ${won(r.prod)} + 설치 ${won(r.inst)}`,`총 합계 ${won(r.total)} (부가세 포함)`].join("\n");
+  try{ await navigator.clipboard.writeText(t); }catch(e){ const a=document.createElement("textarea"); a.value=t; document.body.appendChild(a); a.select(); document.execCommand("copy"); a.remove(); }
+  toast("견적 내용을 복사했습니다.");
 };
 
-priceTable(); render();
+/* ===== 시작: 단가 불러오기 → 잠금 ===== */
+(async function boot(){
+  try{ const r=await fetch("sim-prices.json?t="+Date.now(),{cache:"no-store"}); if(r.ok) P=await r.json(); }catch(e){}
+  if(P.quote && P.quote.site) $("#hd-site").textContent = `${P.quote.site} 입주민 공동구매`;
+  try{ const s=JSON.parse(SS.get("dvm_sim")||"null"); if(s && Array.isArray(s.sizes) && s.sizes.every(z=>indoorOf(z)) && outOf(s.hp)) S=Object.assign(S,s); else applyPreset(2); }catch(e){ applyPreset(2); }
+  try{ const q=JSON.parse(SS.get("dvm_q")||"null"); if(q) Q=q; }catch(e){}
+  render();
+  const unlock=()=>{ document.body.classList.remove("locked"); $("#lock").remove(); };
+  if(SS.get("dvm_auth")===P.pwHash) return unlock();
+  setTimeout(()=>$("#lock-pw").focus(),100);
+  $("#lock-f").onsubmit=async e=>{ e.preventDefault();
+    if(await sha256($("#lock-pw").value)===P.pwHash){ SS.set("dvm_auth",P.pwHash); unlock(); }
+    else{ $("#lock-err").textContent="비밀번호가 올바르지 않습니다."; $("#lock-pw").value=""; $("#lock-pw").focus(); } };
+})();
 </script>
 </body>
 </html>
