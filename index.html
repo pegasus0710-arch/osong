@@ -276,6 +276,37 @@ footer{padding:26px 0 calc(30px + env(safe-area-inset-bottom));text-align:center
 input[type=checkbox]{accent-color:var(--navy)}
 .prices .lbl{white-space:nowrap}
 @media (max-width:639px){ .prices .row{flex-direction:column;align-items:flex-start;gap:0} .prices .row>:last-child{align-self:flex-end} }
+/* 제품 목록 (빠른 편집) */
+.h3s{font-family:"Pretendard Variable",Pretendard,sans-serif;font-size:12.5px;color:var(--mute);font-weight:700;margin-left:6px}
+.pgrp{margin:18px 4px 7px;font-size:13px;font-weight:800;color:var(--navy);display:flex;gap:6px;align-items:center;letter-spacing:.02em}
+.pgrp:before{content:"";width:6px;height:6px;border-radius:2px;background:var(--accent)}
+.pgrp span{color:var(--mute);font-weight:600;font-size:12px}
+.plist .pitem{margin-bottom:6px;background:#fff}
+.prow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:'sw t pa' 'pp pp pp';gap:8px 10px;align-items:center;padding:10px 12px}
+.prow>.sw{grid-area:sw}.prow>.t{grid-area:t}.prow>.pp{grid-area:pp}.prow>.pa{grid-area:pa}
+.prow .t{cursor:pointer;min-width:0}
+.prow .t b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prow .t small{font-size:11.5px;color:var(--mute);letter-spacing:.01em}
+.prow .t .hd{font-style:normal;color:var(--red);font-weight:700}
+.pp{display:grid;grid-template-columns:1fr 1fr 52px;gap:8px;align-items:end}
+.pp label{font-size:10.5px;font-weight:700;color:var(--mute);white-space:nowrap}
+.pp input{display:block;width:100%;height:40px;margin-top:3px;border:1px solid var(--line);border-radius:10px;padding:0 10px;text-align:right;font:inherit;font-size:15px;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;background:#fff}
+.pp input:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent}
+.pp input::placeholder{color:#c9bfa9;font-weight:600;font-size:13px}
+.pp .pc{display:grid;place-items:center;height:40px;margin-top:3px;border-radius:10px;background:#faf6ee;color:var(--red);font-weight:800;font-size:13px}
+.pitem.need .pp input:placeholder-shown{background:#fffaf0;border-color:#efdcb5}
+.pa{display:flex;gap:4px;align-items:center}
+.pa .mini{width:32px;height:32px;display:grid;place-items:center;padding:0;margin:0;font-size:14px;line-height:1;color:var(--ink2)}
+.pa .more{font-weight:800}
+.pitem.hid{opacity:.62}
+.pitem.open{border-color:var(--navy)}
+.pitem .pbody{border-top:1px solid var(--line2);padding-top:12px}
+@media (min-width:760px){
+  .prow{grid-template-columns:auto minmax(0,1fr) 400px auto;grid-template-areas:'sw t pp pa'}
+}
+.sw-row{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;cursor:pointer}
+.sw-row .swt b{display:block;font-size:14px;color:var(--ink)}
+.sw-row .swt small{font-size:12px;color:var(--mute);font-weight:500}
 /* 노출 스위치 */
 .sw{position:relative;display:inline-flex;align-items:center;gap:6px;flex:none;cursor:pointer;font-size:11.5px;font-weight:700;color:var(--mute)}
 .sw input{position:absolute;opacity:0;pointer-events:none}
@@ -426,7 +457,7 @@ body.op-open{overflow:hidden}
 
 <script>
 /* 기본 데이터 (data.json 을 못 불러올 때 사용) */
-const FALLBACK = {"site": {"apartment": "힐스테이트 오송역 퍼스트", "title": "입주민 공동구매 특별 제안", "store": "삼성스토어", "subtitle": "조합원 및 입주 예정 세대를 위한 삼성전자 가전 공동구매", "period": "공동구매 기간 : 추후 안내", "phone": "", "contactName": "삼성스토어 담당자", "benefits": ["입주 일정에 맞춘 일괄 배송·설치", "공동구매 전용 특별가 적용", "시스템에어컨 세대별 맞춤 설계 상담"], "notice": ["본 공동구매는 힐스테이트 오송역 퍼스트 입주민(조합원 및 입주 예정 세대)에 한해 적용되며, 배송·설치지 역시 해당 아파트 세대로 한정됩니다.", "본 페이지는 1차 제안 시안이며, 가격 및 혜택은 확정 후 안내됩니다.", "제품 사양 및 디자인은 제조사 사정에 따라 변경될 수 있습니다.", "시스템에어컨은 세대 구조에 따라 설치 사양이 달라질 수 있습니다."], "showDiscount": true, "pwHash": "de64b116d208c12f41504cf04f5ef7352c2d4b1f7895fa8b0f9e62a2b2aeab9c", "ver": "4"}, "categories": ["시스템에어컨", "TV", "냉장고", "김치냉장고", "의류케어", "전기레인지", "식기세척기", "무선청소기", "로봇청소기", "조리기기"], "products": [{"id": "dvm2", "cat": "시스템에어컨", "name": "무풍 시스템에어컨 DVM HOME 2실", "model": "DVM HOME 2실 패키지", "specs": ["실외기 1대 + 실내기 2대 (거실·안방)", "무풍 1Way 천장형 카세트", "SmartThings 앱 원격 제어"], "img": "images/DVM-HOME-2room.png", "list": null, "price": null, "badge": "입주 필수", "hidden": false}, {"id": "dvm3", "cat": "시스템에어컨", "name": "무풍 시스템에어컨 DVM HOME 3실", "model": "DVM HOME 3실 패키지", "specs": ["실외기 1대 + 실내기 3대 (거실·안방·침실)", "무풍 1Way 천장형 카세트", "SmartThings 앱 원격 제어"], "img": "images/DVM-HOME-3room.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "dvm4", "cat": "시스템에어컨", "name": "무풍 시스템에어컨 DVM HOME 4실", "model": "DVM HOME 4실 패키지", "specs": ["실외기 1대 + 실내기 4대 (거실·안방·침실 2)", "무풍 1Way 천장형 카세트", "SmartThings 앱 원격 제어"], "img": "images/DVM-HOME-4room.png", "list": null, "price": null, "badge": "추천", "hidden": false}, {"id": "dvm5", "cat": "시스템에어컨", "name": "무풍 시스템에어컨 DVM HOME 5실", "model": "DVM HOME 5실 패키지", "specs": ["실외기 1대 + 실내기 5대 (거실·안방·침실 3)", "무풍 1Way 천장형 카세트", "SmartThings 앱 원격 제어"], "img": "images/DVM-HOME-5room.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "tv1", "cat": "TV", "name": "2026 Neo QLED QNH70 189cm (75형)", "model": "KQ75QNH70AFXKR", "specs": ["Supreme Mini LED Dimming · 4K UHD", "HDR10+ (Adaptive) · DLG 120Hz", "2026년형"], "img": "images/KQ75QNH70AFXKR.png", "list": null, "price": null, "badge": "", "hidden": false, "optLabel": "벽걸이 설치 시", "optPrice": null}, {"id": "tv2", "cat": "TV", "name": "2026 Neo QLED QNH70 163cm (65형)", "model": "KQ65QNH70AFXKR", "specs": ["Supreme Mini LED Dimming · 4K UHD", "HDR10+ (Adaptive) · DLG 120Hz", "2026년형"], "img": "images/KQ65QNH70AFXKR.png", "list": null, "price": null, "badge": "", "hidden": false, "optLabel": "벽걸이 설치 시", "optPrice": null}, {"id": "tv3", "cat": "TV", "name": "2026 Mini LED MH80 138cm (55형)", "model": "KU55MH80AFXKR", "specs": ["Mini LED · 4K UHD", "최대 144Hz (VRR 지원)", "HDR10+ · Auto HDR 리마스터링"], "img": "images/KU55MH80AFXKR.png", "list": null, "price": null, "badge": "", "hidden": false, "optLabel": "벽걸이 설치 시", "optPrice": null}, {"id": "rf1", "cat": "냉장고", "name": "Bespoke AI 하이브리드 4도어 889L (오토오픈도어)", "model": "RM80F91K1A", "specs": ["냉장 523L + 냉동 366L", "하이브리드 쿨링 (컴프레서+펠티어)", "에너지효율 1등급 · 투명 쇼케이스 · 코타화이트"], "img": "images/RM80F91K1A.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "rf2", "cat": "냉장고", "name": "Bespoke AI 하이브리드 4도어 901L (UV탈취)", "model": "RM70H91RMA", "specs": ["냉장 535L + 냉동 366L", "AI 하이브리드 쿨링 · UV 탈취", "에너지효율 1등급 · 코타화이트"], "img": "images/RM70H91RMA.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "rf3", "cat": "냉장고", "name": "Bespoke AI 하이브리드 4도어 키친핏 Max 611L", "model": "RM80F64L2A", "specs": ["냉장 376L + 냉동 235L", "키친핏 Max 설치 · 푸드 쇼케이스", "에너지효율 2등급 · 코타화이트"], "img": "images/RM80F64L2A.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "rf4", "cat": "냉장고", "name": "Bespoke AI 냉동고 1도어 키친핏 347L (코타화이트)", "model": "RZ34C785501", "specs": ["냉동 전용 1도어 · 우열림", "냉장고·김치냉장고와 조합 설치", "키친핏 설치 · 코타화이트"], "img": "images/RZ34C785501.png?v=3", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "rf5", "cat": "냉장고", "name": "Bespoke AI 냉장고 1도어 키친핏 409L (코타화이트)", "model": "RR40C798501", "specs": ["냉장 전용 1도어 · 좌열림", "냉동고·김치냉장고와 조합 설치", "키친핏 설치 · 코타화이트"], "img": "images/RR40C798501.png?v=3", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "kc1", "cat": "김치냉장고", "name": "Bespoke AI 김치플러스 4도어 487L (맞춤숙성실)", "model": "RK80F49C1W", "specs": ["독립냉각 · 김치통 114.9L", "오토 오픈 도어", "에너지효율 1등급 · 클린화이트"], "img": "images/RK80F49C1W.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "kc2", "cat": "김치냉장고", "name": "Bespoke AI 김치플러스 4도어 490L (냄새케어 김치통)", "model": "RK70F49F1DD", "specs": ["독립냉각 · 김치통 114.9L", "냄새케어 김치통", "에너지효율 1등급 · 다크메탈"], "img": "images/RK70F49F1DD.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "kc3", "cat": "김치냉장고", "name": "김치플러스 3도어 328L", "model": "RQ33DG71G1S9", "specs": ["독립냉각 · 김치통 124.8L", "도어 디스플레이", "에너지효율 1등급 · 리파인드 이녹스"], "img": "images/RQ33DG71G1S9.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "kc4", "cat": "김치냉장고", "name": "Bespoke 김치플러스 3도어 키친핏 313L (코타화이트)", "model": "RQ33DB744101", "specs": ["스탠드형 3도어", "키친핏 설치", "칸별 독립 보관 · 코타화이트"], "img": "images/RQ33DB744101.png?v=3", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "kc5", "cat": "김치냉장고", "name": "Bespoke AI 김치플러스 1도어 키친핏 347L (코타화이트)", "model": "RQ34C793501", "specs": ["1도어 단독형 · 좌열림", "냉장고·냉동고와 조합 설치", "키친핏 설치 · 코타화이트"], "img": "images/RQ34C793501.png?v=2", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc1", "cat": "의류케어", "name": "Bespoke AI 콤보 25/20kg (다크스틸)", "model": "WD90H25AHS", "specs": ["세탁 25kg + 건조 20kg 일체형", "7형(177.8mm) LCD · 오토 오픈 도어", "2026년형"], "img": "images/WD90H25AHS.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc2", "cat": "의류케어", "name": "Bespoke AI 콤보 25/20kg (화이트)", "model": "WD90H25BHW", "specs": ["세탁 25kg + 건조 20kg 일체형", "7형(177.8mm) LCD", "2026년형"], "img": "images/WD90H25BHW.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc3", "cat": "의류케어", "name": "Bespoke AI 원바디 25/22kg", "model": "WH90F2522AAHS", "specs": ["세탁 25kg + 건조 22kg 원바디", "인버터 히트펌프 + 히터 건조", "7형(177.8mm) LCD · 다크스틸"], "img": "images/WH90F2522AAHS.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc4", "cat": "의류케어", "name": "Bespoke AI 세탁기 25kg", "model": "WF90F25ADS", "specs": ["드럼 세탁기 25kg", "7형(177.8mm) LCD · 오토 오픈 도어", "다크스틸"], "img": "images/WF90F25ADS.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc5", "cat": "의류케어", "name": "Bespoke AI 건조기 22kg", "model": "DV90F22CDS", "specs": ["인버터 히트펌프 + 히터", "7형(177.8mm) LCD · 오토 오픈 도어", "다크스틸"], "img": "images/DV90F22CDS.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc6", "cat": "의류케어", "name": "Bespoke AI 에어드레서 대용량 (크리스탈 미러)", "model": "DF90H24R5C", "specs": ["상의 5~9벌 + 하의 3벌", "크리스탈 미러", "2026년형"], "img": "images/DF90H24R5C.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "lc7", "cat": "의류케어", "name": "Bespoke AI 에어드레서 대용량 (클린화이트)", "model": "DF90H24R4D", "specs": ["상의 5~9벌 + 하의 2벌", "클린화이트", "2026년형"], "img": "images/DF90H24R4D.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "ck1", "cat": "전기레인지", "name": "Infinite AI 인덕션 3구", "model": "CC99F63U1DS", "specs": ["3구 · 최대 3.4kW", "에너지효율 1등급 · SmartThings", "새틴 블랙"], "img": "images/CC99F63U1DS.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "ck2", "cat": "전기레인지", "name": "Bespoke AI 인덕션 3구", "model": "CC80H63U1HS", "specs": ["3구 · 최대 3.4kW", "에너지효율 1등급 · SmartThings", "화이트 · 2026년형"], "img": "images/CC80H63U1HS.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "dw1", "cat": "식기세척기", "name": "Bespoke AI 식기세척기 빌트인 14인용", "model": "DW90F79F1USWT", "specs": ["14인용 빌트인", "열풍건조", "SmartThings 연동"], "img": "images/DW90F79F1USWT.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "dw2", "cat": "식기세척기", "name": "Bespoke AI 식기세척기 빌트인 14인용 (새틴 베이지)", "model": "DW90F79F1USBT", "specs": ["14인용 빌트인", "열풍건조", "SmartThings 연동"], "img": "images/DW90F79F1USBT.png?v=2", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "vc1", "cat": "무선청소기", "name": "Bespoke AI 제트 핏 (물걸레 브러시 패키지)", "model": "VS70H18GVG", "specs": ["흡입력 180W", "물걸레 브러시 포함", "새틴 그레이지 · 2026년형"], "img": "images/VS70H18GVG.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "rb1", "cat": "로봇청소기", "name": "Bespoke AI 스팀 울트라 로봇청소기 (새틴 차콜)", "model": "VR90F01AAH", "specs": ["흡입 + 물걸레 스팀 살균", "청정스테이션 (정수 4L / 오수 3.6L)", "새틴 차콜"], "img": "images/VR90F01AAH.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "rb2", "cat": "로봇청소기", "name": "Bespoke AI 스팀 울트라 로봇청소기 (새틴 그레이지)", "model": "VR90F01AAG", "specs": ["흡입 + 물걸레 스팀 살균", "청정스테이션 (정수 4L / 오수 3.6L)", "새틴 그레이지"], "img": "images/VR90F01AAG.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "ov1", "cat": "조리기기", "name": "Bespoke 콤팩트 오븐 50L (블랙)", "model": "NQ50T8539BK", "specs": ["빌트인 50L", "터치 + 다이얼 조작", "스팀청소"], "img": "images/NQ50T8539BK.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "ov2", "cat": "조리기기", "name": "Bespoke 콤팩트 오븐 50L (글램 화이트)", "model": "NQ50T8539BW", "specs": ["빌트인 50L", "터치 + 다이얼 조작", "스팀청소"], "img": "images/NQ50T8539BW.png", "list": null, "price": null, "badge": "", "hidden": false}]};
+const FALLBACK = {"site": {"apartment": "오송역 힐스테이트 퍼스트", "title": "입주민 공동구매 특별 제안", "store": "삼성스토어", "subtitle": "조합원 및 입주 예정 세대를 위한 삼성전자 가전 공동구매", "period": "공동구매 기간 : 추후 안내", "phone": "", "contactName": "삼성스토어 담당자", "benefits": ["입주 일정에 맞춘 일괄 배송·설치", "공동구매 전용 특별가 적용", "시스템에어컨 세대별 맞춤 설계 상담"], "notice": ["본 공동구매는 힐스테이트 오송역 퍼스트 입주민(조합원 및 입주 예정 세대)에 한해 적용되며, 배송지 역시 해당 아파트 세대로 한정됩니다.", "본 페이지는 1차 제안 시안이며, 가격 및 혜택은 확정 후 안내됩니다.", "행사 기간 및 모델은 제조사 사정에 따라 변경될 수 있습니다.", "시스템에어컨은 세대 구조에 따라 설치 사양이 달라질 수 있습니다."], "showDiscount": true, "pwHash": "de64b116d208c12f41504cf04f5ef7352c2d4b1f7895fa8b0f9e62a2b2aeab9c", "ver": "4"}, "categories": ["시스템에어컨", "TV", "냉장고", "김치냉장고", "의류케어", "전기레인지", "식기세척기", "무선청소기", "로봇청소기", "조리기기"], "products": [{"id": "dvm2", "cat": "시스템에어컨", "name": "무풍 시스템에어컨 DVM HOME 2실", "model": "DVM HOME 2실 패키지", "specs": ["실외기 1대 + 실내기 2대 (거실·안방)", "무풍 1Way 천장형 카세트", "SmartThings 앱 원격 제어"], "img": "images/DVM-HOME-2room.png", "list": null, "price": null, "badge": "입주 필수", "hidden": false}, {"id": "dvm3", "cat": "시스템에어컨", "name": "무풍 시스템에어컨 DVM HOME 3실", "model": "DVM HOME 3실 패키지", "specs": ["실외기 1대 + 실내기 3대 (거실·안방·침실)", "무풍 1Way 천장형 카세트", "SmartThings 앱 원격 제어"], "img": "images/DVM-HOME-3room.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "dvm4", "cat": "시스템에어컨", "name": "무풍 시스템에어컨 DVM HOME 4실", "model": "DVM HOME 4실 패키지", "specs": ["실외기 1대 + 실내기 4대 (거실·안방·침실 2)", "무풍 1Way 천장형 카세트", "SmartThings 앱 원격 제어"], "img": "images/DVM-HOME-4room.png", "list": null, "price": null, "badge": "추천", "hidden": false}, {"id": "dvm5", "cat": "시스템에어컨", "name": "무풍 시스템에어컨 DVM HOME 5실", "model": "DVM HOME 5실 패키지", "specs": ["실외기 1대 + 실내기 5대 (거실·안방·침실 3)", "무풍 1Way 천장형 카세트", "SmartThings 앱 원격 제어"], "img": "images/DVM-HOME-5room.png", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "tv1", "cat": "TV", "name": "2026 Neo QLED QNH70 189cm (75형)", "model": "KQ75QNH70AFXKR", "specs": ["Supreme Mini LED Dimming · 4K UHD", "HDR10+ (Adaptive) · DLG 120Hz", "2026년형"], "img": "images/KQ75QNH70AFXKR.png", "list": 2990000, "price": 1864000, "badge": "", "hidden": false, "optLabel": "벽걸이 설치 시", "optPrice": null}, {"id": "tv2", "cat": "TV", "name": "2026 Neo QLED QNH70 163cm (65형)", "model": "KQ65QNH70AFXKR", "specs": ["Supreme Mini LED Dimming · 4K UHD", "HDR10+ (Adaptive) · DLG 120Hz", "2026년형"], "img": "images/KQ65QNH70AFXKR.png", "list": 2390000, "price": 1504000, "badge": "", "hidden": false, "optLabel": "벽걸이 설치 시", "optPrice": null}, {"id": "tv3", "cat": "TV", "name": "2026 Mini LED MH80 138cm (55형)", "model": "KU55MH80AFXKR", "specs": ["Mini LED · 4K UHD", "최대 144Hz (VRR 지원)", "HDR10+ · Auto HDR 리마스터링"], "img": "images/KU55MH80AFXKR.png", "list": 1640000, "price": 1038000, "badge": "", "hidden": false, "optLabel": "벽걸이 설치 시", "optPrice": null}, {"id": "rf1", "cat": "냉장고", "name": "Bespoke AI 하이브리드 4도어 889L (오토오픈도어)", "model": "RM80F91K1A", "specs": ["냉장 523L + 냉동 366L", "하이브리드 쿨링 (컴프레서+펠티어)", "에너지효율 1등급 · 투명 쇼케이스 · 코타화이트"], "img": "images/RM80F91K1A.png", "list": 4390000, "price": 3178000, "badge": "", "hidden": false}, {"id": "rf2", "cat": "냉장고", "name": "Bespoke AI 하이브리드 4도어 901L (UV탈취)", "model": "RM70H91RMA", "specs": ["냉장 535L + 냉동 366L", "AI 하이브리드 쿨링 · UV 탈취", "에너지효율 1등급 · 코타화이트"], "img": "images/RM70H91RMA.png", "list": 3240000, "price": 2326000, "badge": "", "hidden": false}, {"id": "rf3", "cat": "냉장고", "name": "Bespoke AI 하이브리드 4도어 키친핏 Max 611L", "model": "RM80F64L2A", "specs": ["냉장 376L + 냉동 235L", "키친핏 Max 설치 · 푸드 쇼케이스", "에너지효율 2등급 · 코타화이트"], "img": "images/RM80F64L2A.png", "list": 4490000, "price": 3113000, "badge": "", "hidden": false}, {"id": "rf4", "cat": "냉장고", "name": "Bespoke AI 냉동고 1도어 키친핏 347L (코타화이트)", "model": "RZ34C785501", "specs": ["냉동 전용 1도어 · 우열림", "냉장고·김치냉장고와 조합 설치", "키친핏 설치 · 코타화이트"], "img": "images/RZ34C785501.png?v=3", "list": 1699000, "price": 1349000, "badge": "", "hidden": false}, {"id": "rf5", "cat": "냉장고", "name": "Bespoke AI 냉장고 1도어 키친핏 409L (코타화이트)", "model": "RR40C798501", "specs": ["냉장 전용 1도어 · 좌열림", "냉동고·김치냉장고와 조합 설치", "키친핏 설치 · 코타화이트"], "img": "images/RR40C798501.png?v=3", "list": null, "price": null, "badge": "", "hidden": false}, {"id": "kc1", "cat": "김치냉장고", "name": "Bespoke AI 김치플러스 4도어 487L (맞춤숙성실)", "model": "RK80F49C1W", "specs": ["독립냉각 · 김치통 114.9L", "오토 오픈 도어", "에너지효율 1등급 · 클린화이트"], "img": "images/RK80F49C1W.png", "list": 3970000, "price": 2867000, "badge": "", "hidden": false}, {"id": "kc2", "cat": "김치냉장고", "name": "Bespoke AI 김치플러스 4도어 490L (냄새케어 김치통)", "model": "RK70F49F1DD", "specs": ["독립냉각 · 김치통 114.9L", "냄새케어 김치통", "에너지효율 1등급 · 다크메탈"], "img": "images/RK70F49F1DD.png", "list": 2820000, "price": 2015000, "badge": "", "hidden": false}, {"id": "kc3", "cat": "김치냉장고", "name": "김치플러스 3도어 328L", "model": "RQ33DG71G1S9", "specs": ["독립냉각 · 김치통 124.8L", "도어 디스플레이", "에너지효율 1등급 · 리파인드 이녹스"], "img": "images/RQ33DG71G1S9.png", "list": 2050000, "price": 1486000, "badge": "", "hidden": false}, {"id": "kc4", "cat": "김치냉장고", "name": "Bespoke 김치플러스 3도어 키친핏 313L (코타화이트)", "model": "RQ33DB744101", "specs": ["스탠드형 3도어", "키친핏 설치", "칸별 독립 보관 · 코타화이트"], "img": "images/RQ33DB744101.png?v=3", "list": 2790000, "price": 2053000, "badge": "", "hidden": false}, {"id": "kc5", "cat": "김치냉장고", "name": "Bespoke AI 김치플러스 1도어 키친핏 347L (코타화이트)", "model": "RQ34C793501", "specs": ["1도어 단독형 · 좌열림", "냉장고·냉동고와 조합 설치", "키친핏 설치 · 코타화이트"], "img": "images/RQ34C793501.png?v=2", "list": 2049000, "price": 1519000, "badge": "", "hidden": false}, {"id": "lc1", "cat": "의류케어", "name": "Bespoke AI 콤보 25/20kg (다크스틸)", "model": "WD90H25AHS", "specs": ["세탁 25kg + 건조 20kg 일체형", "7형(177.8mm) LCD · 오토 오픈 도어", "2026년형"], "img": "images/WD90H25AHS.png", "list": 4299000, "price": 3412000, "badge": "", "hidden": false}, {"id": "lc2", "cat": "의류케어", "name": "Bespoke AI 콤보 25/20kg (화이트)", "model": "WD90H25BHW", "specs": ["세탁 25kg + 건조 20kg 일체형", "7형(177.8mm) LCD", "2026년형"], "img": "images/WD90H25BHW.png", "list": 3999000, "price": 3174000, "badge": "", "hidden": false}, {"id": "lc3", "cat": "의류케어", "name": "Bespoke AI 원바디 25/22kg", "model": "WH90F2522AAHS", "specs": ["세탁 25kg + 건조 22kg 원바디", "인버터 히트펌프 + 히터 건조", "7형(177.8mm) LCD · 다크스틸"], "img": "images/WH90F2522AAHS.png", "list": 4348000, "price": 3313000, "badge": "", "hidden": false}, {"id": "lc4", "cat": "의류케어", "name": "Bespoke AI 세탁기 25kg", "model": "WF90F25ADS", "specs": ["드럼 세탁기 25kg", "7형(177.8mm) LCD · 오토 오픈 도어", "다크스틸"], "img": "images/WF90F25ADS.png", "list": 2149000, "price": 1774000, "badge": "", "hidden": false}, {"id": "lc5", "cat": "의류케어", "name": "Bespoke AI 건조기 22kg", "model": "DV90F22CDS", "specs": ["인버터 히트펌프 + 히터", "7형(177.8mm) LCD · 오토 오픈 도어", "다크스틸"], "img": "images/DV90F22CDS.png", "list": 2299000, "price": 1898000, "badge": "", "hidden": false}, {"id": "lc6", "cat": "의류케어", "name": "Bespoke AI 에어드레서 대용량 (크리스탈 미러)", "model": "DF90H24R5C", "specs": ["상의 5~9벌 + 하의 3벌", "크리스탈 미러", "2026년형"], "img": "images/DF90H24R5C.png", "list": 2499000, "price": 1852000, "badge": "", "hidden": false}, {"id": "lc7", "cat": "의류케어", "name": "Bespoke AI 에어드레서 대용량 (클린화이트)", "model": "DF90H24R4D", "specs": ["상의 5~9벌 + 하의 2벌", "클린화이트", "2026년형"], "img": "images/DF90H24R4D.png", "list": 2399000, "price": 1778000, "badge": "", "hidden": false}, {"id": "ck1", "cat": "전기레인지", "name": "Infinite AI 인덕션 3구", "model": "CC99F63U1DS", "specs": ["3구 · 최대 3.4kW", "에너지효율 1등급 · SmartThings", "새틴 블랙"], "img": "images/CC99F63U1DS.png", "list": 1940000, "price": 1500000, "badge": "", "hidden": false}, {"id": "ck2", "cat": "전기레인지", "name": "Bespoke AI 인덕션 3구", "model": "CC80H63U1HS", "specs": ["3구 · 최대 3.4kW", "에너지효율 1등급 · SmartThings", "화이트 · 2026년형"], "img": "images/CC80H63U1HS.png", "list": 1590000, "price": 1347000, "badge": "", "hidden": false}, {"id": "dw1", "cat": "식기세척기", "name": "Bespoke AI 식기세척기 빌트인 14인용", "model": "DW90F79F1USWT", "specs": ["14인용 빌트인", "열풍건조", "SmartThings 연동"], "img": "images/DW90F79F1USWT.png", "list": 2140000, "price": 1596000, "badge": "", "hidden": false}, {"id": "dw2", "cat": "식기세척기", "name": "Bespoke AI 식기세척기 빌트인 14인용 (새틴 베이지)", "model": "DW90F79F1USBT", "specs": ["14인용 빌트인", "열풍건조", "SmartThings 연동"], "img": "images/DW90F79F1USBT.png?v=2", "list": 2140000, "price": 1596000, "badge": "", "hidden": false}, {"id": "vc1", "cat": "무선청소기", "name": "Bespoke AI 제트 핏 (물걸레 브러시 패키지)", "model": "VS70H18GVG", "specs": ["흡입력 180W", "물걸레 브러시 포함", "새틴 그레이지 · 2026년형"], "img": "images/VS70H18GVG.png", "list": null, "price": null, "badge": "", "hidden": true}, {"id": "rb1", "cat": "로봇청소기", "name": "Bespoke AI 스팀 울트라 로봇청소기 (새틴 차콜)", "model": "VR90F01AAH", "specs": ["흡입 + 물걸레 스팀 살균", "청정스테이션 (정수 4L / 오수 3.6L)", "새틴 차콜"], "img": "images/VR90F01AAH.png", "list": 1960000, "price": 1575000, "badge": "", "hidden": false}, {"id": "rb2", "cat": "로봇청소기", "name": "Bespoke AI 스팀 울트라 로봇청소기 (새틴 그레이지)", "model": "VR90F01AAG", "specs": ["흡입 + 물걸레 스팀 살균", "청정스테이션 (정수 4L / 오수 3.6L)", "새틴 그레이지"], "img": "images/VR90F01AAG.png", "list": 1960000, "price": 1575000, "badge": "", "hidden": false}, {"id": "ov1", "cat": "조리기기", "name": "Bespoke 콤팩트 오븐 50L (블랙)", "model": "NQ50T8539BK", "specs": ["빌트인 50L", "터치 + 다이얼 조작", "스팀청소"], "img": "images/NQ50T8539BK.png", "list": 1020000, "price": 929000, "badge": "", "hidden": false}, {"id": "ov2", "cat": "조리기기", "name": "Bespoke 콤팩트 오븐 50L (글램 화이트)", "model": "NQ50T8539BW", "specs": ["빌트인 50L", "터치 + 다이얼 조작", "스팀청소"], "img": "images/NQ50T8539BW.png", "list": 1020000, "price": 929000, "badge": "", "hidden": false}]};
 
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -612,22 +643,22 @@ $("#sections").addEventListener("keydown", e=>{ if(e.key==="Enter"){ const c = e
 
 /* ===== 한장에 보기 (A4 1장) ===== */
 function renderOnePage(){
-  const s=DATA.site, vis=DATA.products.filter(p=>!p.hidden);
+  const s=DATA.site, sd=!!s.showDiscount, vis=DATA.products.filter(p=>!p.hidden);
   const cats=DATA.categories.filter(c=>vis.some(p=>p.cat===c)); vis.forEach(p=>{ if(!cats.includes(p.cat)) cats.push(p.cat); });
   const t=new Date(), date=`${t.getFullYear()}. ${t.getMonth()+1}. ${t.getDate()}.`;
   const money = v => isNum(v) ? Number(v).toLocaleString() : `<span class="tbd">추후 안내</span>`;
   let no=0;
   const rows = cats.map(c=>{ const list=vis.filter(p=>p.cat===c);
-    return `<tr class="ocat"><td colspan="6"><span>■</span>${esc(c)} <span style="color:#8b909b;font-weight:600;margin-left:4px">${list.length}</span></td></tr>` + list.map(p=>{
+    return `<tr class="ocat"><td colspan="${sd?6:5}"><span>■</span>${esc(c)} <span style="color:#8b909b;font-weight:600;margin-left:4px">${list.length}</span></td></tr>` + list.map(p=>{
       const hasL=isNum(p.list), hasP=isNum(p.price), pct=(hasL&&hasP&&s.showDiscount&&Number(p.price)<Number(p.list))?Math.round((1-p.price/p.list)*100):0;
       const opt = p.optLabel ? `<small>${esc(p.optLabel)} ${isNum(p.optPrice)?"+"+Number(p.optPrice).toLocaleString()+"원":"+ 00만원"}</small>` : "";
-      return `<tr><td class="oc">${++no}</td><td class="onm">${esc(p.name)}${opt}</td><td class="omd">${esc(p.model)}</td><td class="on orr">${money(p.list)}</td><td class="on ogb">${money(p.price)}</td><td class="opct">${pct?pct+"%":"-"}</td></tr>`; }).join(""); }).join("");
+      return `<tr><td class="oc">${++no}</td><td class="onm">${esc(p.name)}${opt}</td><td class="omd">${esc(p.model)}</td><td class="on orr">${money(p.list)}</td><td class="on ogb">${money(p.price)}</td>${sd?`<td class="opct">${pct?pct+"%":"-"}</td>`:""}</tr>`; }).join(""); }).join("");
   $("#osheet").innerHTML = `
     <div class="o-top"><div><div class="k">SAMSUNG STORE · 입주민 공동구매</div><h2>${esc(s.apartment)} ${esc(s.title)}</h2><p>${esc(s.subtitle||"")}</p></div>
       <div class="r">${esc(s.period||"")}<br>기준일 <b>${date}</b><br>총 <b>${no}</b>개 모델</div></div>
     ${(s.benefits||[]).filter(Boolean).length?`<div class="o-ben">${s.benefits.filter(Boolean).map(b=>`<span>${esc(b)}</span>`).join("")}</div>`:""}
-    <table class="o-tb"><colgroup><col style="width:30px"><col><col style="width:128px"><col style="width:112px"><col style="width:104px"><col style="width:52px"></colgroup>
-      <thead><tr><th>No</th><th class="ol">제품명</th><th>모델명</th><th>희망 권장소비자가</th><th>공동구매가</th><th>할인율</th></tr></thead><tbody>${rows}</tbody></table>
+    <table class="o-tb"><colgroup><col style="width:30px"><col><col style="width:128px"><col style="width:112px"><col style="width:104px">${sd?'<col style="width:52px">':""}</colgroup>
+      <thead><tr><th>No</th><th class="ol">제품명</th><th>모델명</th><th>희망 권장소비자가</th><th>공동구매가</th>${sd?"<th>할인율</th>":""}</tr></thead><tbody>${rows}</tbody></table>
     <div class="o-foot"><ul>${(s.notice||[]).filter(Boolean).map(n=>`<li>${esc(n)}</li>`).join("")}<li>금액 단위: 원 (부가세 포함)</li></ul>
       <div class="o-ct"><b>${esc(s.store||"삼성스토어")}</b>${esc(s.contactName||"")}${s.phone?" · "+esc(s.phone):""}</div>
       ${qrImg()?`<div class="o-qr"><img src="${qrImg()}" alt="QR"><b>제품 상세 보기</b>카메라로 스캔</div>`:""}</div>`;
@@ -717,29 +748,27 @@ function drawAdmin(){
   if(adTab === "deploy") v.innerHTML = adDeploy();
   bindAdmin();
 }
+const pctOf = p => (isNum(p.list)&&isNum(p.price)&&Number(p.price)<Number(p.list)) ? Math.round((1-p.price/p.list)*100)+"%" : "–";
+function discSwitch(id){ return `<label class="sw sw-row" for="${id}"><span class="swt"><b>할인율(%) 표시</b><small>제품 카드 · 상세창 · 한장에 보기에 함께 적용</small></span><input type="checkbox" id="${id}" class="s-disc" ${DATA.site.showDiscount?"checked":""}><i></i></label>`; }
 function adProducts(){
-  const done = DATA.products.filter(p=>isNum(p.list)&&isNum(p.price)).length;
-  return `<div class="box"><h3>가격 입력 현황 ${done} / ${DATA.products.length}</h3>
-    <div class="chk"><input type="checkbox" id="s-disc" ${DATA.site.showDiscount?"checked":""}><label for="s-disc">공동구매가 앞에 할인율(%) 자동 표시</label></div>
-    <div style="font-size:12.5px;color:var(--mute)">가격을 비워두면 고객 화면에 ‘희망 권장소비자가 / 공동구매가’ 글자로 표시됩니다. 내부 정책 DC율은 저장하지 마세요 — data.json 은 공개 파일입니다.</div>
-    <div class="pfilter">
-      <div class="seg2" id="f-vis">${[["all","전체",DATA.products.length],["on","노출",DATA.products.filter(p=>!p.hidden).length],["off","숨김",DATA.products.filter(p=>p.hidden).length]].map(([k,n,c])=>`<button data-fv="${k}" class="${AF.vis===k?"on":""}">${n} ${c}</button>`).join("")}</div>
-      <select id="f-cat"><option value="">모든 품목</option>${[...new Set([...DATA.categories,...DATA.products.map(p=>p.cat)])].map(c=>`<option ${AF.cat===c?"selected":""}>${esc(c)}</option>`).join("")}</select>
-    </div>
-    <div class="row-btn" style="margin-top:10px"><button class="btn" id="p-showall">지금 목록 모두 노출</button><button class="btn" id="p-hideall">지금 목록 모두 숨김</button><button class="btn blue" id="p-add">+ 제품 추가</button></div></div>
-  ${DATA.products.map((p,i)=>{
-    const ok = isNum(p.list)&&isNum(p.price);
+  const P = DATA.products, done = P.filter(p=>isNum(p.list)&&isNum(p.price)).length;
+  let last = null, html = "";
+  P.forEach((p,i)=>{
     const show = (AF.vis==="all" || (AF.vis==="on")===!p.hidden) && (!AF.cat || p.cat===AF.cat);
-    return `<div class="pitem ${p.hidden?"hid":""} ${openId===p.id?"open":""}" data-i="${i}" ${show?"":'style="display:none"'}>
-      <div class="phead" data-act="toggle"><div class="t"><b>${esc(p.name)}</b><small>${esc(p.cat)} · ${esc(p.model)}</small></div>
-        <label class="sw" title="고객 화면 노출"><input type="checkbox" class="vis" ${p.hidden?"":"checked"}><i></i><span class="sl">${p.hidden?"숨김":"노출"}</span></label>
-        <span class="st ${ok?"ok":""}">${ok?"가격완료":"가격미정"}</span>
-        <button class="mini" data-act="up">↑</button><button class="mini" data-act="down">↓</button></div>
-      <div class="pbody">
-        <div class="two">
-          <label class="fld"><span>희망 권장소비자가 (원)</span><input inputmode="numeric" data-k="list" value="${isNum(p.list)?Number(p.list).toLocaleString():""}" placeholder="비우면 '희망 권장소비자가' 표시"></label>
-          <label class="fld"><span>공동구매가 (원)</span><input inputmode="numeric" data-k="price" value="${isNum(p.price)?Number(p.price).toLocaleString():""}" placeholder="비우면 '공동구매가' 표시"></label>
+    if(show && p.cat!==last){ last=p.cat; const n=P.filter(x=>x.cat===p.cat && (AF.vis==="all"||(AF.vis==="on")===!x.hidden)).length; html += `<div class="pgrp">${esc(p.cat)}<span>${n}</span></div>`; }
+    const ok = isNum(p.list)&&isNum(p.price);
+    html += `<div class="pitem ${p.hidden?"hid":""} ${ok?"":"need"} ${openId===p.id?"open":""}" data-i="${i}" ${show?"":'style="display:none"'}>
+      <div class="prow">
+        <label class="sw" title="고객 화면 노출"><input type="checkbox" class="vis" ${p.hidden?"":"checked"}><i></i></label>
+        <div class="t" data-act="toggle"><b>${esc(p.name)}</b><small>${esc(p.model)}${p.hidden?' · <em class="hd">숨김</em>':""}</small></div>
+        <div class="pp">
+          <label>희망 권장소비자가<input inputmode="numeric" data-k="list" value="${isNum(p.list)?Number(p.list).toLocaleString():""}" placeholder="미정"></label>
+          <label>공동구매가<input inputmode="numeric" data-k="price" value="${isNum(p.price)?Number(p.price).toLocaleString():""}" placeholder="미정"></label>
+          <label>할인<span class="pc">${pctOf(p)}</span></label>
         </div>
+        <div class="pa"><button class="mini" data-act="up" aria-label="위로">↑</button><button class="mini" data-act="down" aria-label="아래로">↓</button><button class="mini more" data-act="toggle" aria-label="상세 편집">${openId===p.id?"▴":"⋯"}</button></div>
+      </div>
+      <div class="pbody">
         <div class="calc">계산기: 희망 권장소비자가에서 <input inputmode="decimal" class="c-pct" placeholder="%"> % 할인 → <button class="btn c-go" style="padding:6px 10px">공동구매가에 적용</button><em style="font-style:normal;color:var(--mute)">(%는 저장되지 않음)</em></div>
         <label class="fld"><span>제품명</span><input data-k="name" value="${esc(p.name)}"></label>
         <div class="two">
@@ -762,12 +791,22 @@ function adProducts(){
         </div>
         <div class="row-btn"><button class="btn" data-act="dup">복제</button><button class="btn red" data-act="del">삭제</button></div>
       </div></div>`;
-  }).join("")}
+  });
+  return `<div class="box"><h3>표시 설정</h3>${discSwitch("s-disc")}</div>
+  <div class="box"><h3>제품 · 가격 <small class="h3s">가격 입력 ${done} / ${P.length}</small></h3>
+    <div style="font-size:12.5px;color:var(--mute)">금액은 목록에서 바로 입력하세요. ⋯ 를 누르면 제품명·사양·옵션·이미지를 수정할 수 있어요. 가격을 비우면 고객 화면에 글자로 표시됩니다. data.json 은 공개 파일이니 내부 정책 DC율은 넣지 마세요.</div>
+    <div class="pfilter">
+      <div class="seg2" id="f-vis">${[["all","전체",P.length],["on","노출",P.filter(p=>!p.hidden).length],["off","숨김",P.filter(p=>p.hidden).length]].map(([k,n,c])=>`<button data-fv="${k}" class="${AF.vis===k?"on":""}">${n} ${c}</button>`).join("")}</div>
+      <select id="f-cat"><option value="">모든 품목</option>${[...new Set([...DATA.categories,...P.map(p=>p.cat)])].map(c=>`<option ${AF.cat===c?"selected":""}>${esc(c)}</option>`).join("")}</select>
+    </div>
+    <div class="row-btn" style="margin-top:10px"><button class="btn" id="p-showall">지금 목록 모두 노출</button><button class="btn" id="p-hideall">지금 목록 모두 숨김</button><button class="btn blue" id="p-add">+ 제품 추가</button></div></div>
+  <div class="plist">${html}</div>
   <datalist id="catlist">${DATA.categories.map(c=>`<option value="${esc(c)}">`).join("")}</datalist>`;
 }
 function adSite(){
   const s = DATA.site;
-  return `<div class="box"><h3>상단 문구</h3>
+  return `<div class="box"><h3>표시 설정</h3>${discSwitch("s-disc2")}</div>
+  <div class="box"><h3>상단 문구</h3>
     <label class="fld"><span>단지명</span><input data-s="apartment" value="${esc(s.apartment)}"></label>
     <label class="fld"><span>제목</span><input data-s="title" value="${esc(s.title)}"></label>
     <label class="fld"><span>부제</span><input data-s="subtitle" value="${esc(s.subtitle)}"></label>
@@ -895,11 +934,12 @@ function bindAdmin(){
       else if(k==="hidden") p.hidden = el.checked;
       else p[k] = el.value.trim();
       if(k==="name") it.querySelector(".t b").textContent = p.name;
+      if(k==="list"||k==="price"){ const pc=it.querySelector(".pc"); if(pc) pc.textContent=pctOf(p); }
     }
     if(el.dataset.s) DATA.site[el.dataset.s] = el.value.trim();
     if(el.dataset.sl) DATA.site[el.dataset.sl] = unlines(el.value);
     if(el.dataset.cats !== undefined) DATA.categories = unlines(el.value);
-    if(el.id==="s-disc") DATA.site.showDiscount = el.checked;
+    if(el.classList && el.classList.contains("s-disc")){ DATA.site.showDiscount = el.checked; keepDraft(); render(); }
     if(el.id==="b-text") BULK.text = el.value;
   };
   v.onchange = async e=>{
@@ -927,7 +967,7 @@ function bindAdmin(){
     if(!b) return;
     const it = b.closest(".pitem"), i = it ? +it.dataset.i : -1, P = DATA.products;
     const act = b.dataset.act;
-    if(act==="toggle"){ if(e.target.closest(".mini,.sw")) return; const p=P[i]; openId = openId===p.id?null:p.id; it.classList.toggle("open"); return; }
+    if(act==="toggle"){ if(e.target.closest(".sw")) return; const p=P[i]; openId = openId===p.id?null:p.id; it.classList.toggle("open"); const mb=it.querySelector(".more"); if(mb) mb.textContent = it.classList.contains("open")?"▴":"⋯"; return; }
     if(act==="up"&&i>0){ e.stopPropagation(); [P[i-1],P[i]]=[P[i],P[i-1]]; drawAdmin(); return; }
     if(act==="down"&&i<P.length-1){ e.stopPropagation(); [P[i+1],P[i]]=[P[i],P[i+1]]; drawAdmin(); return; }
     if(act==="dup"){ const c=JSON.parse(JSON.stringify(P[i])); c.id="p"+Date.now(); P.splice(i+1,0,c); openId=c.id; drawAdmin(); return; }
@@ -954,8 +994,9 @@ function bindAdmin(){
 }
 function drawStatus(el){
   const it = el.closest(".pitem"); if(!it) return;
-  const p = DATA.products[+it.dataset.i], ok = isNum(p.list)&&isNum(p.price), st = it.querySelector(".st");
-  st.textContent = ok?"가격완료":"가격미정"; st.classList.toggle("ok", ok);
+  const p = DATA.products[+it.dataset.i], ok = isNum(p.list)&&isNum(p.price);
+  it.classList.toggle("need", !ok); const pc=it.querySelector(".pc"); if(pc) pc.textContent=pctOf(p);
+  const h=document.querySelector(".h3s"); if(h) h.textContent=`가격 입력 ${DATA.products.filter(x=>isNum(x.list)&&isNum(x.price)).length} / ${DATA.products.length}`;
 }
 
 /* ===== 저장: 깃허브 API 또는 파일 다운로드 ===== */
