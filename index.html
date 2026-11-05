@@ -343,7 +343,10 @@ input[type=checkbox]{accent-color:var(--navy)}
 .o-tb tr.ocat td{background:#f4f1ea;font-weight:800;font-size:calc(var(--fs) - .5px);color:#0d1830;padding:calc(var(--fs)*.32) 8px;border-bottom:1px solid #d9d4c8;letter-spacing:.04em}
 .o-tb tr.ocat td span{color:#a7823f;margin-right:6px}
 .o-tb .tbd{color:#a7823f;font-weight:700;font-size:calc(var(--fs) - 1px)}
-.o-foot{margin-top:auto;padding-top:10px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;border-top:1px solid #d9d4c8}
+.o-foot{margin-top:auto;padding-top:10px;display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:end;border-top:1px solid #d9d4c8}
+.o-qr{text-align:center;font-size:9px;color:#6b7080;line-height:1.35;font-weight:700}
+.o-qr img{display:block;width:78px;height:78px;margin:0 auto 4px;image-rendering:pixelated;border:1px solid #e7e2d8;padding:3px;background:#fff}
+.o-qr b{display:block;color:#a7823f;font-size:9.5px}
 .o-foot ul{list-style:none;font-size:9.5px;color:#4a5263;line-height:1.6}
 .o-foot li:before{content:"·";margin-right:5px;color:#a7823f;font-weight:800}
 .o-ct{text-align:right;font-size:10.5px;color:#6b7080;line-height:1.5;white-space:nowrap}
@@ -626,8 +629,18 @@ function renderOnePage(){
     <table class="o-tb"><colgroup><col style="width:30px"><col><col style="width:128px"><col style="width:112px"><col style="width:104px"><col style="width:52px"></colgroup>
       <thead><tr><th>No</th><th class="ol">제품명</th><th>모델명</th><th>희망 권장소비자가</th><th>공동구매가</th><th>할인율</th></tr></thead><tbody>${rows}</tbody></table>
     <div class="o-foot"><ul>${(s.notice||[]).filter(Boolean).map(n=>`<li>${esc(n)}</li>`).join("")}<li>금액 단위: 원 (부가세 포함)</li></ul>
-      <div class="o-ct"><b>${esc(s.store||"삼성스토어")}</b>${esc(s.contactName||"")}${s.phone?" · "+esc(s.phone):""}</div></div>`;
+      <div class="o-ct"><b>${esc(s.store||"삼성스토어")}</b>${esc(s.contactName||"")}${s.phone?" · "+esc(s.phone):""}</div>
+      ${qrImg()?`<div class="o-qr"><img src="${qrImg()}" alt="QR"><b>제품 상세 보기</b>카메라로 스캔</div>`:""}</div>`;
   fitOneContent(); fitOnePage();
+}
+/* QR: 이 페이지 주소 (해시 제외) */
+let QRLIB=null;
+function loadQR(){ if(QRLIB) return QRLIB; QRLIB=new Promise((res)=>{ const sc=document.createElement("script"); sc.src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"; sc.onload=()=>res(window.qrcode); sc.onerror=()=>res(null); document.head.appendChild(sc); }); return QRLIB; }
+let QR_URL=null;
+function qrImg(){
+  if(QR_URL) return QR_URL; if(!window.qrcode) return "";
+  try{ const q=window.qrcode(0,"M"); q.addData(location.origin+location.pathname); q.make(); QR_URL=q.createDataURL(6,0); }catch(e){ QR_URL=""; }
+  return QR_URL;
 }
 function fitOneContent(){
   const sh=$("#osheet"), tb=sh.querySelector(".o-tb"), ft=sh.querySelector(".o-foot");
@@ -636,7 +649,7 @@ function fitOneContent(){
   while(over() && fs>7.5){ fs-=.25; sh.style.setProperty("--fs",fs+"px"); }
 }
 function fitOnePage(){ const v=$("#op-view"), w=v.clientWidth-24, sc=Math.min(1,w/794); $("#osheet").style.transform=`scale(${sc})`; $("#osw").style.width=(794*sc)+"px"; $("#osw").style.height=(1123*sc)+"px"; }
-function openOnePage(){ $("#op").classList.add("open"); document.body.classList.add("op-open"); const sh=$("#osheet"); sh.style.transform="none"; renderOnePage(); }
+async function openOnePage(){ $("#op").classList.add("open"); document.body.classList.add("op-open"); renderOnePage(); if(!window.qrcode){ await loadQR(); renderOnePage(); } }
 function closeOnePage(){ $("#op").classList.remove("open"); document.body.classList.remove("op-open"); }
 let H2C=null;
 function loadH2C(){ if(H2C) return H2C; H2C=new Promise((res,rej)=>{ const sc=document.createElement("script"); sc.src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"; sc.onload=()=>res(window.html2canvas); sc.onerror=rej; document.head.appendChild(sc); }); return H2C; }
