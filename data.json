@@ -462,7 +462,7 @@
       "badge": "",
       "hidden": false,
       "optLabel": "벽걸이 설치 시",
-      "optPrice": 6
+      "optPrice": 60000
     },
     {
       "id": "tv2",
@@ -480,7 +480,7 @@
       "badge": "",
       "hidden": false,
       "optLabel": "벽걸이 설치 시",
-      "optPrice": 6
+      "optPrice": 60000
     },
     {
       "id": "tv3",
@@ -498,7 +498,7 @@
       "badge": "",
       "hidden": false,
       "optLabel": "벽걸이 설치 시",
-      "optPrice": 6
+      "optPrice": 60000
     },
     {
       "id": "rf1",
