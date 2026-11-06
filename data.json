@@ -37,68 +37,414 @@
   ],
   "products": [
     {
-      "id": "dvm2",
+      "id": "ac-g-59-2",
       "cat": "시스템에어컨",
-      "name": "무풍 시스템에어컨 DVM HOME 2실",
-      "model": "DVM HOME 2실 패키지",
+      "name": "무풍 일반 59㎡ 2실",
+      "model": "SET · 59㎡ 2실",
       "specs": [
-        "실외기 1대 + 실내기 2대 (거실·안방)",
-        "무풍 1Way 천장형 카세트",
-        "SmartThings 앱 원격 제어"
+        "실외기 2.5마력 · 실내기 2대",
+        "실내기 6평형 + 15평형",
+        "무풍 1Way 천장형 카세트"
       ],
       "img": "images/DVM-HOME-2room.png",
       "list": null,
-      "price": null,
-      "badge": "입주 필수",
-      "hidden": false
+      "price": 3300000,
+      "badge": "",
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "일반",
+        "size": "59㎡",
+        "rooms": 2,
+        "out": "2.5마력",
+        "ins": [
+          "6평형",
+          "15평형"
+        ],
+        "full": false
+      }
     },
     {
-      "id": "dvm3",
+      "id": "ac-g-59-3",
       "cat": "시스템에어컨",
-      "name": "무풍 시스템에어컨 DVM HOME 3실",
-      "model": "DVM HOME 3실 패키지",
+      "name": "무풍 일반 59㎡ 3실",
+      "model": "SET · 59㎡ 3실",
       "specs": [
-        "실외기 1대 + 실내기 3대 (거실·안방·침실)",
-        "무풍 1Way 천장형 카세트",
-        "SmartThings 앱 원격 제어"
+        "실외기 4마력 · 실내기 3대",
+        "실내기 5평형 + 6평형 + 15평형",
+        "무풍 1Way 천장형 카세트"
       ],
       "img": "images/DVM-HOME-3room.png",
       "list": null,
-      "price": null,
+      "price": 4450000,
       "badge": "",
-      "hidden": false
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "일반",
+        "size": "59㎡",
+        "rooms": 3,
+        "out": "4마력",
+        "ins": [
+          "5평형",
+          "6평형",
+          "15평형"
+        ],
+        "full": false
+      }
     },
     {
-      "id": "dvm4",
+      "id": "ac-g-59-4",
       "cat": "시스템에어컨",
-      "name": "무풍 시스템에어컨 DVM HOME 4실",
-      "model": "DVM HOME 4실 패키지",
+      "name": "무풍 일반 59㎡ 4실",
+      "model": "SET · 59㎡ 4실",
       "specs": [
-        "실외기 1대 + 실내기 4대 (거실·안방·침실 2)",
-        "무풍 1Way 천장형 카세트",
-        "SmartThings 앱 원격 제어"
+        "실외기 4마력 · 실내기 4대",
+        "실내기 5평형 + 5평형 + 6평형 + 15평형",
+        "무풍 1Way 천장형 카세트"
       ],
       "img": "images/DVM-HOME-4room.png",
       "list": null,
-      "price": null,
-      "badge": "추천",
-      "hidden": false
+      "price": 5570000,
+      "badge": "",
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "일반",
+        "size": "59㎡",
+        "rooms": 4,
+        "out": "4마력",
+        "ins": [
+          "5평형",
+          "5평형",
+          "6평형",
+          "15평형"
+        ],
+        "full": false
+      }
     },
     {
-      "id": "dvm5",
+      "id": "ac-g-74-2",
       "cat": "시스템에어컨",
-      "name": "무풍 시스템에어컨 DVM HOME 5실",
-      "model": "DVM HOME 5실 패키지",
+      "name": "무풍 일반 74·84㎡ 2실",
+      "model": "SET · 74·84㎡ 2실",
       "specs": [
-        "실외기 1대 + 실내기 5대 (거실·안방·침실 3)",
-        "무풍 1Way 천장형 카세트",
-        "SmartThings 앱 원격 제어"
+        "실외기 4마력 · 실내기 2대",
+        "실내기 5평형 + 18평형",
+        "무풍 1Way 천장형 카세트"
+      ],
+      "img": "images/DVM-HOME-2room.png",
+      "list": null,
+      "price": 3350000,
+      "badge": "",
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "일반",
+        "size": "74·84㎡",
+        "rooms": 2,
+        "out": "4마력",
+        "ins": [
+          "5평형",
+          "18평형"
+        ],
+        "full": false
+      }
+    },
+    {
+      "id": "ac-g-74-3",
+      "cat": "시스템에어컨",
+      "name": "무풍 일반 74·84㎡ 3실",
+      "model": "SET · 74·84㎡ 3실",
+      "specs": [
+        "실외기 4마력 · 실내기 3대",
+        "실내기 5평형 + 6평형 + 18평형",
+        "무풍 1Way 천장형 카세트"
+      ],
+      "img": "images/DVM-HOME-3room.png",
+      "list": null,
+      "price": 4520000,
+      "badge": "",
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "일반",
+        "size": "74·84㎡",
+        "rooms": 3,
+        "out": "4마력",
+        "ins": [
+          "5평형",
+          "6평형",
+          "18평형"
+        ],
+        "full": false
+      }
+    },
+    {
+      "id": "ac-g-74-4",
+      "cat": "시스템에어컨",
+      "name": "무풍 일반 74·84㎡ 4실",
+      "model": "SET · 74·84㎡ 4실",
+      "specs": [
+        "실외기 4마력 · 실내기 4대",
+        "실내기 5평형 + 5평형 + 6평형 + 18평형",
+        "무풍 1Way 천장형 카세트"
+      ],
+      "img": "images/DVM-HOME-4room.png",
+      "list": null,
+      "price": 5640000,
+      "badge": "",
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "일반",
+        "size": "74·84㎡",
+        "rooms": 4,
+        "out": "4마력",
+        "ins": [
+          "5평형",
+          "5평형",
+          "6평형",
+          "18평형"
+        ],
+        "full": false
+      }
+    },
+    {
+      "id": "ac-g-74-5",
+      "cat": "시스템에어컨",
+      "name": "무풍 일반 74·84㎡ 5실 (전실)",
+      "model": "SET · 74·84㎡ 5실",
+      "specs": [
+        "실외기 5마력 · 실내기 5대",
+        "실내기 5평형 + 5평형 + 5평형 + 6평형 + 18평형",
+        "무풍 1Way 천장형 카세트"
       ],
       "img": "images/DVM-HOME-5room.png",
       "list": null,
-      "price": null,
+      "price": 7400000,
+      "badge": "전실",
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "일반",
+        "size": "74·84㎡",
+        "rooms": 5,
+        "out": "5마력",
+        "ins": [
+          "5평형",
+          "5평형",
+          "5평형",
+          "6평형",
+          "18평형"
+        ],
+        "full": true
+      }
+    },
+    {
+      "id": "ac-i-59-2",
+      "cat": "시스템에어컨",
+      "name": "무풍 인피니트 59㎡ 2실",
+      "model": "SET · 59㎡ 2실",
+      "specs": [
+        "실외기 2.5마력 · 실내기 2대",
+        "실내기 6평형 + 15평형",
+        "Infinite Line 무풍 1Way · 프리미엄 판넬"
+      ],
+      "img": "images/DVM-INF-2room.png",
+      "list": null,
+      "price": 3600000,
       "badge": "",
-      "hidden": false
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "인피니트",
+        "size": "59㎡",
+        "rooms": 2,
+        "out": "2.5마력",
+        "ins": [
+          "6평형",
+          "15평형"
+        ],
+        "full": false
+      }
+    },
+    {
+      "id": "ac-i-59-3",
+      "cat": "시스템에어컨",
+      "name": "무풍 인피니트 59㎡ 3실",
+      "model": "SET · 59㎡ 3실",
+      "specs": [
+        "실외기 4마력 · 실내기 3대",
+        "실내기 5평형 + 6평형 + 15평형",
+        "Infinite Line 무풍 1Way · 프리미엄 판넬"
+      ],
+      "img": "images/DVM-INF-3room.png",
+      "list": null,
+      "price": 4900000,
+      "badge": "",
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "인피니트",
+        "size": "59㎡",
+        "rooms": 3,
+        "out": "4마력",
+        "ins": [
+          "5평형",
+          "6평형",
+          "15평형"
+        ],
+        "full": false
+      }
+    },
+    {
+      "id": "ac-i-59-4",
+      "cat": "시스템에어컨",
+      "name": "무풍 인피니트 59㎡ 4실",
+      "model": "SET · 59㎡ 4실",
+      "specs": [
+        "실외기 4마력 · 실내기 4대",
+        "실내기 5평형 + 5평형 + 6평형 + 15평형",
+        "Infinite Line 무풍 1Way · 프리미엄 판넬"
+      ],
+      "img": "images/DVM-INF-4room.png",
+      "list": null,
+      "price": 6170000,
+      "badge": "",
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "인피니트",
+        "size": "59㎡",
+        "rooms": 4,
+        "out": "4마력",
+        "ins": [
+          "5평형",
+          "5평형",
+          "6평형",
+          "15평형"
+        ],
+        "full": false
+      }
+    },
+    {
+      "id": "ac-i-74-2",
+      "cat": "시스템에어컨",
+      "name": "무풍 인피니트 74·84㎡ 2실",
+      "model": "SET · 74·84㎡ 2실",
+      "specs": [
+        "실외기 4마력 · 실내기 2대",
+        "실내기 5평형 + 18평형",
+        "Infinite Line 무풍 1Way · 프리미엄 판넬"
+      ],
+      "img": "images/DVM-INF-2room.png",
+      "list": null,
+      "price": 3650000,
+      "badge": "",
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "인피니트",
+        "size": "74·84㎡",
+        "rooms": 2,
+        "out": "4마력",
+        "ins": [
+          "5평형",
+          "18평형"
+        ],
+        "full": false
+      }
+    },
+    {
+      "id": "ac-i-74-3",
+      "cat": "시스템에어컨",
+      "name": "무풍 인피니트 74·84㎡ 3실",
+      "model": "SET · 74·84㎡ 3실",
+      "specs": [
+        "실외기 4마력 · 실내기 3대",
+        "실내기 5평형 + 6평형 + 18평형",
+        "Infinite Line 무풍 1Way · 프리미엄 판넬"
+      ],
+      "img": "images/DVM-INF-3room.png",
+      "list": null,
+      "price": 4970000,
+      "badge": "",
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "인피니트",
+        "size": "74·84㎡",
+        "rooms": 3,
+        "out": "4마력",
+        "ins": [
+          "5평형",
+          "6평형",
+          "18평형"
+        ],
+        "full": false
+      }
+    },
+    {
+      "id": "ac-i-74-4",
+      "cat": "시스템에어컨",
+      "name": "무풍 인피니트 74·84㎡ 4실",
+      "model": "SET · 74·84㎡ 4실",
+      "specs": [
+        "실외기 4마력 · 실내기 4대",
+        "실내기 5평형 + 5평형 + 6평형 + 18평형",
+        "Infinite Line 무풍 1Way · 프리미엄 판넬"
+      ],
+      "img": "images/DVM-INF-4room.png",
+      "list": null,
+      "price": 6240000,
+      "badge": "",
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "인피니트",
+        "size": "74·84㎡",
+        "rooms": 4,
+        "out": "4마력",
+        "ins": [
+          "5평형",
+          "5평형",
+          "6평형",
+          "18평형"
+        ],
+        "full": false
+      }
+    },
+    {
+      "id": "ac-i-74-5",
+      "cat": "시스템에어컨",
+      "name": "무풍 인피니트 74·84㎡ 5실 (전실)",
+      "model": "SET · 74·84㎡ 5실",
+      "specs": [
+        "실외기 5마력 · 실내기 5대",
+        "실내기 5평형 + 5평형 + 5평형 + 6평형 + 18평형",
+        "Infinite Line 무풍 1Way · 프리미엄 판넬"
+      ],
+      "img": "images/DVM-INF-5room.png",
+      "list": null,
+      "price": 8150000,
+      "badge": "전실",
+      "hidden": false,
+      "hideList": true,
+      "ac": {
+        "line": "인피니트",
+        "size": "74·84㎡",
+        "rooms": 5,
+        "out": "5마력",
+        "ins": [
+          "5평형",
+          "5평형",
+          "5평형",
+          "6평형",
+          "18평형"
+        ],
+        "full": true
+      }
     },
     {
       "id": "tv1",
