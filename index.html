@@ -409,19 +409,21 @@ input[type=checkbox]{accent-color:var(--navy)}
 .o-top .r b{color:#14181f}
 .o-ben{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
 .o-ben span{display:inline-block;line-height:1.7;font-size:10.5px;border:1px solid #e3d6bc;background:#faf6ee;color:#7a5a1e;border-radius:4px;padding:2px 8px;font-weight:700}
-.o-tb{width:100%;border-collapse:collapse;margin-top:10px;font-size:var(--fs)}
+.o-tb{width:100%;border-collapse:collapse;margin-top:10px;font-size:var(--fs);flex-shrink:0}
+.o-top,.o-ben,.o-foot{flex-shrink:0}
+.o-tb tr.osub td{font-size:calc(var(--fs) - 1px);color:#7a5a1e;font-weight:700;background:#faf6ee;padding:calc(var(--fs)*.16) 6px;border-bottom:1px solid #ece8de}
 .o-tb th{background:#0d1830;color:#fff;font-size:calc(var(--fs) - .5px);font-weight:700;padding:calc(var(--fs)*.5) 6px;text-align:center;white-space:nowrap}
 .o-tb th.ol{text-align:left}
-.o-tb td{padding:calc(var(--fs)*.36) 6px;border-bottom:1px solid #ece8de;vertical-align:middle}
+.o-tb td{padding:calc(var(--fs)*.22) 6px;line-height:1.3;border-bottom:1px solid #ece8de;vertical-align:middle}
 .o-tb td.on{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 .o-tb td.omd{font-size:calc(var(--fs) - 1px);color:#4a5263;letter-spacing:.01em;white-space:nowrap}
 .o-tb td.oc{text-align:center}
 .o-tb td.ogb{font-weight:800;color:#0d1830}
 .o-tb td.opct{color:#b7372b;font-weight:800;text-align:center}
 .o-tb td.onm{font-weight:600}
-.o-tb td.onm small{display:block;font-size:calc(var(--fs) - 1.5px);color:#a7823f;font-weight:700}
+.o-tb td.onm small{display:inline;margin-left:6px;font-size:calc(var(--fs) - 1.5px);color:#a7823f;font-weight:700}
 .o-tb td.orr{color:#8b909b}
-.o-tb tr.ocat td{background:#f4f1ea;font-weight:800;font-size:calc(var(--fs) - .5px);color:#0d1830;padding:calc(var(--fs)*.32) 8px;border-bottom:1px solid #d9d4c8;letter-spacing:.04em}
+.o-tb tr.ocat td{background:#f4f1ea;font-weight:800;font-size:calc(var(--fs) - .5px);color:#0d1830;padding:calc(var(--fs)*.2) 8px;border-bottom:1px solid #d9d4c8;letter-spacing:.04em}
 .o-tb tr.ocat td span{color:#a7823f;margin-right:6px}
 .o-tb .tbd{color:#a7823f;font-weight:700;font-size:calc(var(--fs) - 1px)}
 .o-foot{margin-top:auto;padding-top:10px;display:grid;grid-template-columns:1fr auto auto;gap:16px;align-items:end;border-top:1px solid #d9d4c8}
@@ -747,13 +749,19 @@ function renderOnePage(){
   const money = v => isNum(v) ? Number(v).toLocaleString() : `<span class="tbd">추후 안내</span>`;
   let no=0;
   const rows = cats.map(c=>{ const list=vis.filter(p=>p.cat===c);
-    return `<tr class="ocat"><td colspan="${sd?6:5}"><span>■</span>${esc(c)} <span style="color:#8b909b;font-weight:600;margin-left:4px">${list.length}</span></td></tr>` + list.map(p=>{
+    const head=`<tr class="ocat"><td colspan="${sd?6:5}"><span>■</span>${esc(c)} <span style="color:#8b909b;font-weight:600;margin-left:4px">${list.length}</span></td></tr>`;
+    const acs=list.filter(p=>p.ac), rest=list.filter(p=>!p.ac);
+    let acRows="";
+    if(acs.length){ const g=[]; acs.forEach(p=>{ const k=p.ac.size+"|"+p.ac.rooms; let o=g.find(x=>x.k===k); if(!o){ o={k,p,"일반":null,"인피니트":null}; g.push(o);} o[p.ac.line]=p; });
+      acRows=`<tr class="osub"><td></td><td>평형 · 구성</td><td>실외기 · 실내기</td><td class="on">무풍 일반</td><td class="on">무풍 인피니트</td>${sd?"<td></td>":""}</tr>`+g.map(o=>{ const a=o.p.ac;
+        return `<tr><td class="oc">${++no}</td><td class="onm">${esc(a.size)} ${a.rooms}실 SET${a.full||a.rooms>=5?' <span class="tbd">전실</span>':""}</td><td class="omd">${esc(a.out||"")} · ${esc((a.ins||[]).map(x=>String(x).replace(/평형?$/,"")).join("+"))}평</td><td class="on ogb">${o["일반"]?money(o["일반"].price):"-"}</td><td class="on ogb">${o["인피니트"]?money(o["인피니트"].price):"-"}</td>${sd?'<td class="opct">-</td>':""}</tr>`; }).join(""); }
+    return head + acRows + rest.map(p=>{
       const hasL=isNum(p.list), hasP=isNum(p.price), pct=(hasL&&hasP&&s.showDiscount&&Number(p.price)<Number(p.list))?Math.round((1-p.price/p.list)*100):0;
       const opt = p.optLabel ? `<small>${esc(p.optLabel)} ${isNum(p.optPrice)?"+"+Number(p.optPrice).toLocaleString()+"원":"+ 00만원"}</small>` : "";
       return `<tr><td class="oc">${++no}</td><td class="onm">${esc(p.name)}${opt}</td><td class="omd">${esc(p.model)}</td><td class="on orr">${p.hideList?"-":money(p.list)}</td><td class="on ogb">${money(p.price)}</td>${sd?`<td class="opct">${pct?pct+"%":"-"}</td>`:""}</tr>`; }).join(""); }).join("");
   $("#osheet").innerHTML = `
     <div class="o-top"><div><div class="k">SAMSUNG STORE · 입주민 공동구매</div><h2>${esc(s.apartment)} ${esc(s.title)}</h2><p>${esc(s.subtitle||"")}</p></div>
-      <div class="r">${esc(s.period||"")}<br>기준일 <b>${date}</b><br>총 <b>${no}</b>개 모델</div></div>
+      <div class="r">${esc(s.period||"")}<br>기준일 <b>${date}</b><br>총 <b>${vis.length}</b>개 모델</div></div>
     ${(s.benefits||[]).filter(Boolean).length?`<div class="o-ben">${s.benefits.filter(Boolean).map(b=>`<span>${esc(b)}</span>`).join("")}</div>`:""}
     <table class="o-tb"><colgroup><col style="width:30px"><col><col style="width:128px"><col style="width:112px"><col style="width:104px">${sd?'<col style="width:52px">':""}</colgroup>
       <thead><tr><th>No</th><th class="ol">제품명</th><th>모델명</th><th>희망 권장소비자가</th><th>공동구매가</th>${sd?"<th>할인율</th>":""}</tr></thead><tbody>${rows}</tbody></table>
@@ -775,7 +783,7 @@ function fitOneContent(){
   const sh=$("#osheet"), tb=sh.querySelector(".o-tb"), ft=sh.querySelector(".o-foot");
   let fs=12; sh.style.setProperty("--fs",fs+"px");
   const over = ()=> tb.offsetTop + tb.offsetHeight + ft.offsetHeight + 14 > 1123 - 30;
-  while(over() && fs>7.5){ fs-=.25; sh.style.setProperty("--fs",fs+"px"); }
+  while(over() && fs>6.5){ fs-=.25; sh.style.setProperty("--fs",fs+"px"); }
 }
 function fitOnePage(){ const v=$("#op-view"), w=v.clientWidth-24, sc=Math.min(1,w/794); $("#osheet").style.transform=`scale(${sc})`; $("#osw").style.width=(794*sc)+"px"; $("#osw").style.height=(1123*sc)+"px"; }
 async function openOnePage(){ $("#op").classList.add("open"); document.body.classList.add("op-open"); renderOnePage(); if(!window.qrcode){ await loadQR(); renderOnePage(); } }
