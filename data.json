@@ -21,7 +21,8 @@
     ],
     "showDiscount": false,
     "pwHash": "de64b116d208c12f41504cf04f5ef7352c2d4b1f7895fa8b0f9e62a2b2aeab9c",
-    "ver": "4"
+    "ver": "5",
+    "pointNote": "포인트(30만원)는 배송 완료 2주 후 적립되며, 적립 이후 캐시백 또는 상품 구매 시 사용 가능합니다."
   },
   "categories": [
     "시스템에어컨",
@@ -48,7 +49,7 @@
       ],
       "img": "images/DVM-HOME-2room.png",
       "list": null,
-      "price": 3300000,
+      "price": 2450000,
       "badge": "",
       "hidden": false,
       "hideList": true,
@@ -62,7 +63,8 @@
           "15평형"
         ],
         "full": false
-      }
+      },
+      "point": 300000
     },
     {
       "id": "ac-g-59-3",
@@ -76,7 +78,7 @@
       ],
       "img": "images/DVM-HOME-3room.png",
       "list": null,
-      "price": 4450000,
+      "price": 4850000,
       "badge": "",
       "hidden": false,
       "hideList": true,
@@ -91,7 +93,8 @@
           "15평형"
         ],
         "full": false
-      }
+      },
+      "point": 300000
     },
     {
       "id": "ac-g-59-4",
@@ -105,7 +108,7 @@
       ],
       "img": "images/DVM-HOME-4room.png",
       "list": null,
-      "price": 5570000,
+      "price": 5660000,
       "badge": "",
       "hidden": false,
       "hideList": true,
@@ -121,7 +124,8 @@
           "15평형"
         ],
         "full": false
-      }
+      },
+      "point": 300000
     },
     {
       "id": "ac-g-74-2",
@@ -135,7 +139,7 @@
       ],
       "img": "images/DVM-HOME-2room.png",
       "list": null,
-      "price": 3350000,
+      "price": 3770000,
       "badge": "",
       "hidden": false,
       "hideList": true,
@@ -149,7 +153,8 @@
           "18평형"
         ],
         "full": false
-      }
+      },
+      "point": 300000
     },
     {
       "id": "ac-g-74-3",
@@ -163,7 +168,7 @@
       ],
       "img": "images/DVM-HOME-3room.png",
       "list": null,
-      "price": 4520000,
+      "price": 5010000,
       "badge": "",
       "hidden": false,
       "hideList": true,
@@ -178,7 +183,8 @@
           "18평형"
         ],
         "full": false
-      }
+      },
+      "point": 300000
     },
     {
       "id": "ac-g-74-4",
@@ -192,7 +198,7 @@
       ],
       "img": "images/DVM-HOME-4room.png",
       "list": null,
-      "price": 5640000,
+      "price": 5660000,
       "badge": "",
       "hidden": false,
       "hideList": true,
@@ -208,7 +214,8 @@
           "18평형"
         ],
         "full": false
-      }
+      },
+      "point": 300000
     },
     {
       "id": "ac-g-74-5",
@@ -222,7 +229,7 @@
       ],
       "img": "images/DVM-HOME-5room.png",
       "list": null,
-      "price": 7400000,
+      "price": 7690000,
       "badge": "전실",
       "hidden": false,
       "hideList": true,
@@ -239,7 +246,8 @@
           "18평형"
         ],
         "full": true
-      }
+      },
+      "point": 300000
     },
     {
       "id": "ac-i-59-2",
@@ -253,7 +261,7 @@
       ],
       "img": "images/DVM-INF-2room.png",
       "list": null,
-      "price": 3600000,
+      "price": 2750000,
       "badge": "",
       "hidden": false,
       "hideList": true,
@@ -267,7 +275,8 @@
           "15평형"
         ],
         "full": false
-      }
+      },
+      "point": 300000
     },
     {
       "id": "ac-i-59-3",
@@ -281,7 +290,7 @@
       ],
       "img": "images/DVM-INF-3room.png",
       "list": null,
-      "price": 4900000,
+      "price": 5300000,
       "badge": "",
       "hidden": false,
       "hideList": true,
@@ -296,7 +305,8 @@
           "15평형"
         ],
         "full": false
-      }
+      },
+      "point": 300000
     },
     {
       "id": "ac-i-59-4",
@@ -310,7 +320,7 @@
       ],
       "img": "images/DVM-INF-4room.png",
       "list": null,
-      "price": 6170000,
+      "price": 6260000,
       "badge": "",
       "hidden": false,
       "hideList": true,
@@ -326,7 +336,8 @@
           "15평형"
         ],
         "full": false
-      }
+      },
+      "point": 300000
     },
     {
       "id": "ac-i-74-2",
@@ -340,7 +351,7 @@
       ],
       "img": "images/DVM-INF-2room.png",
       "list": null,
-      "price": 3650000,
+      "price": 4070000,
       "badge": "",
       "hidden": false,
       "hideList": true,
@@ -354,7 +365,8 @@
           "18평형"
         ],
         "full": false
-      }
+      },
+      "point": 300000
     },
     {
       "id": "ac-i-74-3",
@@ -368,7 +380,7 @@
       ],
       "img": "images/DVM-INF-3room.png",
       "list": null,
-      "price": 4970000,
+      "price": 5460000,
       "badge": "",
       "hidden": false,
       "hideList": true,
@@ -383,7 +395,8 @@
           "18평형"
         ],
         "full": false
-      }
+      },
+      "point": 300000
     },
     {
       "id": "ac-i-74-4",
@@ -397,7 +410,7 @@
       ],
       "img": "images/DVM-INF-4room.png",
       "list": null,
-      "price": 6240000,
+      "price": 6260000,
       "badge": "",
       "hidden": false,
       "hideList": true,
@@ -413,7 +426,8 @@
           "18평형"
         ],
         "full": false
-      }
+      },
+      "point": 300000
     },
     {
       "id": "ac-i-74-5",
@@ -427,7 +441,7 @@
       ],
       "img": "images/DVM-INF-5room.png",
       "list": null,
-      "price": 8150000,
+      "price": 8440000,
       "badge": "전실",
       "hidden": false,
       "hideList": true,
@@ -444,7 +458,8 @@
           "18평형"
         ],
         "full": true
-      }
+      },
+      "point": 300000
     },
     {
       "id": "tv1",
