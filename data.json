@@ -20,7 +20,7 @@
     ],
     "showDiscount": false,
     "pwHash": "de64b116d208c12f41504cf04f5ef7352c2d4b1f7895fa8b0f9e62a2b2aeab9c",
-    "ver": "11",
+    "ver": "12",
     "pointNote": "포인트(30만원)는 제품 배송 3일 이후 적립되며, 캐시백 신청 시 2개월 후 캐시백으로 받으실 수 있습니다. 자세한 내용은 상담 시 매니저에게 문의해 주세요."
   },
   "categories": [
@@ -608,7 +608,7 @@
         "기본 색상 코타화이트 (패널 포함) · 냉장고·김치냉장고와 조합"
       ],
       "img": "images/RZ34C7955AP.png",
-      "list": 1699000,
+      "list": 1599000,
       "price": 1270000,
       "badge": "",
       "hidden": false
@@ -625,7 +625,7 @@
         "기본 색상 코타화이트 (패널 포함) · 냉장고·김치냉장고와 조합"
       ],
       "img": "images/RZ34C7855AP.png",
-      "list": 1699000,
+      "list": 1599000,
       "price": 1270000,
       "badge": "",
       "hidden": false
@@ -875,7 +875,7 @@
     {
       "id": "dw1",
       "cat": "식기세척기",
-      "name": "Bespoke AI 식기세척기 빌트인 14인용",
+      "name": "Bespoke AI 식기세척기 빌트인 14인용 (새틴 화이트)",
       "model": "DW90F79F1USWT",
       "specs": [
         "14인용 빌트인",
