@@ -766,9 +766,8 @@ function drawEvent(){
     <input class="hp" id="ev-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
     <div class="st"><i>2</i>일자별 참석 여부</div>
     ${c.dates.map(d=>{ const L=evLabel(d), v=EVS.attend[L]; return `<div class="drow"><div class="dl">${esc(L)}</div><div class="seg" data-d="${esc(L)}"><button data-v="참석" class="${v==="참석"?"on":""}">참석</button><button data-v="불참" class="${v==="불참"?"on":""}">불참</button></div></div>`; }).join("")}
-    <div class="st"><i>3</i>관심 품목 <small>여러 개 선택 · 모델 선택은 선택사항</small></div>
+    <div class="st"><i>3</i>관심 품목 <small>여러 개 선택</small></div>
     <div class="cats">${cats.map(x=>`<button class="chip ${EVS.cats.includes(x)?"on":""}" data-cat="${esc(x)}">${esc(x)}</button>`).join("")}</div>
-    ${EVS.cats.map(x=>{ const list=vis.filter(p=>p.cat===x); return `<div class="mdl"><h5>${esc(x)} · 관심 모델</h5><div class="cats">${list.map(p=>`<button class="chip ${EVS.models.includes(evShort(p))?"on":""}" data-mdl="${esc(evShort(p))}" title="${esc(p.name)}">${esc(p.ac?evShort(p):p.name.replace(/^2026 /,"").replace(/^(Bespoke AI |Bespoke |Infinite AI )/,""))}</button>`).join("")}</div></div>`; }).join("")}
     <label class="agree"><input type="checkbox" id="ev-agree" ${EVS.agree?"checked":""}><span><b>[필수] 개인정보 수집·이용 동의</b><br>동·호수는 초청행사 안내 및 세대 중복 확인 목적으로만 사용되며, 행사 종료 후 파기됩니다.</span></label>
     <div class="once">※ 세대당 1회만 제출할 수 있으며, 제출 후에는 수정할 수 없습니다.</div>
     <div class="err" id="ev-err"></div>
@@ -784,10 +783,7 @@ document.addEventListener("click", async e=>{
     if(off) delete EVS.attend[d]; else EVS.attend[d]=sb.dataset.v;
     sb.parentElement.querySelectorAll("button").forEach(x=>x.classList.toggle("on",!off&&x===sb)); return; }
   const ch=e.target.closest("[data-cat]");
-  if(ch){ evCollect(); const x=ch.dataset.cat; if(EVS.cats.includes(x)){ EVS.cats=EVS.cats.filter(y=>y!==x); const vis=DATA.products.filter(p=>p.cat===x).map(evShort); EVS.models=EVS.models.filter(m=>!vis.includes(m)); } else EVS.cats.push(x);
-    const sc=$("#ev-body").scrollTop; drawEvent(); $("#ev-body").scrollTop=sc; return; }
-  const md=e.target.closest("[data-mdl]");
-  if(md){ const x=md.dataset.mdl; EVS.models=EVS.models.includes(x)?EVS.models.filter(y=>y!==x):EVS.models.concat(x); md.classList.toggle("on"); return; }
+  if(ch){ const x=ch.dataset.cat; EVS.cats=EVS.cats.includes(x)?EVS.cats.filter(y=>y!==x):EVS.cats.concat(x); ch.classList.toggle("on"); return; }
   if(e.target.closest("#ev-send")) submitEvent();
 });
 async function submitEvent(){
@@ -800,7 +796,7 @@ async function submitEvent(){
   const key=`${EVS.dong}동 ${EVS.ho}호`;
   if(!confirm(`${key}\n\n${labels.map(L=>L+" "+EVS.attend[L]).join(" · ")}\n관심 품목: ${EVS.cats.join(", ")||"없음"}\n\n세대당 1회만 제출할 수 있습니다. 제출할까요?`)) return;
   EVS.busy=true; const b=$("#ev-send"); b.disabled=true; b.textContent="제출 중…";
-  const payload={ dong:EVS.dong, ho:EVS.ho, dates:labels, attend:EVS.attend, cats:EVS.cats, models:EVS.models, hp:($("#ev-hp")||{}).value||"" };
+  const payload={ dong:EVS.dong, ho:EVS.ho, dates:labels, attend:EVS.attend, cats:EVS.cats, hp:($("#ev-hp")||{}).value||"" };
   let j=null;
   try{ const r=await fetch(c.gasUrl,{method:"POST",body:JSON.stringify(payload)}); j=await r.json(); }
   catch(x){ j={ok:false,code:"net"}; }
