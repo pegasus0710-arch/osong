@@ -363,10 +363,11 @@ input[type=checkbox]{accent-color:var(--navy)}
 .evf .st i{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--navy);color:#c9a467;font-size:12px;display:grid;place-items:center;flex:none}
 .evf .st small{font-weight:500;color:var(--mute);font-size:12px}
 .evf .dh{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.evf .dh label{display:flex;align-items:center;gap:6px;border:1.5px solid var(--line);border-radius:12px;padding:0 12px;background:#fff}
+.evf .dh label{min-width:0;display:flex;align-items:center;gap:6px;border:1.5px solid var(--line);border-radius:12px;padding:0 12px;background:#fff}
 .evf .dh label:focus-within{border-color:var(--gold)}
-.evf .dh input{flex:1;min-width:0;border:0;outline:0;font-size:18px;font-weight:700;padding:12px 0;background:transparent;color:var(--navy)}
+.evf .dh input{flex:1;min-width:0;width:100%;border:0;outline:0;font-size:18px;font-weight:700;padding:12px 0;background:transparent;color:var(--navy)}
 .evf .dh span{font-weight:700;color:var(--mute)}
+.evf .dh input::placeholder{color:#d4d4d4;font-weight:600;opacity:1}
 .evf .drow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0ede6}
 .evf .drow .dl{flex:1;font-weight:700;color:var(--navy)}
 .evf .drow .dl small{display:block;font-size:11.5px;color:var(--mute);font-weight:500}
@@ -760,8 +761,8 @@ function drawEvent(){
   const cats = DATA.categories.filter(x=>vis.some(p=>p.cat===x)); vis.forEach(p=>{ if(!cats.includes(p.cat)) cats.push(p.cat) });
   $("#ev-body").innerHTML = `<div class="evf">
     <div class="st"><i>1</i>세대 정보</div>
-    <div class="dh"><label><input id="ev-dong" inputmode="numeric" maxlength="4" placeholder="101" value="${esc(EVS.dong)}"><span>동</span></label>
-      <label><input id="ev-ho" inputmode="numeric" maxlength="4" placeholder="1203" value="${esc(EVS.ho)}"><span>호</span></label></div>
+    <div class="dh"><label><input id="ev-dong" inputmode="numeric" maxlength="4" placeholder="000" value="${esc(EVS.dong)}"><span>동</span></label>
+      <label><input id="ev-ho" inputmode="numeric" maxlength="4" placeholder="0000" value="${esc(EVS.ho)}"><span>호</span></label></div>
     <input class="hp" id="ev-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
     <div class="st"><i>2</i>일자별 참석 여부</div>
     ${c.dates.map(d=>{ const L=evLabel(d), v=EVS.attend[L]; return `<div class="drow"><div class="dl">${esc(L)}</div><div class="seg" data-d="${esc(L)}"><button data-v="참석" class="${v==="참석"?"on":""}">참석</button><button data-v="불참" class="${v==="불참"?"on":""}">불참</button></div></div>`; }).join("")}
@@ -779,7 +780,9 @@ document.addEventListener("click", async e=>{
   if(!e.target.closest("#ev")) return;
   if(e.target.closest("[data-evclose]")){ closeEvent(); return; }
   const sb=e.target.closest(".seg button");
-  if(sb){ evCollect(); EVS.attend[sb.parentElement.dataset.d]=sb.dataset.v; sb.parentElement.querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===sb)); return; }
+  if(sb){ evCollect(); const d=sb.parentElement.dataset.d, off=EVS.attend[d]===sb.dataset.v;
+    if(off) delete EVS.attend[d]; else EVS.attend[d]=sb.dataset.v;
+    sb.parentElement.querySelectorAll("button").forEach(x=>x.classList.toggle("on",!off&&x===sb)); return; }
   const ch=e.target.closest("[data-cat]");
   if(ch){ evCollect(); const x=ch.dataset.cat; if(EVS.cats.includes(x)){ EVS.cats=EVS.cats.filter(y=>y!==x); const vis=DATA.products.filter(p=>p.cat===x).map(evShort); EVS.models=EVS.models.filter(m=>!vis.includes(m)); } else EVS.cats.push(x);
     const sc=$("#ev-body").scrollTop; drawEvent(); $("#ev-body").scrollTop=sc; return; }
