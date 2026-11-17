@@ -19,7 +19,7 @@
     ],
     "showDiscount": false,
     "pwHash": "de64b116d208c12f41504cf04f5ef7352c2d4b1f7895fa8b0f9e62a2b2aeab9c",
-    "ver": "17",
+    "ver": "18",
     "pointNote": "포인트(30만원)는 제품 배송 3일 이후 적립되며, 캐시백 신청 시 2개월 후 캐시백으로 받으실 수 있습니다. 자세한 내용은 상담 시 매니저에게 문의해 주세요.",
     "event": {
       "on": true,
@@ -29,7 +29,9 @@
       "dates": [
         "2026-12-11",
         "2026-12-12",
-        "2026-12-13"
+        "2026-12-13",
+        "2026-12-19",
+        "2026-12-20"
       ],
       "gasUrl": "https://script.google.com/macros/s/AKfycbznZozcoPqMcbgY76V_C2dmTwChvZK9hsSbHJRueqmeb_OEB7338f4i7jYb3ZHpb3frXQ/exec"
     }
