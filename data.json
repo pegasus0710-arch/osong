@@ -33,7 +33,12 @@
         "2026-12-18"
       ],
       "gasUrl": "https://script.google.com/macros/s/AKfycbzEcqvbC6lyfY0-x-oNO_BBCpJr5ypipf4iYjpCY7ndMPCLNdwJW-ekFr-v-bFn3truyQ/exec"
-    }
+    },
+    "venueName": "삼성스토어 율량점",
+    "venueAddr": "충북 청주시 청원구 공항로 229",
+    "venueMap": "",
+    "venueDir": "성모병원 사거리에서 오창 방면 300m, SK주유소 맞은편\n1·2층 매장 · 3층 삼성전자서비스센터",
+    "venueSketch": true
   },
   "categories": [
     "시스템에어컨",
