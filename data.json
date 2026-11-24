@@ -594,7 +594,8 @@
       "list": 1599000,
       "price": 1196000,
       "badge": "",
-      "hidden": false
+      "hidden": false,
+      "note": "1도어 2대 이상 함께 설치 시 연결 페어킷 필요 (별도 구매)"
     },
     {
       "id": "rf6",
@@ -611,7 +612,8 @@
       "list": 1599000,
       "price": 1196000,
       "badge": "",
-      "hidden": false
+      "hidden": false,
+      "note": "1도어 2대 이상 함께 설치 시 연결 페어킷 필요 (별도 구매)"
     },
     {
       "id": "rf4",
@@ -628,7 +630,8 @@
       "list": 1599000,
       "price": 1270000,
       "badge": "",
-      "hidden": false
+      "hidden": false,
+      "note": "1도어 2대 이상 함께 설치 시 연결 페어킷 필요 (별도 구매)"
     },
     {
       "id": "rf7",
@@ -645,7 +648,8 @@
       "list": 1599000,
       "price": 1270000,
       "badge": "",
-      "hidden": false
+      "hidden": false,
+      "note": "1도어 2대 이상 함께 설치 시 연결 페어킷 필요 (별도 구매)"
     },
     {
       "id": "kc1",
@@ -726,7 +730,8 @@
       "list": 2049000,
       "price": 1519000,
       "badge": "",
-      "hidden": false
+      "hidden": false,
+      "note": "1도어 2대 이상 함께 설치 시 연결 페어킷 필요 (별도 구매)"
     },
     {
       "id": "kc6",
@@ -743,7 +748,8 @@
       "list": 2049000,
       "price": 1519000,
       "badge": "",
-      "hidden": false
+      "hidden": false,
+      "note": "1도어 2대 이상 함께 설치 시 연결 페어킷 필요 (별도 구매)"
     },
     {
       "id": "lc1",
